@@ -1,0 +1,3341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRANAT — The Voice of Humanity / Голос человечества</title>
+<meta name="description" content="GRANAT — the first digital artifact, created by all of humanity. A heritage-grade platform for collective voice, where every person can leave a sounding mark on the symphony of civilization.">
+<meta property="og:title" content="GRANAT — The Voice of Humanity">
+<meta property="og:description" content="The first digital artifact, created by all of humanity.">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#1A0F0C">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&subset=cyrillic,latin&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   GRANAT FUTURE SITE — Heritage-Magazine
+   Wine-brown ground · Pomegranate juice in sunlight
+   Per Riot Design Direction · 2026-05-08
+   ═══════════════════════════════════════════ */
+
+:root {
+  /* GROUND — wine-brown, не чёрный (Olga, May 8) */
+  --bg-void:        #120A08;
+  --bg-deep:        #1A0F0C;
+  --bg-primary:     #241612;
+  --bg-elevated:    #241612;
+  --bg-surface:     #2E1B16;
+  --bg-glass:       rgba(255,240,230,0.035);
+  --bg-glass-hover: rgba(255,240,230,0.06);
+
+  /* PRIMARY — pomegranate juice in sunlight (mapped onto legacy --crimson tokens
+     so the inherited voice-modal CSS keeps working) */
+  --crimson:        #A4123F;
+  --crimson-bright: #C7264F;
+  --crimson-soft:   #C7264F;
+  --crimson-glow:   rgba(164,18,63,0.18);
+  --crimson-dark:   #6B0F1A;
+
+  /* Riot aliases (preferred names for new code) */
+  --pom-juice:        #A4123F;
+  --pom-juice-bright: #C7264F;
+  --pom-juice-deep:   #6B0F1A;
+  --pom-juice-glow:   rgba(164,18,63,0.18);
+  --pom-juice-tint:   rgba(199,38,79,0.10);
+
+  /* SECONDARY — sun-warmed honey-gold */
+  --gold:        #E8B66A;
+  --gold-light:  #F0CC92;
+  --gold-muted:  rgba(184,133,58,0.35);
+  --sun-gold:       #E8B66A;
+  --sun-gold-soft:  #F0CC92;
+  --sun-gold-deep:  #B8853A;
+
+  /* NEUTRALS — warm-cream on wine-brown */
+  --text-bright:    #FAF3E8;
+  --text-primary:   #E8DFD0;
+  --text-secondary: rgba(250,243,232,0.62);
+  --text-muted:     rgba(250,243,232,0.38);
+  --border-subtle:  rgba(250,243,232,0.07);
+  --border-medium:  rgba(250,243,232,0.14);
+  --border-crimson: rgba(164,18,63,0.25);
+
+  /* Scroll progress gradient */
+  --gradient-line: linear-gradient(90deg, var(--pom-juice), var(--sun-gold));
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg-deep); color: var(--text-primary);
+  line-height: 1.7; -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; transition: opacity 0.25s ease;
+}
+
+/* ═══ LANGUAGE TOGGLE ═══ */
+.ru { display: none; }
+body.lang-ru .en { display: none !important; }
+body.lang-ru span.ru { display: inline !important; }
+body.lang-ru div.ru, body.lang-ru p.ru { display: block !important; }
+body.lang-ru .ru.flex { display: flex !important; }
+body.lang-ru .ru.grid { display: grid !important; }
+body.lang-ru .ru.inline-flex { display: inline-flex !important; }
+
+.lang-toggle {
+  display: flex; align-items: center; gap: 0.3rem;
+  background: rgba(255,240,230,0.04); border: 1px solid var(--border-subtle);
+  border-radius: 6px; padding: 0.2rem;
+}
+.lang-btn {
+  border: none; background: transparent; color: var(--text-secondary);
+  font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.06em; padding: 0.55rem 0.85rem; border-radius: 4px;
+  cursor: pointer; transition: all 0.2s; min-height: 32px;
+}
+.lang-btn.active { background: var(--crimson-dark); color: var(--text-bright); }
+.lang-btn:hover:not(.active) { color: var(--text-bright); }
+
+/* ═══ FOCUS VISIBLE — global a11y ═══ */
+a:focus-visible, button:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+.role-card:focus-visible {
+  outline: 2px solid var(--gold);
+  outline-offset: 4px;
+}
+
+/* ═══ SCROLL PROGRESS ═══ */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; height: 2px; z-index: 200;
+  background: var(--gradient-line);
+  width: 0%; transition: width 0.1s;
+}
+
+/* ═══ TYPOGRAPHY HELPERS ═══ */
+.section-label {
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1.4rem; display: flex; align-items: center; gap: 0.9rem;
+}
+.section-label::before {
+  content: ''; width: 32px; height: 1px; background: var(--gold-muted);
+}
+.section-label-num {
+  font-family: 'JetBrains Mono', monospace; font-weight: 500;
+  color: var(--gold); opacity: 0.85;
+}
+
+.display-anthem {
+  font-family: 'Playfair Display', Georgia, serif; font-weight: 900;
+  font-size: clamp(2.4rem, 5.2vw, 4.2rem); line-height: 1.05;
+  letter-spacing: -0.02em; color: var(--text-bright);
+  margin-bottom: 1.2rem;
+}
+.display-anthem em { font-style: italic; font-weight: 400; color: var(--gold-light); }
+.display-anthem.lowercase { text-transform: lowercase; }
+
+.pull-quote {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic; font-weight: 400;
+  font-size: clamp(1.3rem, 2.4vw, 1.85rem);
+  line-height: 1.4; letter-spacing: -0.005em;
+  color: var(--text-bright);
+  max-width: 720px; margin: 1.4rem 0;
+}
+
+.lead-body {
+  font-family: 'Inter', sans-serif; font-weight: 300;
+  font-size: 1.15rem; line-height: 1.8;
+  color: var(--text-primary); max-width: 680px;
+  margin-bottom: 1.6rem;
+}
+.body-secondary {
+  font-size: 1rem; font-weight: 400; line-height: 1.75;
+  color: var(--text-secondary); max-width: 680px;
+}
+
+.mono-data {
+  font-family: 'JetBrains Mono', monospace; font-weight: 400;
+  letter-spacing: 0.04em; line-height: 1;
+}
+.mono-data-xl {
+  font-family: 'JetBrains Mono', monospace; font-weight: 400;
+  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  letter-spacing: 0.04em; line-height: 1;
+  color: var(--pom-juice-bright);
+}
+.mono-data-md {
+  font-family: 'JetBrains Mono', monospace; font-weight: 500;
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  letter-spacing: 0.04em; line-height: 1;
+  color: var(--gold);
+}
+
+.section-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.9rem, 3.7vw, 2.9rem);
+  font-weight: 700; line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--text-bright); margin-bottom: 1.2rem;
+}
+.section-subtitle {
+  font-size: 1.05rem; font-weight: 300;
+  color: var(--text-secondary);
+  max-width: 720px; line-height: 1.85; margin-bottom: 2rem;
+}
+
+/* ═══ LAYOUT ═══ */
+section {
+  padding: clamp(5rem, 10vw, 8rem) 1.5rem;
+  position: relative;
+}
+.container { max-width: 1080px; margin: 0 auto; }
+.container-narrow { max-width: 880px; margin: 0 auto; }
+.container-quote { max-width: 720px; margin: 0 auto; }
+.section-alt { background: var(--bg-primary); border-top: 1px solid var(--border-subtle); }
+.section-void { background: var(--bg-void); }
+
+/* ═══ NAV ═══ */
+nav.site-nav {
+  position: fixed; top: 2px; left: 0; right: 0; z-index: 100;
+  padding: 0 1.5rem; height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(18,10,8,0.92); backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.nav-brand { display: flex; align-items: center; gap: 0.55rem; }
+.nav-gem {
+  width: 22px; height: 26px;
+  background-image: url('assets/granat-gem.png');
+  background-size: contain; background-position: center;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 0 6px var(--pom-juice-glow));
+}
+.nav-wordmark {
+  font-family: 'Playfair Display', serif; font-weight: 900; font-size: 0.95rem;
+  color: var(--text-bright); letter-spacing: 0.12em;
+  text-transform: lowercase;
+}
+.nav-links { display: flex; gap: 1.4rem; list-style: none; align-items: center; }
+.nav-links a {
+  color: var(--text-muted); text-decoration: none; font-size: 0.7rem;
+  font-weight: 500; letter-spacing: 0.04em; transition: color 0.25s;
+}
+.nav-links a:hover { color: var(--text-bright); }
+@media (max-width: 900px) {
+  .nav-links a:not(.nav-cta) { display: none; }
+}
+
+/* ═══ SCROLL REVEAL ═══
+   Progressive enhancement: content visible by default. Only when JS confirms
+   it's running (adds body.js-ready) do we hide-then-fade-in on scroll. This
+   keeps content visible for no-JS readers, headless screenshots, and any
+   IntersectionObserver edge cases. */
+.reveal { opacity: 1; transform: translateY(0); transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1); }
+body.js-ready .reveal:not(.visible) { opacity: 0; transform: translateY(16px); }
+body.js-ready .reveal.visible { opacity: 1; transform: translateY(0); }
+@media (prefers-reduced-motion: reduce) {
+  .reveal { transform: none; }
+  *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+/* ═══ HAIRLINE ═══ */
+.hairline {
+  height: 1px; background: var(--border-medium); width: 100%;
+  margin: 2.4rem 0;
+}
+.hairline-gold {
+  height: 1px; background: var(--gold-muted); width: 80px;
+  margin: 1.4rem 0;
+}
+
+/* ═══ HERO ═══ */
+#hero {
+  min-height: 100vh; display: flex; align-items: center;
+  background: var(--bg-void); position: relative; overflow: hidden;
+  padding: 7rem 1.5rem 5rem;
+}
+#hero::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 90% 60% at 80% 50%, var(--pom-juice-glow), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 20% 70%, rgba(232,182,106,0.05), transparent 70%);
+  pointer-events: none;
+}
+.hero-grid {
+  display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem;
+  align-items: center; max-width: 1200px; margin: 0 auto;
+  position: relative; z-index: 2;
+}
+@media (max-width: 900px) { .hero-grid { grid-template-columns: 1fr; gap: 2rem; } }
+.hero-type {
+  display: flex; flex-direction: column; gap: 1.2rem;
+}
+.hero-mark {
+  font-family: 'Playfair Display', serif; font-weight: 900;
+  font-size: clamp(3.6rem, 9vw, 7rem); line-height: 0.95;
+  letter-spacing: -0.04em; color: var(--text-bright);
+  text-transform: lowercase;
+}
+.hero-mark .anthem-mark { color: var(--pom-juice-bright); font-style: italic; font-weight: 400; }
+.hero-anthem {
+  font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400;
+  font-size: clamp(1.4rem, 3vw, 2.1rem); line-height: 1.3;
+  color: var(--gold-light); letter-spacing: -0.005em;
+  margin-top: -0.4rem;
+}
+.hero-sub {
+  font-family: 'Playfair Display', serif; font-weight: 400;
+  font-size: clamp(1rem, 1.5vw, 1.2rem); line-height: 1.7;
+  color: var(--text-primary); max-width: 480px;
+  margin-top: 0.6rem;
+}
+.hero-ctas {
+  display: flex; gap: 1.4rem; margin-top: 1.6rem;
+  flex-wrap: wrap;
+}
+.hero-cta-link {
+  font-family: 'Inter', sans-serif; font-weight: 500;
+  font-size: 0.82rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold-light); text-decoration: none;
+  display: inline-flex; align-items: center; gap: 1rem;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  padding: 0.5rem 0;
+}
+.hero-cta-rule {
+  width: 32px; height: 1px; background: var(--gold);
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hero-cta-arrow {
+  color: var(--gold); transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hero-cta-link:hover {
+  color: var(--text-bright);
+}
+.hero-cta-link:hover .hero-cta-rule { width: 48px; background: var(--text-bright); }
+.hero-cta-link:hover .hero-cta-arrow { transform: translateX(4px); color: var(--text-bright); }
+/* Hero — the granat gem (faceted ruby, cyan sparkle).
+   Image carried verbatim from the TMA — same brand mark partners see in the app. */
+.hero-art {
+  position: relative; width: 100%; aspect-ratio: 5/6; max-width: 480px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: center;
+  filter: drop-shadow(0 30px 60px rgba(0,0,0,0.55))
+          drop-shadow(0 0 70px var(--pom-juice-glow))
+          drop-shadow(0 0 40px rgba(94,161,255,0.12));
+}
+.hero-art::before {
+  /* Backlit halo — light passing around the gem */
+  content: ''; position: absolute; inset: 8%;
+  background:
+    radial-gradient(ellipse 65% 80% at 50% 55%, var(--pom-juice-glow), transparent 60%),
+    radial-gradient(ellipse 40% 50% at 50% 30%, rgba(232,182,106,0.10), transparent 65%);
+  z-index: 0;
+  filter: blur(20px);
+}
+.hero-art-img {
+  position: relative; width: 100%; height: 100%; z-index: 1;
+  background-image: url('assets/granat-gem.png');
+  background-size: contain; background-position: center;
+  background-repeat: no-repeat;
+}
+.hero-art::after {
+  /* Caustic glint — bottom-right reflective highlight */
+  content: ''; position: absolute; right: -2%; bottom: -2%;
+  width: 38%; height: 38%; pointer-events: none;
+  background: radial-gradient(ellipse 60% 50% at 30% 30%, rgba(255,235,200,0.06), transparent 70%);
+  z-index: 2;
+  filter: blur(6px);
+}
+.hero-scroll-cue {
+  position: absolute; left: 50%; bottom: 2rem; transform: translateX(-50%);
+  font-family: 'Inter', sans-serif; font-size: 0.62rem; font-weight: 600;
+  letter-spacing: 0.32em; text-transform: uppercase; color: var(--text-muted);
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  z-index: 2; opacity: 0.7;
+}
+.hero-scroll-cue::after {
+  content: ''; width: 1px; height: 28px; background: var(--gold-muted);
+  animation: heroCue 2.4s ease-in-out infinite;
+}
+@keyframes heroCue { 0%,100% { transform: scaleY(0.4); transform-origin: top; } 50% { transform: scaleY(1); transform-origin: top; } }
+
+/* ═══ STAT BLOCK (SEC 2) ═══ */
+.stat-block {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+  margin: 2.6rem 0; padding: 2rem 0;
+  border-top: 1px solid var(--border-medium);
+  border-bottom: 1px solid var(--border-medium);
+}
+@media (max-width: 700px) { .stat-block { grid-template-columns: 1fr; gap: 1.6rem; padding: 1.6rem 0; } }
+.stat-cell { display: flex; flex-direction: column; gap: 0.4rem; }
+.stat-cell .stat-num {
+  font-family: 'JetBrains Mono', monospace; font-weight: 400;
+  font-size: clamp(2.6rem, 5vw, 4rem); line-height: 1;
+  letter-spacing: 0.02em; color: var(--text-bright);
+}
+.stat-cell:nth-child(3) .stat-num { color: var(--pom-juice-bright); }
+.stat-cell .stat-label {
+  font-family: 'Inter', sans-serif; font-size: 0.78rem;
+  font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-secondary); line-height: 1.4;
+}
+
+/* ═══ SECTION 2 LAYOUT ═══ */
+.split-2col {
+  display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 3rem;
+  align-items: start;
+}
+@media (max-width: 900px) { .split-2col { grid-template-columns: 1fr; gap: 1.6rem; } }
+.duality-art {
+  width: 100%; aspect-ratio: 4/5; max-width: 460px; margin: 0 auto;
+  background-image: url('assets/challenge-duality-cropped.jpg');
+  background-size: cover; background-position: center;
+  position: relative; overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  filter: brightness(0.95) contrast(1.05) saturate(0.95);
+}
+.duality-art::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    linear-gradient(180deg, transparent 65%, rgba(26,15,12,0.55) 100%),
+    radial-gradient(ellipse at 70% 70%, var(--pom-juice-tint), transparent 60%);
+}
+
+/* ═══ SECTION 3 — ANSWER ═══ */
+.answer-grid {
+  display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 3rem;
+  align-items: center;
+}
+@media (max-width: 900px) { .answer-grid { grid-template-columns: 1fr; } }
+.mic-art {
+  width: 100%; aspect-ratio: 3/4; max-width: 440px; margin: 0 auto;
+  background:
+    radial-gradient(ellipse 70% 38% at 50% 38%, var(--gold-light) 0%, var(--gold) 28%, var(--sun-gold-deep) 60%, transparent 75%),
+    radial-gradient(ellipse 90% 45% at 50% 60%, rgba(232,182,106,0.18), transparent 80%),
+    linear-gradient(180deg, var(--bg-elevated) 0%, var(--bg-deep) 100%);
+  position: relative; overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 20px 50px rgba(0,0,0,0.4), 0 0 80px rgba(232,182,106,0.08);
+}
+.mic-art::before {
+  content: ''; position: absolute; left: 50%; top: 16%;
+  width: 56%; aspect-ratio: 1/1; transform: translateX(-50%);
+  background:
+    radial-gradient(circle at 50% 30%, rgba(255,235,200,0.4), transparent 60%),
+    repeating-linear-gradient(0deg, var(--sun-gold-deep) 0 1.4px, transparent 1.4px 5px),
+    repeating-linear-gradient(90deg, rgba(0,0,0,0.18) 0 1px, transparent 1px 5px),
+    radial-gradient(ellipse at 50% 50%, var(--gold-light) 0%, var(--gold) 40%, var(--sun-gold-deep) 80%);
+  border-radius: 50%;
+  box-shadow:
+    0 0 60px rgba(232,182,106,0.4),
+    inset 0 -20px 40px rgba(0,0,0,0.5),
+    inset 0 8px 20px rgba(255,235,200,0.3);
+}
+.mic-art::after {
+  content: ''; position: absolute; left: 50%; bottom: 6%;
+  width: 8%; height: 28%; transform: translateX(-50%);
+  background: linear-gradient(180deg, var(--sun-gold-deep) 0%, var(--bg-elevated) 100%);
+  border-radius: 4px;
+}
+.three-line-refrain {
+  display: flex; flex-direction: column; gap: 0;
+  margin: 2rem 0;
+}
+.refrain-line {
+  font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400;
+  font-size: clamp(1.15rem, 2vw, 1.55rem); line-height: 1.4;
+  color: var(--text-bright); padding: 1.2rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.refrain-line:last-child { border-bottom: none; }
+
+/* ═══ SECTION 4 — TEAM ═══ */
+.team-strip {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 2rem;
+  margin-top: 2.4rem;
+}
+@media (max-width: 800px) { .team-strip { grid-template-columns: 1fr; gap: 2.6rem; } }
+.team-cell {
+  display: flex; flex-direction: column; gap: 0.6rem;
+  padding-top: 1.2rem; border-top: 1px solid var(--border-medium);
+}
+.team-credit {
+  font-family: 'JetBrains Mono', monospace; font-weight: 400;
+  font-size: 0.78rem; letter-spacing: 0.06em;
+  color: var(--gold); margin-bottom: 0.3rem;
+  text-transform: lowercase;
+}
+.team-credit .en, .team-credit .ru {
+  font-family: 'Inter', sans-serif; font-weight: 500;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold-light); font-size: 0.7rem;
+}
+.team-name {
+  font-family: 'Playfair Display', serif; font-weight: 700;
+  font-size: clamp(1.5rem, 2.2vw, 1.85rem); line-height: 1.15;
+  letter-spacing: -0.005em; color: var(--text-bright);
+  margin-bottom: 0.4rem;
+}
+.team-bullets {
+  list-style: none; display: flex; flex-direction: column; gap: 0.5rem;
+  font-size: 0.92rem; color: var(--text-secondary); line-height: 1.55;
+  margin-top: 0.4rem;
+}
+.team-bullets li { padding-left: 1rem; position: relative; }
+.team-bullets li::before {
+  content: '·'; position: absolute; left: 0; color: var(--gold);
+  font-weight: 700;
+}
+.team-machete {
+  text-align: center; padding: 2rem 1rem;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: 2.6rem;
+}
+.team-machete .label {
+  font-family: 'Inter', sans-serif; font-size: 0.7rem;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold); font-weight: 600; margin-bottom: 0.5rem;
+}
+.team-machete .name {
+  font-family: 'Playfair Display', serif; font-weight: 700;
+  font-size: 1.3rem; color: var(--text-bright); letter-spacing: 0.04em;
+}
+.team-machete .desc {
+  font-size: 0.95rem; color: var(--text-secondary); margin-top: 0.4rem;
+}
+
+/* ═══ SECTION 5 — PHILOSOPHY ═══ */
+.philosophy-bg {
+  background:
+    linear-gradient(180deg, rgba(26,15,12,0.94), rgba(26,15,12,0.88)),
+    url('assets/philosophy-bridge-cropped.jpg');
+  background-size: cover, cover;
+  background-position: center, center right;
+  position: relative;
+}
+.philosophy-bg::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 20%, var(--pom-juice-glow), transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(232,182,106,0.05), transparent 60%);
+  pointer-events: none;
+}
+.philosophy-bg .container-narrow { position: relative; z-index: 1; }
+.bridge-triptych {
+  display: flex; flex-direction: column; gap: 0;
+  max-width: 720px; margin: 2rem auto 0;
+}
+.bridge-row {
+  padding: 2rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+  display: flex; flex-direction: column; gap: 0.7rem;
+}
+.bridge-row:last-child { border-bottom: none; }
+.bridge-glyph {
+  font-family: 'Playfair Display', serif; font-weight: 700;
+  font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gold); display: flex; align-items: center; gap: 0.8rem;
+}
+.bridge-glyph .arrow { color: var(--pom-juice-bright); font-size: 1.1rem; font-weight: 400; }
+.bridge-text {
+  font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400;
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem); line-height: 1.5;
+  color: var(--text-bright);
+}
+
+/* ═══ SECTION 6 — ARCHITECTURE ═══ */
+.arch-pillars {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.8rem;
+  margin: 2.4rem 0;
+}
+@media (max-width: 900px) { .arch-pillars { grid-template-columns: 1fr; } }
+.arch-card {
+  padding: 2.4rem 1.9rem;
+  background:
+    linear-gradient(135deg, rgba(255,240,230,0.05) 0%, rgba(255,240,230,0.02) 50%, rgba(164,18,63,0.06) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(250,243,232,0.10);
+  border-top-color: rgba(232,182,106,0.22);
+  border-left-color: rgba(232,182,106,0.18);
+  border-radius: 14px;
+  position: relative; overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.arch-card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(232,182,106,0.4), transparent);
+  pointer-events: none;
+}
+.arch-card::after {
+  /* glass highlight */
+  content: ''; position: absolute; top: -50%; left: -10%; width: 60%; height: 200%;
+  background: linear-gradient(135deg, rgba(255,240,230,0.06) 0%, transparent 60%);
+  transform: rotate(20deg); pointer-events: none;
+}
+.arch-card:hover {
+  border-color: rgba(164,18,63,0.32);
+  border-top-color: rgba(232,182,106,0.40);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 30px var(--pom-juice-glow);
+}
+.arch-card > * { position: relative; z-index: 1; }
+.arch-icon {
+  width: 38px; height: 38px; margin-bottom: 1.3rem;
+  background: linear-gradient(135deg, rgba(232,182,106,0.15), rgba(232,182,106,0.05));
+  border: 1px solid rgba(232,182,106,0.45); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--gold-light); font-family: 'Playfair Display', serif; font-weight: 700;
+  font-size: 1rem;
+  box-shadow: inset 0 1px 0 rgba(255,240,230,0.12);
+}
+.arch-card h3 {
+  font-family: 'Playfair Display', serif; font-weight: 700;
+  font-size: 1.2rem; color: var(--text-bright);
+  margin-bottom: 0.5rem; letter-spacing: -0.005em;
+}
+.arch-card p {
+  font-size: 0.95rem; color: var(--text-secondary); line-height: 1.7;
+  font-style: italic;
+}
+.core-plugins-frame {
+  margin: 3.2rem auto 0; padding: 2rem 0 0; max-width: 820px;
+  border-top: 1px solid var(--border-medium);
+  text-align: center;
+}
+.core-plugins-frame h4 {
+  font-family: 'Inter', sans-serif; font-weight: 600;
+  font-size: 0.78rem; color: var(--gold);
+  letter-spacing: 0.18em; text-transform: uppercase;
+  margin-bottom: 1.2rem;
+}
+.core-plugins-frame p {
+  font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400;
+  font-size: clamp(1.1rem, 1.9vw, 1.4rem); line-height: 1.55;
+  color: var(--text-bright);
+}
+
+/* ═══ SECTION 7 — HOW IT WORKS ═══ */
+.steps-flow {
+  display: flex; flex-direction: column;
+  max-width: 880px; margin: 2.4rem auto;
+}
+.step-row {
+  display: grid; grid-template-columns: 90px 1fr; gap: 1.6rem;
+  padding: 2.4rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.step-row:last-child { border-bottom: none; }
+@media (max-width: 700px) { .step-row { grid-template-columns: 70px 1fr; gap: 1rem; padding: 1.6rem 0; } }
+.step-num {
+  font-family: 'JetBrains Mono', monospace; font-weight: 400;
+  font-size: clamp(2.8rem, 5vw, 4rem); line-height: 1;
+  color: var(--gold); letter-spacing: -0.02em;
+}
+.step-body h3 {
+  font-family: 'Playfair Display', serif; font-weight: 700;
+  font-size: clamp(1.4rem, 2.4vw, 1.9rem); line-height: 1.2;
+  color: var(--text-bright); margin-bottom: 0.5rem;
+}
+.step-body p {
+  font-size: 1rem; color: var(--text-secondary); line-height: 1.7;
+  font-family: 'Playfair Display', serif; font-style: italic;
+}
+.demo-cta-wrap {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 1rem; margin-top: 3rem;
+  padding: 2.6rem 1.4rem; background: var(--bg-elevated);
+  border: 1px solid var(--border-medium);
+  text-align: center;
+}
+.demo-cta-wrap .demo-headline {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: clamp(1.05rem, 1.7vw, 1.3rem);
+  color: var(--text-bright); margin-bottom: 0.4rem; max-width: 540px;
+}
+.demo-cta-wrap .demo-sub {
+  font-size: 0.92rem; color: var(--text-secondary); max-width: 480px;
+}
+.demo-headphones {
+  font-size: 0.78rem; color: var(--gold-light);
+  letter-spacing: 0.06em; margin-top: 0.6rem;
+}
+
+/* ═══ SECTION 8 — ROADMAP ═══ */
+.roadmap-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.4rem;
+  margin: 3rem 0 1.4rem;
+  position: relative;
+}
+.roadmap-grid::before {
+  content: ''; position: absolute; left: 0; right: 0; top: 1.8rem; height: 1px;
+  background: var(--border-medium);
+}
+@media (max-width: 800px) {
+  .roadmap-grid { grid-template-columns: 1fr; gap: 1.6rem; }
+  .roadmap-grid::before { display: none; }
+}
+.roadmap-cell { display: flex; flex-direction: column; gap: 0.6rem; padding-top: 0; position: relative; z-index: 2; }
+.roadmap-year {
+  font-family: 'JetBrains Mono', monospace; font-weight: 500;
+  font-size: clamp(1.7rem, 3vw, 2.4rem); line-height: 1;
+  color: var(--gold); letter-spacing: 0.04em;
+}
+.roadmap-cell::before {
+  content: ''; width: 9px; height: 9px; border-radius: 50%;
+  background: var(--pom-juice); border: 2px solid var(--bg-deep);
+  position: absolute; top: -0.5rem; left: 0;
+}
+.roadmap-label {
+  font-family: 'Inter', sans-serif; font-weight: 600;
+  font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--gold-light);
+}
+.roadmap-text {
+  font-family: 'Playfair Display', serif; font-weight: 400;
+  font-size: 1.05rem; line-height: 1.45;
+  color: var(--text-primary);
+}
+.roadmap-closer {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: clamp(1.2rem, 2.2vw, 1.6rem); line-height: 1.5;
+  color: var(--text-bright); max-width: 760px; margin: 3rem auto 0;
+  text-align: center;
+  padding: 0 1rem;
+}
+
+/* ═══ SECTION 9 — SOCIAL ARROWS ═══ */
+.transform-arrows {
+  display: flex; flex-direction: column;
+  max-width: 760px; margin: 2.4rem auto 0;
+}
+.transform-row {
+  display: grid; grid-template-columns: 1fr auto 1fr; gap: 1.4rem;
+  padding: 1.6rem 0; align-items: center;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.transform-row:last-of-type { border-bottom: none; }
+.transform-from {
+  font-family: 'Inter', sans-serif; font-weight: 400;
+  font-size: 1rem; color: var(--text-secondary);
+  text-align: right;
+}
+.transform-arrow {
+  width: 40px; height: 1px; background: var(--gold);
+  position: relative;
+}
+.transform-arrow::after {
+  content: ''; position: absolute; right: -1px; top: -3px;
+  border-left: 7px solid var(--gold);
+  border-top: 4px solid transparent;
+  border-bottom: 4px solid transparent;
+}
+.transform-to {
+  font-family: 'Playfair Display', serif; font-weight: 700;
+  font-size: clamp(1.05rem, 1.8vw, 1.3rem); color: var(--text-bright);
+}
+@media (max-width: 700px) {
+  .transform-row { grid-template-columns: 1fr; gap: 0.4rem; padding: 1.2rem 0; text-align: left; }
+  .transform-from { text-align: left; }
+  .transform-arrow { display: none; }
+}
+.seven-worlds-fold {
+  margin-top: 3rem; border-top: 1px solid var(--border-subtle);
+  padding-top: 2rem;
+}
+.seven-worlds-toggle {
+  background: transparent; border: none; cursor: pointer;
+  font-family: 'Inter', sans-serif; font-weight: 600;
+  font-size: 0.78rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--gold); display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 0.4rem 0; transition: color 0.2s;
+}
+.seven-worlds-toggle:hover { color: var(--gold-light); }
+.seven-worlds-toggle .chev { transition: transform 0.3s; display: inline-block; }
+.seven-worlds-toggle[aria-expanded="true"] .chev { transform: rotate(90deg); }
+.seven-worlds-content {
+  display: none; margin-top: 1.6rem;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+}
+.seven-worlds-content[data-open="true"] { display: grid; }
+.world-card {
+  padding: 1.4rem 1.2rem; background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+}
+.world-card .world-num {
+  font-family: 'JetBrains Mono', monospace; font-size: 0.78rem;
+  color: var(--gold); margin-bottom: 0.3rem; letter-spacing: 0.04em;
+}
+.world-card h4 {
+  font-family: 'Playfair Display', serif; font-weight: 700;
+  font-size: 1rem; color: var(--text-bright); margin-bottom: 0.4rem;
+}
+.world-card p {
+  font-size: 0.85rem; color: var(--text-secondary); line-height: 1.55;
+}
+
+/* ═══ SECTION 10 — ECONOMY HEXAGONS ═══ */
+.hex-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.4rem;
+  margin: 2.4rem 0;
+}
+@media (max-width: 900px) { .hex-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .hex-grid { grid-template-columns: 1fr; } }
+.hex-cell {
+  padding: 2rem 1.5rem 1.8rem; text-align: center;
+  background:
+    linear-gradient(135deg, rgba(255,240,230,0.05) 0%, rgba(255,240,230,0.02) 50%, rgba(164,18,63,0.06) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(250,243,232,0.10);
+  border-radius: 14px;
+  position: relative; overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hex-cell::before {
+  content: ''; position: absolute; left: 50%; top: 0;
+  transform: translateX(-50%);
+  width: 60%; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(232,182,106,0.55), transparent);
+}
+.hex-cell::after {
+  content: ''; position: absolute; top: -50%; left: -10%; width: 60%; height: 200%;
+  background: linear-gradient(135deg, rgba(255,240,230,0.05) 0%, transparent 60%);
+  transform: rotate(20deg); pointer-events: none;
+}
+.hex-cell:hover {
+  border-color: rgba(164,18,63,0.32);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 30px var(--pom-juice-glow);
+}
+.hex-cell > * { position: relative; z-index: 1; }
+.hex-cell h4 {
+  font-family: 'Playfair Display', serif; font-weight: 700;
+  font-size: 1.05rem; color: var(--text-bright); margin: 0.6rem 0 0.4rem;
+  line-height: 1.25;
+}
+.hex-cell .hex-tag {
+  font-family: 'Inter', sans-serif; font-style: italic; font-weight: 400;
+  font-size: 0.85rem; color: var(--gold-light);
+  line-height: 1.5;
+}
+.economy-tagline {
+  font-family: 'Playfair Display', serif; font-weight: 700;
+  font-size: clamp(1.4rem, 2.5vw, 1.9rem); line-height: 1.3;
+  color: var(--text-bright); text-align: center;
+  margin-top: 2.4rem; max-width: 680px; margin-left: auto; margin-right: auto;
+  font-style: italic;
+}
+
+/* ═══ SECTION 11 — INVITATION ═══ */
+#invitation {
+  background: var(--bg-void);
+  min-height: 80vh;
+  display: flex; align-items: center;
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.invitation-frame {
+  max-width: 820px; margin: 0 auto; text-align: center;
+  padding: 4rem 1.5rem; position: relative;
+}
+.invitation-frame .hairline-gold {
+  width: 60px; margin: 1.2rem auto;
+}
+.invitation-lead {
+  font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400;
+  font-size: clamp(1.4rem, 2.6vw, 2rem); line-height: 1.5;
+  color: var(--text-bright); margin: 1.4rem 0;
+  letter-spacing: -0.005em;
+}
+.invitation-frame-block {
+  font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400;
+  font-size: clamp(1.05rem, 1.8vw, 1.3rem); line-height: 1.7;
+  color: var(--text-primary); margin: 2rem auto;
+  max-width: 720px;
+}
+.invitation-closer {
+  font-family: 'Playfair Display', serif; font-weight: 700;
+  font-size: clamp(1.3rem, 2.4vw, 1.85rem); line-height: 1.4;
+  color: var(--gold-light); margin-top: 2rem;
+  letter-spacing: -0.01em;
+}
+
+/* ═══ SECTION 12 — CTA ═══ */
+.cta-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.4rem;
+  margin: 2rem 0 2.4rem;
+}
+@media (max-width: 800px) { .cta-grid { grid-template-columns: 1fr; } }
+.role-card {
+  padding: 2.4rem 1.7rem;
+  background:
+    linear-gradient(135deg, rgba(255,240,230,0.05) 0%, rgba(255,240,230,0.02) 50%, rgba(164,18,63,0.06) 100%);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(250,243,232,0.10);
+  border-top-color: rgba(232,182,106,0.22);
+  border-radius: 14px;
+  display: flex; flex-direction: column; gap: 0.8rem;
+  position: relative; overflow: hidden;
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none; color: inherit;
+}
+.role-card::after {
+  content: ''; position: absolute; top: -50%; left: -10%; width: 60%; height: 200%;
+  background: linear-gradient(135deg, rgba(255,240,230,0.06) 0%, transparent 60%);
+  transform: rotate(20deg); pointer-events: none;
+}
+.role-card > * { position: relative; z-index: 1; }
+.role-card:hover {
+  border-color: rgba(232,182,106,0.40);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4), 0 0 30px rgba(232,182,106,0.10);
+}
+.role-card .role-label {
+  font-family: 'Inter', sans-serif; font-weight: 700;
+  font-size: 0.78rem; letter-spacing: 0.22em;
+  color: var(--gold); text-transform: uppercase;
+}
+.role-card h4 {
+  font-family: 'Playfair Display', serif; font-weight: 700;
+  font-size: 1.2rem; line-height: 1.3; color: var(--text-bright);
+}
+.role-card .role-action {
+  font-family: 'Inter', sans-serif; font-weight: 500;
+  font-size: 0.88rem; color: var(--gold-light); margin-top: auto;
+  display: flex; align-items: center; gap: 0.4rem;
+  letter-spacing: 0.04em;
+}
+.cta-tagline {
+  font-family: 'Playfair Display', serif; font-style: italic; font-weight: 400;
+  font-size: clamp(1.3rem, 2.4vw, 1.8rem); line-height: 1.4;
+  color: var(--text-bright); text-align: center;
+  margin: 3rem auto 0; max-width: 720px;
+}
+
+/* ═══ FOOTER ═══ */
+footer.site-footer {
+  padding: 3rem 1.5rem 2rem;
+  background: var(--bg-void);
+  border-top: 1px solid var(--border-subtle);
+  text-align: center;
+  display: flex; flex-direction: column; gap: 1.2rem;
+  align-items: center;
+}
+.footer-mark {
+  display: flex; align-items: center; justify-content: center; gap: 0.6rem;
+  font-family: 'Playfair Display', serif; font-weight: 900;
+  font-size: 1rem; color: var(--text-bright); letter-spacing: 0.1em;
+  text-transform: lowercase;
+}
+.footer-gem {
+  width: 22px; height: 26px;
+  background-image: url('assets/granat-gem.png');
+  background-size: contain; background-position: center;
+  background-repeat: no-repeat;
+  filter: drop-shadow(0 0 8px var(--pom-juice-glow));
+  flex-shrink: 0;
+}
+.footer-meta {
+  font-family: 'Inter', sans-serif; font-size: 0.72rem;
+  letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--text-muted);
+}
+.footer-links {
+  display: flex; gap: 1.4rem; flex-wrap: wrap; justify-content: center;
+  margin-top: 0.4rem;
+}
+.footer-links a {
+  font-family: 'Inter', sans-serif; font-size: 0.72rem;
+  letter-spacing: 0.08em; color: var(--text-secondary);
+  text-decoration: none; transition: color 0.2s;
+}
+.footer-links a:hover { color: var(--text-bright); }
+
+/* ═══════════════════════════════════════════
+   VOICE-DEMO MODAL CSS (inherited from manifesto)
+   ═══════════════════════════════════════════ */
+/* ═══ VOICE JOURNEY ═══ */
+.vj-stage {
+  padding: 3rem 0; border-bottom: 1px solid var(--border-subtle);
+}
+.vj-stage:last-child { border-bottom: none; }
+.vj-stage-label {
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--crimson-soft); margin-bottom: 1rem;
+}
+.vj-waveform { display: flex; align-items: flex-end; justify-content: center; gap: 3px; height: 70px; margin: 2rem 0; }
+.vj-bar {
+  width: 4px; border-radius: 2px; background: linear-gradient(to top, var(--crimson), var(--crimson-bright));
+  animation: vjWave 1.8s ease-in-out infinite;
+}
+@keyframes vjWave {
+  0%, 100% { height: 15%; }
+  50% { height: 90%; }
+}
+.vj-params-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; margin: 2rem 0;
+}
+@media (max-width: 768px) { .vj-params-grid { grid-template-columns: repeat(2, 1fr); } }
+.vj-param {
+  padding: 1rem; border-radius: 10px;
+  background: var(--bg-glass); border: 1px solid var(--border-subtle);
+  transition: all 0.5s ease;
+}
+.vj-param.glow {
+  border-color: var(--crimson); box-shadow: 0 0 20px var(--crimson-glow);
+}
+.vj-param-num {
+  font-size: 0.6rem; font-weight: 700; color: var(--crimson-soft);
+  letter-spacing: 1px; margin-bottom: 0.3rem;
+}
+.vj-param-name {
+  font-size: 0.78rem; font-weight: 600; color: var(--text-bright); margin-bottom: 0.2rem;
+}
+.vj-param-desc { font-size: 0.68rem; color: var(--text-muted); line-height: 1.45; }
+
+.vj-fingerprint {
+  display: flex; align-items: center; justify-content: center;
+  height: 120px; margin: 2rem 0; position: relative;
+}
+.vj-ring {
+  position: absolute; border-radius: 50%; border: 1.5px solid var(--crimson);
+  opacity: 0.25; animation: fpPulse 3s ease-in-out infinite;
+}
+@keyframes fpPulse {
+  0%, 100% { transform: scale(1); opacity: 0.2; }
+  50% { transform: scale(1.08); opacity: 0.5; }
+}
+
+.vj-universe {
+  display: flex; align-items: center; justify-content: center;
+  height: 120px; margin: 2rem 0; position: relative;
+}
+.vj-dot {
+  position: absolute; width: 4px; height: 4px; border-radius: 50%;
+  background: var(--crimson-bright);
+  animation: vjDotPulse 3s ease-in-out infinite;
+}
+@keyframes vjDotPulse {
+  0%, 100% { opacity: 0.2; transform: scale(0.8); }
+  50% { opacity: 0.9; transform: scale(1.4); }
+}
+
+/* ═══════════════════════════════════════════
+   STAGE 5 — ADD VOICE TO CHOIR (CTA + MODAL)
+   ═══════════════════════════════════════════ */
+
+/* CTA button used in Stage 5 and as primary action inside the modal */
+.vj-cta {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  padding: 0.85rem 1.4rem; min-height: 44px;
+  background: var(--crimson-dark); color: var(--text-bright);
+  border: 1px solid var(--crimson); border-radius: 8px;
+  font-family: 'Inter', sans-serif; font-size: 0.78rem; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  cursor: pointer; user-select: none;
+  transition: transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease, opacity 0.18s ease;
+  box-shadow: 0 4px 18px rgba(198,40,40,0.18);
+}
+.vj-cta:hover:not(:disabled) {
+  transform: translateY(-1px);
+  background: var(--crimson);
+  box-shadow: 0 6px 22px rgba(198,40,40,0.32);
+}
+.vj-cta:active:not(:disabled) { transform: translateY(0) scale(0.99); }
+.vj-cta:disabled { opacity: 0.55; cursor: not-allowed; }
+.vj-cta-icon {
+  display: inline-block; width: 10px; height: 10px; border-radius: 50%;
+  background: var(--crimson-bright); flex-shrink: 0;
+}
+
+/* Modal backdrop */
+.vj-modal-backdrop {
+  position: fixed; inset: 0; z-index: 300;
+  background: rgba(5,5,5,0.78); backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.18s ease-out;
+}
+.vj-modal-backdrop[data-open="true"] { opacity: 1; pointer-events: auto; }
+body.vj-modal-open { overflow: hidden; }
+
+/* Modal surface — sized to fit without scrolling at typical laptop viewports */
+.vj-modal {
+  position: fixed; left: 50%; top: 50%; z-index: 301;
+  transform: translate(-50%, -46%) scale(0.96); opacity: 0;
+  pointer-events: none;
+  width: calc(100% - 32px); max-width: 560px;
+  max-height: calc(100dvh - 24px);
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(18,18,18,0.97), rgba(8,8,8,0.97));
+  border: 1px solid var(--border-medium); border-radius: 14px;
+  box-shadow:
+    0 30px 80px rgba(0,0,0,0.6),
+    0 0 0 1px var(--border-subtle),
+    0 0 60px rgba(198,40,40,0.08);
+  padding: 1.4rem 1.5rem 1.2rem;
+  transition: opacity 0.22s ease, transform 0.26s cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+/* Last-resort: short viewports get a scroll so nothing is cut off */
+@media (max-height: 700px) {
+  .vj-modal { overflow-y: auto; }
+}
+.vj-modal[data-open="true"] {
+  transform: translate(-50%, -50%) scale(1); opacity: 1; pointer-events: auto;
+}
+
+.vj-modal-close {
+  position: absolute; top: 12px; right: 12px;
+  width: 32px; height: 32px; padding: 0;
+  background: transparent; border: 1px solid transparent;
+  color: var(--text-muted); border-radius: 6px;
+  font-size: 1rem; line-height: 1; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: color 0.15s, border-color 0.15s, background 0.15s;
+}
+.vj-modal-close:hover, .vj-modal-close:focus-visible {
+  color: var(--text-bright); border-color: var(--border-medium);
+  background: var(--bg-glass); outline: none;
+}
+
+.vj-modal-label {
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--crimson-soft); margin-bottom: 0.5rem;
+}
+.vj-modal-title {
+  font-family: 'Playfair Display', Georgia, serif; font-weight: 700;
+  font-size: 1.45rem; line-height: 1.2; color: var(--text-bright);
+  margin-bottom: 0.6rem;
+}
+
+/* Journey strip — 4 mini illustrations of the voice transformation,
+   replacing the old wall-of-text fingerprint explainer. */
+.vj-journey {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr auto 1fr auto 1fr;
+  align-items: center; gap: 0.4rem;
+}
+.vj-jc {
+  display: flex; flex-direction: column; align-items: center; gap: 0.4rem;
+  padding: 0.5rem 0.2rem;
+}
+.vj-ji {
+  position: relative;
+  width: 56px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+}
+.vj-jl {
+  font-family: 'Inter', sans-serif; font-size: 0.6rem; font-weight: 700;
+  letter-spacing: 1.5px; text-transform: uppercase;
+  color: var(--text-secondary); text-align: center; line-height: 1.2;
+}
+.vj-jarrow {
+  font-size: 0.85rem; color: var(--text-muted); user-select: none;
+  padding-bottom: 1.2rem;     /* aligns arrow vertically with the illustration row, not the label */
+}
+
+/* Cell 1 — your voice: mini waveform */
+.vj-ji-bars { gap: 2.5px; align-items: flex-end; }
+.vj-ji-bars span {
+  width: 3px; border-radius: 2px;
+  background: linear-gradient(to top, var(--crimson), var(--crimson-bright));
+  animation: vjWave 1.8s ease-in-out infinite;
+}
+.vj-ji-bars span:nth-child(1) { animation-delay: 0s; }
+.vj-ji-bars span:nth-child(2) { animation-delay: 0.18s; }
+.vj-ji-bars span:nth-child(3) { animation-delay: 0.36s; }
+.vj-ji-bars span:nth-child(4) { animation-delay: 0.54s; }
+.vj-ji-bars span:nth-child(5) { animation-delay: 0.72s; }
+.vj-ji-bars span:nth-child(6) { animation-delay: 0.9s; }
+
+/* Cell 2 — 12 dimensions: a measurement dial with twelve ticks on a ring,
+   instantly readable as "twelve discrete measurements". */
+.vj-ji-dims { width: 44px; height: 44px; }
+.vj-ji-dial { width: 100%; height: 100%; display: block; }
+.vj-ji-dial-ticks circle {
+  fill: var(--crimson-bright);
+  transform-origin: 20px 20px;
+  animation: vjJiTick 2.4s ease-in-out infinite;
+}
+/* Stagger pulses around the dial so it reads as alive, not blinking */
+.vj-ji-dial-ticks circle:nth-child(1)  { animation-delay: 0s; }
+.vj-ji-dial-ticks circle:nth-child(2)  { animation-delay: 0.2s; }
+.vj-ji-dial-ticks circle:nth-child(3)  { animation-delay: 0.4s; }
+.vj-ji-dial-ticks circle:nth-child(4)  { animation-delay: 0.6s; }
+.vj-ji-dial-ticks circle:nth-child(5)  { animation-delay: 0.8s; }
+.vj-ji-dial-ticks circle:nth-child(6)  { animation-delay: 1.0s; }
+.vj-ji-dial-ticks circle:nth-child(7)  { animation-delay: 1.2s; }
+.vj-ji-dial-ticks circle:nth-child(8)  { animation-delay: 1.4s; }
+.vj-ji-dial-ticks circle:nth-child(9)  { animation-delay: 1.6s; }
+.vj-ji-dial-ticks circle:nth-child(10) { animation-delay: 1.8s; }
+.vj-ji-dial-ticks circle:nth-child(11) { animation-delay: 2.0s; }
+.vj-ji-dial-ticks circle:nth-child(12) { animation-delay: 2.2s; }
+@keyframes vjJiTick {
+  0%, 100% { opacity: 0.35; transform: scale(0.85); }
+  50%      { opacity: 1;    transform: scale(1.15); }
+}
+/* Legacy ring styles kept for Cell 3 (.vj-ji-fp) which still uses them. */
+.vj-ji-ring {
+  position: absolute; width: 28px; height: 28px;
+  border: 1.2px solid var(--crimson); border-radius: 50%;
+  opacity: 0.6;
+  animation: fpPulse 3s ease-in-out infinite;
+}
+
+/* Cell 3 — fingerprint: tight ring + bright core */
+.vj-ji-fp .vj-ji-ring { width: 32px; height: 32px; opacity: 0.7; }
+.vj-ji-core {
+  position: relative; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--gold-light);
+  box-shadow: 0 0 8px var(--gold-light);
+}
+
+/* Cell 4 — choir cluster: scattered pulsing dots */
+.vj-ji-choir { width: 56px; height: 40px; }
+.vj-ji-choir span {
+  position: absolute; width: 4px; height: 4px; border-radius: 50%;
+  background: var(--crimson-bright);
+  animation: vjDotPulse 3s ease-in-out infinite;
+}
+.vj-ji-choir span:nth-child(1) { top: 18%; left: 20%; animation-delay: 0s; }
+.vj-ji-choir span:nth-child(2) { top: 60%; left: 14%; animation-delay: 0.4s; }
+.vj-ji-choir span:nth-child(3) { top: 30%; left: 42%; animation-delay: 0.8s; }
+.vj-ji-choir span:nth-child(4) { top: 70%; left: 50%; animation-delay: 1.2s; }
+.vj-ji-choir span:nth-child(5) { top: 14%; left: 68%; animation-delay: 1.6s; }
+.vj-ji-choir span:nth-child(6) { top: 80%; left: 78%; animation-delay: 2.0s; }
+.vj-ji-choir span:nth-child(7) { top: 44%; left: 82%; animation-delay: 0.2s; }
+.vj-ji-choir span:nth-child(8) { top: 50%; left: 28%; animation-delay: 1.0s; }
+.vj-ji-choir span:nth-child(9) { top: 22%; left: 90%; animation-delay: 1.8s; }
+
+@media (max-width: 480px) {
+  .vj-journey {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 0.3rem;
+  }
+  .vj-jarrow { display: none; }
+  .vj-ji { width: 44px; height: 32px; }
+  .vj-ji-ring { width: 22px; height: 22px; }
+  .vj-ji-dims { width: 36px; height: 36px; }
+  .vj-jl { font-size: 0.55rem; }
+}
+
+/* Morphing centerpiece — HERO stage with halo + state-driven sub-elements */
+.vj-stage-area {
+  position: relative;
+  width: 240px; height: 240px;
+  margin: 0.2rem auto 1.4rem;
+}
+.vj-stage-area > * {
+  position: absolute; inset: 0;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.32s ease;
+  pointer-events: none;
+}
+
+/* Soft halo behind the stage — always present, intensifies during recording */
+.vj-sa-halo {
+  opacity: 1 !important;
+  background:
+    radial-gradient(circle at center, rgba(198,40,40,0.18) 0%, rgba(198,40,40,0.06) 35%, transparent 70%);
+  filter: blur(8px);
+  transition: opacity 0.4s, transform 0.4s, background 0.4s;
+}
+.vj-modal[data-state="recording"] .vj-sa-halo {
+  background:
+    radial-gradient(circle at center, rgba(239,83,80,0.32) 0%, rgba(198,40,40,0.14) 40%, transparent 75%);
+  animation: vjHaloBreath 1.6s ease-in-out infinite;
+}
+@keyframes vjHaloBreath {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+/* Layer: idle/arming/uploading rings (composed of vj-ring) */
+.vj-sa-rings .vj-ring { position: absolute; border-radius: 50%; }
+.vj-sa-rings .vj-ring:nth-child(1) { width: 60px;  height: 60px;  border: 1.5px solid var(--crimson); animation: fpPulse 3s ease-in-out infinite; }
+.vj-sa-rings .vj-ring:nth-child(2) { width: 112px; height: 112px; border: 1.5px solid var(--crimson); animation: fpPulse 3s ease-in-out 0.4s infinite; }
+.vj-sa-rings .vj-ring:nth-child(3) { width: 164px; height: 164px; border: 1.5px solid var(--crimson); animation: fpPulse 3s ease-in-out 0.8s infinite; }
+.vj-sa-rings .vj-ring:nth-child(4) { width: 216px; height: 216px; border: 1.5px solid var(--crimson); animation: fpPulse 3s ease-in-out 1.2s infinite; opacity: 0.15; }
+
+/* Recording state — live waveform bars driven by JS */
+.vj-sa-bars { gap: 5px; }
+.vj-sa-bars .vj-rec-bar {
+  width: 6px; height: 8%;
+  background: linear-gradient(to top, var(--crimson), var(--crimson-bright));
+  border-radius: 3px;
+  transition: height 80ms linear;
+  box-shadow: 0 0 12px rgba(239,83,80,0.45);
+}
+/* Recording timer — its own clean row BELOW the stage area, centred,
+   visible only while recording. Used to live inside the stage with an
+   absolute negative offset that fought the inset:0 inheritance and
+   pushed it into the top-left corner; now it's a normal block element. */
+.vj-sa-counter {
+  display: block;
+  text-align: center;
+  margin: -0.4rem auto 0.6rem;       /* negative top pulls it closer to the stage; positive bottom keeps it off the status line */
+  font-family: 'Inter', sans-serif; font-variant-numeric: tabular-nums;
+  font-size: 1.5rem; font-weight: 700; letter-spacing: 3px;
+  color: var(--crimson-bright);
+  text-shadow: 0 0 18px rgba(239,83,80,0.5);
+  opacity: 0;
+  transition: opacity 0.32s ease;
+  pointer-events: none;
+  user-select: none;
+}
+
+/* Universe of dots (assembling/mastering) — JS injects ~30 .vj-rec-dot */
+.vj-sa-dots .vj-rec-dot {
+  position: absolute; width: 5px; height: 5px; border-radius: 50%;
+  background: var(--crimson-bright);
+  animation: vjDotPulse 3s ease-in-out infinite;
+}
+
+
+/* Journey strip — live progress states. Each cell is one of:
+   - default (idle) :: gentle ambient animation
+   - .vj-jc--future :: dimmed, not yet reached
+   - .vj-jc--done   :: solid, already passed through
+   - .vj-jc--active :: brightened, scaled up, with crimson glow — current stage */
+.vj-jc { transition: opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease; }
+.vj-jc--future { opacity: 0.32; }
+.vj-jc--future .vj-ji-bars span,
+.vj-jc--future .vj-ji-dial-ticks circle,
+.vj-jc--future .vj-ji-fp .vj-ji-ring,
+.vj-jc--future .vj-ji-choir span { animation-play-state: paused; }
+.vj-jc--done {
+  opacity: 0.7;
+}
+.vj-jc--done .vj-jl { color: var(--text-muted); }
+.vj-jc--active {
+  opacity: 1;
+  transform: scale(1.12);
+  filter: drop-shadow(0 0 6px rgba(198,40,40,0.55));
+}
+.vj-jc--active .vj-jl { color: var(--crimson-bright); }
+/* The arrow between an active cell and the next future cell pulses gently
+   to suggest "moving toward this next stage". */
+.vj-jc--active + .vj-jarrow {
+  color: var(--crimson-bright);
+  animation: vjArrowFlow 1.4s ease-in-out infinite;
+}
+@keyframes vjArrowFlow {
+  0%, 100% { opacity: 0.5; transform: translateX(0); }
+  50%      { opacity: 1;   transform: translateX(2px); }
+}
+
+
+/* Gold core (saving/complete) */
+.vj-sa-core {
+  pointer-events: none;
+}
+.vj-sa-core::after {
+  content: ''; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--gold-light);
+  box-shadow: 0 0 24px var(--gold-light), 0 0 48px var(--gold-muted);
+  animation: vjCorePulse 2.4s ease-in-out infinite;
+}
+@keyframes vjCorePulse {
+  0%, 100% { transform: scale(1); opacity: 0.85; }
+  50% { transform: scale(1.18); opacity: 1; }
+}
+
+/* State visibility: which sublayer is shown */
+.vj-modal[data-state="idle"]      .vj-sa-rings { opacity: 1; }
+.vj-modal[data-state="arming"]    .vj-sa-rings { opacity: 1; filter: brightness(1.4); }
+.vj-modal[data-state="recording"] .vj-sa-bars,
+.vj-modal[data-state="recording"] .vj-sa-counter { opacity: 1; }
+.vj-modal[data-state="encoding"]  .vj-sa-rings { opacity: 1; }
+.vj-modal[data-state="uploading"] .vj-sa-rings { opacity: 1; filter: brightness(1.2); }
+.vj-modal[data-state="processing"][data-step="loading"]         .vj-sa-rings { opacity: 1; }
+.vj-modal[data-state="processing"][data-step="per_voice_chain"] .vj-sa-rings { opacity: 1; filter: brightness(1.15); }
+.vj-modal[data-state="processing"][data-step="assembling"]      .vj-sa-dots,
+.vj-modal[data-state="processing"][data-step="mastering"]       .vj-sa-dots { opacity: 1; }
+.vj-modal[data-state="processing"][data-step="saving"]          .vj-sa-dots { opacity: 0.4; }
+.vj-modal[data-state="processing"][data-step="saving"]          .vj-sa-core { opacity: 1; }
+.vj-modal[data-state="complete"]  .vj-sa-dots { opacity: 0.35; }
+.vj-modal[data-state="complete"]  .vj-sa-core { opacity: 1; }
+.vj-modal[data-state="failed"]    .vj-sa-rings { opacity: 0.5; filter: grayscale(0.6) brightness(0.7); }
+.vj-modal[data-state="rate_limited"] .vj-sa-rings { opacity: 1; filter: hue-rotate(-30deg) brightness(1.1); }
+
+/* Status line */
+.vj-status-line {
+  text-align: center; min-height: 1.5em;
+  font-family: 'Inter', sans-serif; font-variant-numeric: tabular-nums;
+  font-size: 0.9rem; font-weight: 500; letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  margin: 0.2rem 0 1rem;
+}
+.vj-modal[data-state="recording"] .vj-status-line { color: var(--crimson-soft); }
+.vj-modal[data-state="failed"]    .vj-status-line { color: var(--crimson-soft); }
+.vj-modal[data-state="rate_limited"] .vj-status-line { color: var(--gold-light); }
+.vj-modal[data-state="complete"]  .vj-status-line { color: var(--gold-light); }
+
+/* Primary button — HERO action, full presence */
+.vj-primary {
+  display: flex; align-items: center; justify-content: center; gap: 0.7rem;
+  width: 100%; padding: 1rem 1.3rem; min-height: 56px;
+  background: var(--crimson-dark); color: var(--text-bright);
+  border: 1px solid var(--crimson); border-radius: 12px;
+  font-family: 'Inter', sans-serif; font-size: 0.92rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  cursor: pointer; user-select: none;
+  box-shadow: 0 6px 24px rgba(198,40,40,0.22);
+  transition: all 0.2s ease;
+}
+.vj-primary:hover:not(:disabled) {
+  transform: translateY(-1px); background: var(--crimson);
+  box-shadow: 0 10px 32px rgba(198,40,40,0.4);
+}
+.vj-primary:active:not(:disabled) { transform: translateY(0) scale(0.99); }
+.vj-primary:disabled { opacity: 0.6; cursor: not-allowed; }
+.vj-primary-icon { width: 12px; height: 12px; }
+
+.vj-modal[data-state="recording"] .vj-primary {
+  background: var(--crimson); border-color: var(--crimson-bright);
+  box-shadow: 0 0 0 3px rgba(239,83,80,0.15), 0 0 24px rgba(239,83,80,0.35);
+}
+.vj-modal[data-state="encoding"] .vj-primary,
+.vj-modal[data-state="uploading"] .vj-primary,
+.vj-modal[data-state="processing"] .vj-primary {
+  background: var(--bg-elevated); border-color: var(--border-medium);
+  color: var(--text-secondary); box-shadow: none;
+}
+.vj-modal[data-state="complete"] .vj-primary {
+  background: transparent; border-color: var(--gold-muted); color: var(--gold-light);
+  box-shadow: none;
+}
+.vj-modal[data-state="failed"] .vj-primary {
+  background: transparent; border-color: var(--crimson-dark); color: var(--crimson-soft);
+  box-shadow: none;
+}
+.vj-modal[data-state="rate_limited"] .vj-primary {
+  background: transparent; border-color: var(--gold-muted); color: var(--gold-light);
+  box-shadow: none;
+}
+
+.vj-primary-icon {
+  display: inline-flex; width: 10px; height: 10px; border-radius: 50%;
+  background: var(--crimson-bright); flex-shrink: 0;
+}
+.vj-modal[data-state="recording"] .vj-primary-icon {
+  border-radius: 2px; background: var(--text-bright);
+}
+.vj-modal[data-state="encoding"] .vj-primary-icon,
+.vj-modal[data-state="uploading"] .vj-primary-icon,
+.vj-modal[data-state="processing"] .vj-primary-icon {
+  background: transparent; border: 1.5px solid var(--text-muted);
+  border-top-color: var(--text-bright); animation: vjSpin 0.9s linear infinite;
+}
+@keyframes vjSpin { to { transform: rotate(360deg); } }
+
+/* Headphones hint */
+.vj-headphones-hint {
+  margin-top: 0.7rem; text-align: center;
+  font-size: 0.7rem; letter-spacing: 0.5px;
+  color: var(--text-muted);
+}
+
+/* Result block (post-success) */
+.vj-result-block {
+  display: none;
+  margin-top: 1rem;
+  background: linear-gradient(180deg, rgba(212,168,67,0.06), rgba(198,40,40,0.04));
+  border: 1px solid var(--gold-muted);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  box-shadow: inset 0 0 18px rgba(212,168,67,0.06);
+}
+.vj-modal[data-state="complete"] .vj-result-block { display: block; }
+/* The hidden <audio> element backs the custom player; it must not render. */
+.vj-result-block audio { display: none; }
+
+.vj-result-caption {
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--gold-light);
+  margin-bottom: 0.75rem; text-align: center;
+}
+
+/* Custom audio player */
+.vj-player {
+  display: flex; align-items: center; gap: 0.85rem;
+}
+.vj-player-play {
+  flex-shrink: 0;
+  width: 46px; height: 46px; padding: 0;
+  background: var(--crimson-dark); color: var(--text-bright);
+  border: 1px solid var(--crimson);
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 4px 14px rgba(198,40,40,0.28);
+  transition: transform 0.15s, background 0.18s, box-shadow 0.18s;
+}
+.vj-player-play:hover { background: var(--crimson); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(198,40,40,0.42); }
+.vj-player-play:active { transform: translateY(0) scale(0.96); }
+.vj-pi { width: 18px; height: 18px; }
+.vj-pi-pause { display: none; }
+.vj-player[data-playing="true"] .vj-pi-play { display: none; }
+.vj-player[data-playing="true"] .vj-pi-pause { display: block; }
+
+.vj-player-track {
+  position: relative; flex: 1 1 auto;
+  height: 6px; min-width: 60px;
+  background: rgba(198,40,40,0.18);
+  border-radius: 3px; cursor: pointer; outline: none;
+}
+.vj-player-track:focus-visible { box-shadow: 0 0 0 2px var(--crimson-glow); }
+.vj-player-fill {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 0%;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--crimson), var(--crimson-bright));
+}
+.vj-player-thumb {
+  position: absolute; top: 50%; left: 0%; transform: translate(-50%, -50%);
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--gold-light);
+  box-shadow: 0 0 10px var(--gold-light);
+  pointer-events: none;
+}
+
+.vj-player-time {
+  flex-shrink: 0;
+  font-family: 'Inter', sans-serif; font-variant-numeric: tabular-nums;
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.5px;
+  color: var(--text-secondary); white-space: nowrap;
+}
+
+
+/* Once the user has the result, hide the headphones hint — but keep
+   the journey strip visible as reinforcement of "this is what just happened". */
+.vj-modal[data-state="complete"] .vj-headphones-hint { display: none; }
+
+/* Mobile */
+@media (max-width: 480px) {
+  .vj-modal {
+    padding: 1.4rem 1.1rem 1.1rem;
+    width: calc(100% - 16px);
+    border-radius: 12px;
+  }
+  .vj-modal-title { font-size: 1.3rem; }
+  .vj-fp-explainer p { font-size: 0.74rem; }
+  .vj-stage-area { width: 220px; height: 220px; margin-bottom: 2.6rem; }
+  .vj-sa-rings .vj-ring:nth-child(1) { width: 56px;  height: 56px; }
+  .vj-sa-rings .vj-ring:nth-child(2) { width: 104px; height: 104px; }
+  .vj-sa-rings .vj-ring:nth-child(3) { width: 152px; height: 152px; }
+  .vj-sa-rings .vj-ring:nth-child(4) { display: none; }
+  .vj-sa-counter { font-size: 1.15rem; letter-spacing: 2px; }
+  .vj-status-line { font-size: 0.85rem; }
+  .vj-primary { min-height: 58px; font-size: 0.85rem; padding: 1rem 1.2rem; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .vj-modal-backdrop, .vj-modal { transition-duration: 0.01ms; }
+  .vj-stage-area > * { transition-duration: 0.01ms; }
+  .vj-sa-rings .vj-ring,
+  .vj-sa-dots .vj-rec-dot,
+  .vj-sa-core::after { animation: none; }
+  .vj-cta, .vj-primary { transition-duration: 0.01ms; }
+}
+
+/* ═══ INDUSTRY COMPARISON ═══ */
+.industry-compare {
+  display: grid; grid-template-columns: 1fr auto 1fr; gap: 2rem;
+  align-items: center; margin: 2rem 0;
+}
+.industry-old, .industry-new {
+  padding: 2rem; border-radius: 14px;
+}
+.industry-old {
+  background: rgba(255,255,255,0.015); border: 1px solid var(--border-subtle);
+  opacity: 0.6;
+}
+.industry-new {
+  background: var(--bg-glass); border: 1px solid var(--border-crimson);
+}
+.industry-arrow {
+  font-size: 1.5rem; color: var(--crimson-bright); font-weight: 800;
+}
+@media (max-width: 768px) {
+  .industry-compare { grid-template-columns: 1fr; }
+  .industry-arrow { text-align: center; transform: rotate(90deg); }
+}
+
+/* ═══ FESTIVAL SECTION ═══ */
+.fest-grid {
+  display: grid; grid-template-columns: repeat(5, 1fr); gap: 0.8rem; margin: 2rem 0;
+}
+@media (max-width: 900px) { .fest-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 600px) { .fest-grid { grid-template-columns: repeat(2, 1fr); } }
+.fest-card {
+  padding: 1.5rem 1rem; border-radius: 12px; text-align: center;
+  background: var(--bg-glass); border: 1px solid var(--border-subtle);
+  transition: all 0.35s ease;
+}
+.fest-card:hover { border-color: var(--gold-muted); }
+.fest-emoji { font-size: 1.6rem; margin-bottom: 0.6rem; }
+.fest-card h4 { font-size: 0.8rem; font-weight: 700; color: var(--text-bright); margin-bottom: 0.3rem; }
+.fest-card p { font-size: 0.7rem; color: var(--text-muted); line-height: 1.4; }
+
+/* ═══ UNDER THE HOOD (REVEAL) ═══ */
+.hood-reveal {
+  background: linear-gradient(180deg, var(--bg-void) 0%, var(--bg-deep) 50%, var(--bg-primary) 100%);
+  border-top: 1px solid var(--border-crimson);
+}
+.hood-stats {
+  display: flex; gap: 3rem; flex-wrap: wrap; justify-content: center;
+  margin: 2rem 0;
+}
+.hood-stat { text-align: center; }
+.hood-stat-val {
+  font-family: 'Inter', sans-serif; font-size: 1.6rem;
+  font-weight: 800; color: var(--crimson-bright);
+}
+.hood-stat-label {
+  font-size: 0.65rem; color: var(--text-muted); font-weight: 500;
+  text-transform: uppercase; letter-spacing: 1px; margin-top: 0.2rem;
+}
+
+/* ═══ EVOLUTION TIMELINE ═══ */
+.evo-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin: 2rem 0;
+}
+@media (max-width: 768px) { .evo-grid { grid-template-columns: repeat(2, 1fr); } }
+.evo-card {
+  padding: 1.8rem 1.5rem; border-radius: 14px;
+  background: var(--bg-glass); border: 1px solid var(--border-subtle);
+  transition: all 0.35s ease; position: relative;
+}
+.evo-card:hover { border-color: var(--border-crimson); }
+.evo-num {
+  font-family: 'Playfair Display', serif; font-size: 2.5rem;
+  font-weight: 900; color: rgba(198,40,40,0.15); position: absolute;
+  top: 0.5rem; right: 1rem;
+}
+.evo-card h4 { font-size: 0.9rem; font-weight: 700; color: var(--gold-light); margin-bottom: 0.5rem; }
+.evo-card p { font-size: 0.82rem; color: var(--text-muted); line-height: 1.6; }
+
+/* ═══ TEAM ═══ */
+.team-stats {
+  display: flex; gap: 3rem; flex-wrap: wrap; margin: 2rem 0;
+}
+.team-stat { }
+.team-stat-val {
+  font-family: 'Inter', sans-serif; font-size: 1.4rem;
+  font-weight: 800; color: var(--crimson-bright);
+}
+.team-stat-label {
+  font-size: 0.65rem; color: var(--text-muted); font-weight: 500;
+  text-transform: uppercase; letter-spacing: 1px; margin-top: 0.15rem;
+}
+
+/* ═══ METRIC CARDS ═══ */
+.metric-card {
+  padding: 1.2rem 1.5rem; border-radius: 10px;
+  background: var(--bg-glass); border: 1px solid var(--border-subtle);
+}
+.metric-card .val {
+  font-family: 'Inter', sans-serif; font-size: 1.3rem;
+  font-weight: 800; color: var(--text-bright);
+}
+.metric-card .label {
+  font-size: 0.7rem; color: var(--text-muted); margin-top: 0.15rem;
+}
+
+/* ═══ ROADMAP ═══ */
+.roadmap-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem; margin: 2rem 0;
+}
+@media (max-width: 900px) { .roadmap-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .roadmap-grid { grid-template-columns: 1fr; } }
+.roadmap-card {
+  padding: 2rem; border-radius: 14px;
+  background: var(--bg-glass); border: 1px solid var(--border-subtle);
+}
+.roadmap-card.active { border-color: var(--border-crimson); }
+.roadmap-phase {
+  font-size: 0.6rem; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; margin-bottom: 0.8rem;
+}
+.roadmap-card h4 {
+  font-family: 'Playfair Display', serif; font-size: 1.1rem;
+  font-weight: 700; color: var(--text-bright); margin-bottom: 0.6rem;
+}
+.roadmap-card ul {
+  list-style: none; padding: 0;
+}
+.roadmap-card li {
+  font-size: 0.82rem; color: var(--text-secondary); padding: 0.3rem 0;
+  padding-left: 1rem; position: relative; line-height: 1.5;
+}
+.roadmap-card li::before {
+  content: '›'; position: absolute; left: 0; color: var(--crimson-bright); font-weight: 700;
+}
+
+/* ═══ FILM ═══ */
+.film-hero {
+  padding: 3rem; border-radius: 14px; margin: 2rem 0;
+  background: linear-gradient(135deg, rgba(212,168,67,0.08), rgba(198,40,40,0.06));
+  border: 1px solid var(--gold-muted);
+}
+.film-hero .film-icon {
+  font-size: 2.5rem; margin-bottom: 1rem;
+}
+.film-hero h3 {
+  font-family: 'Playfair Display', serif; font-size: 1.4rem;
+  font-weight: 700; color: var(--text-bright); margin-bottom: 1rem;
+}
+.film-quote {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: 1.1rem; color: var(--gold-light); line-height: 1.6;
+  padding: 1.5rem 0; border-top: 2px solid var(--crimson);
+  border-bottom: 2px solid var(--gold-muted); margin: 1.5rem 0;
+}
+.film-pillars {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; margin-top: 2rem;
+}
+@media (max-width: 768px) { .film-pillars { grid-template-columns: repeat(2, 1fr); } }
+.film-pillar {
+  padding: 1.5rem; border-radius: 12px; text-align: center;
+  background: var(--bg-glass); border: 1px solid var(--border-subtle);
+}
+.film-pillar .pillar-icon { font-size: 1.8rem; margin-bottom: 0.6rem; }
+.film-pillar h4 {
+  font-family: 'Inter', sans-serif; font-weight: 700;
+  font-size: 0.85rem; color: var(--text-bright); margin-bottom: 0.5rem;
+}
+.film-pillar p {
+  font-size: 0.75rem; color: var(--text-secondary); line-height: 1.5;
+}
+
+/* ═══ CLOSING ═══ */
+#closing {
+  min-height: 60vh; display: flex; align-items: center; justify-content: center;
+  text-align: center; background: var(--bg-void);
+}
+.closing-statement {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.5rem, 3.5vw, 2.5rem); font-weight: 700;
+  color: var(--text-bright); line-height: 1.3; max-width: 700px;
+  margin: 0 auto 2rem;
+}
+.closing-statement em { font-style: italic; color: var(--crimson-bright); }
+
+/* ═══ FOOTER ═══ */
+footer {
+  background: var(--bg-void); border-top: 1px solid var(--border-subtle);
+  color: var(--text-muted); text-align: center;
+  padding: 2rem; font-size: 0.7rem; letter-spacing: 0.5px;
+}
+footer strong { color: var(--text-secondary); font-weight: 600; }
+
+@media (max-width: 768px) { section { padding: 3.5rem 1.5rem; } }
+</style>
+</head>
+<body>
+<div class="variant-banner" id="variantBanner">
+  <span class="vb-tag">A · Wine / Heritage</span>
+  <a href="/cd.html" class="vb-switch">Switch to B · Indigo / TMA-aligned →</a>
+</div>
+<style>
+.variant-banner {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+  height: 36px; padding: 0 1.2rem;
+  background: linear-gradient(90deg, #1A0F0C 0%, #241612 100%);
+  border-bottom: 1px solid var(--gold-muted);
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: 'Inter', sans-serif; font-size: 0.7rem;
+  letter-spacing: 0.14em; text-transform: uppercase;
+}
+.vb-tag { color: var(--gold-light); font-weight: 600; }
+.vb-switch {
+  color: var(--text-bright); text-decoration: none; font-weight: 500;
+  padding: 0.35rem 0.8rem; border: 1px solid var(--border-medium);
+  border-radius: 4px; transition: all 0.2s;
+}
+.vb-switch:hover { border-color: var(--gold); color: var(--gold-light); }
+nav.site-nav { top: 38px; }
+.scroll-progress { top: 36px; }
+</style>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<nav class="site-nav">
+  <div class="nav-brand">
+    <span class="nav-gem" aria-hidden="true"></span>
+    <span class="nav-wordmark">granat</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#challenge">Challenge</a></li>
+    <li><a href="#answer">Answer</a></li>
+    <li><a href="#how-it-works">Demo</a></li>
+    <li><a href="#roadmap">Roadmap</a></li>
+    <li><a href="#invitation">Invitation</a></li>
+    <li>
+      <div class="lang-toggle" role="group" aria-label="Language">
+        <button class="lang-btn active" data-lang="en" aria-pressed="true" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" data-lang="ru" aria-pressed="false" onclick="setLang('ru')">RU</button>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 1 — HERO
+     ═══════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-grid">
+    <div class="hero-type">
+      <div class="section-label" style="margin-bottom: 0.8rem;">
+        <span class="section-label-num">01</span>
+        <span class="en">A Heritage Artifact</span><span class="ru">Артефакт наследия</span>
+      </div>
+      <h1 class="hero-mark">granat</h1>
+      <div class="hero-anthem">
+        <span class="en">the voice of humanity</span><span class="ru">голос человечества</span>
+      </div>
+      <p class="hero-sub">
+        <span class="en">The first digital artifact, created by all of humanity.</span>
+        <span class="ru">Первый цифровой артефакт, созданный всем человечеством.</span>
+      </p>
+      <div class="hero-ctas">
+        <a href="#how-it-works" class="hero-cta-link">
+          <span class="hero-cta-rule" aria-hidden="true"></span>
+          <span class="en">Hear it</span><span class="ru">Послушать</span>
+          <span class="hero-cta-arrow" aria-hidden="true">→</span>
+        </a>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <div class="hero-art-img"></div>
+    </div>
+  </div>
+  <div class="hero-scroll-cue">
+    <span class="en">scroll</span><span class="ru">вниз</span>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 2 — CHALLENGE OF OUR TIME
+     ═══════════════════════════════════════════ -->
+<section id="challenge" class="section-alt">
+  <div class="container reveal">
+    <div class="section-label">
+      <span class="section-label-num">02</span>
+      <span class="en">The Challenge of Our Time</span><span class="ru">Вызов нашего времени</span>
+    </div>
+    <div class="split-2col">
+      <div>
+        <h2 class="display-anthem">
+          <span class="en">We have created a technological paradise yet live in a spiritual desert.</span>
+          <span class="ru">Мы создали технологический рай, но живём в духовной пустыне.</span>
+        </h2>
+        <div class="stat-block">
+          <div class="stat-cell">
+            <div class="stat-num" data-count="8">0</div>
+            <div class="stat-label">
+              <span class="en">Billion people</span><span class="ru">Миллиардов человек</span>
+            </div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num" data-count="7000">0</div>
+            <div class="stat-label">
+              <span class="en">Languages</span><span class="ru">Языков</span>
+            </div>
+          </div>
+          <div class="stat-cell">
+            <div class="stat-num" data-count="0">0</div>
+            <div class="stat-label">
+              <span class="en">Shared voices</span><span class="ru">Общих голосов</span>
+            </div>
+          </div>
+        </div>
+        <p class="pull-quote">
+          <span class="en">History will judge us not by our technologies, but by what we did with the human soul.</span>
+          <span class="ru">История будет судить нас не по нашим технологиям, а по тому, что мы сделали с человеческой душой.</span>
+        </p>
+      </div>
+      <div class="duality-art" aria-hidden="true"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 3 — THE ANSWER (GRANAT / ONE VOICE)
+     ═══════════════════════════════════════════ -->
+<section id="answer">
+  <div class="container reveal">
+    <div class="section-label">
+      <span class="section-label-num">03</span>
+      <span class="en">The Answer — GRANAT</span><span class="ru">Ответ — GRANAT</span>
+    </div>
+    <div class="answer-grid">
+      <div class="mic-art" aria-hidden="true"></div>
+      <div>
+        <h2 class="display-anthem">
+          <span class="en">We give humanity what it has never had — a single voice.</span>
+          <span class="ru">Мы даём человечеству то, чего у него никогда не было — единый голос.</span>
+        </h2>
+        <div class="three-line-refrain">
+          <p class="refrain-line">
+            <span class="en">This is not a song. It is a sounding monument to our civilization.</span>
+            <span class="ru">Это не песня. Это звучащий памятник нашей цивилизации.</span>
+          </p>
+          <p class="refrain-line">
+            <span class="en">This is not a project. It is an evolutionary leap of consciousness.</span>
+            <span class="ru">Это не проект. Это эволюционный скачок сознания.</span>
+          </p>
+          <p class="refrain-line">
+            <span class="en">This is not art. It is an act of collective self-knowledge.</span>
+            <span class="ru">Это не искусство. Это акт коллективного самопознания.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 4 — TEAM
+     ═══════════════════════════════════════════ -->
+<section id="team" class="section-alt">
+  <div class="container reveal">
+    <div class="section-label">
+      <span class="section-label-num">04</span>
+      <span class="en">The Team</span><span class="ru">Команда</span>
+    </div>
+    <h2 class="section-title">
+      <span class="en">People who have proven the impossible is possible</span>
+      <span class="ru">Люди, доказавшие, что невозможное возможно</span>
+    </h2>
+
+    <div class="team-strip">
+      <div class="team-cell">
+        <div class="team-credit">01 — <span class="en">Founder &amp; Visionary</span><span class="ru">Основатель и визионер</span></div>
+        <div class="team-name">
+          <span class="en">Yaroslav Malyi</span><span class="ru">Ярослав Малый</span>
+        </div>
+        <ul class="team-bullets">
+          <li><span class="en">Creator of the Olympic anthem performed by a million-voice choir</span><span class="ru">Создатель олимпийского гимна с миллионным хором</span></li>
+          <li><span class="en">Artist of <em>Machete</em> and <em>Tokio</em></span><span class="ru">Артист «Мачете» и «Токио»</span></li>
+          <li><span class="en">Producer of 42 international festivals</span><span class="ru">Продюсер 42 международных фестивалей</span></li>
+        </ul>
+      </div>
+      <div class="team-cell">
+        <div class="team-credit">02 — <span class="en">Strategist &amp; General Manager</span><span class="ru">Стратег и ген-менеджер</span></div>
+        <div class="team-name">
+          <span class="en">Olga Malaya</span><span class="ru">Ольга Малая</span>
+        </div>
+        <ul class="team-bullets">
+          <li><span class="en">Strategist and General Manager of the project</span><span class="ru">Стратег и генеральный менеджер проекта</span></li>
+          <li><span class="en">Track record of turning ambition into results at the intersection of people, businesses and ideas</span><span class="ru">Опыт превращения амбиции в результат на стыке людей, бизнесов и идей</span></li>
+        </ul>
+      </div>
+      <div class="team-cell">
+        <div class="team-credit">03 — <span class="en">Cultural Engine</span><span class="ru">Культурный двигатель</span></div>
+        <div class="team-name">
+          <span class="en">Machete Records</span><span class="ru">Machete Records</span>
+        </div>
+        <ul class="team-bullets">
+          <li><span class="en">Experience in creating global cultural phenomena</span><span class="ru">Опыт создания глобальных культурных явлений</span></li>
+          <li><span class="en">Production house behind the team's prior festival, anthem and broadcast work</span><span class="ru">Продюсерский дом за плечами фестивалей, гимнов и трансляций команды</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 5 — PHILOSOPHY (BRIDGE-BETWEEN)
+     ═══════════════════════════════════════════ -->
+<section id="philosophy" class="philosophy-bg">
+  <div class="container-narrow reveal" style="text-align: center;">
+    <div class="section-label" style="justify-content: center;">
+      <span class="section-label-num">05</span>
+      <span class="en">Philosophy</span><span class="ru">Философия</span>
+    </div>
+    <h2 class="display-anthem" style="margin-left:auto;margin-right:auto;max-width:760px;">
+      <span class="en">A bridge between Human and Intelligence, Earth and Cosmos, Reality and Eternity.</span>
+      <span class="ru">Мост между Человеком и Искусственным Интеллектом, Землёй и Космосом, Реальностью и Вечностью.</span>
+    </h2>
+    <p class="body-secondary" style="margin: 1rem auto 0; max-width: 680px;">
+      <span class="en">Granat is a bridge between Human and Artificial Intelligence, Earth and Cosmos, Reality and Eternity.</span>
+      <span class="ru">Granat — это мост между Человеком и Искусственным Интеллектом, Землёй и Космосом, Реальностью и Вечностью.</span>
+    </p>
+
+    <div class="bridge-triptych">
+      <div class="bridge-row">
+        <div class="bridge-glyph">
+          <span class="en">Human</span><span class="ru">Человек</span>
+          <span class="arrow">↔</span>
+          <span class="en">AI</span><span class="ru">ИИ</span>
+        </div>
+        <div class="bridge-text">
+          <span class="en">A digital shaman that hears each voice and weaves it into a shared language with intelligence.</span>
+          <span class="ru">Цифровой шаман, который слышит каждый голос и сплетает его в общий язык вместе с интеллектом.</span>
+        </div>
+      </div>
+      <div class="bridge-row">
+        <div class="bridge-glyph">
+          <span class="en">Earth</span><span class="ru">Земля</span>
+          <span class="arrow">↔</span>
+          <span class="en">Cosmos</span><span class="ru">Космос</span>
+        </div>
+        <div class="bridge-text">
+          <span class="en">A planet that speaks in one voice — a signal worth sending into the dark, in the long-now register.</span>
+          <span class="ru">Планета, которая звучит одним голосом — сигнал, который стоит отправить в тёмное небо, в регистре «long now».</span>
+        </div>
+      </div>
+      <div class="bridge-row">
+        <div class="bridge-glyph">
+          <span class="en">Reality</span><span class="ru">Реальность</span>
+          <span class="arrow">↔</span>
+          <span class="en">Eternity</span><span class="ru">Вечность</span>
+        </div>
+        <div class="bridge-text">
+          <span class="en">Each contribution is preserved as part of the artifact — the sound of a generation made permanent.</span>
+          <span class="ru">Каждый вклад сохраняется как часть артефакта — звук поколения, ставший постоянным.</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="pull-quote" style="margin: 2.4rem auto 0; text-align: center;">
+      <span class="en">Singularity is not the end of humanity, but the beginning of its immortality.</span>
+      <span class="ru">Сингулярность — это не конец человечества, а начало его бессмертия.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 6 — ARCHITECTURE OF ETERNITY
+     ═══════════════════════════════════════════ -->
+<section id="architecture" class="section-alt">
+  <div class="container reveal">
+    <div class="section-label">
+      <span class="section-label-num">06</span>
+      <span class="en">Architecture of Eternity</span><span class="ru">Архитектура вечности</span>
+    </div>
+    <h2 class="section-title">
+      <span class="en">Three pillars holding the artifact through time</span>
+      <span class="ru">Три опоры, удерживающие артефакт во времени</span>
+    </h2>
+
+    <div class="arch-pillars">
+      <div class="arch-card">
+        <div class="arch-icon">∿</div>
+        <h3>
+          <span class="en">AI-Composer</span><span class="ru">AI-композитор</span>
+        </h3>
+        <p>
+          <span class="en">A digital shaman weaving every voice into humanity's eternal mantra.</span>
+          <span class="ru">Цифровой шаман, вплетающий каждый голос в вечную мантру человечества.</span>
+        </p>
+      </div>
+      <div class="arch-card">
+        <div class="arch-icon">⌘</div>
+        <h3>
+          <span class="en">Blockchain Registry</span><span class="ru">Блокчейн-реестр</span>
+        </h3>
+        <p>
+          <span class="en">An eternal registry where the name of every creator is inscribed.</span>
+          <span class="ru">Вечный реестр, где вписывается имя каждого творца.</span>
+        </p>
+      </div>
+      <div class="arch-card">
+        <div class="arch-icon">◎</div>
+        <h3>
+          <span class="en">Distributed Archive</span><span class="ru">Распределённое хранилище</span>
+        </h3>
+        <p>
+          <span class="en">A modern Library of Alexandria for civilization's digital heritage.</span>
+          <span class="ru">Современная Александрийская библиотека для цифрового наследия цивилизации.</span>
+        </p>
+      </div>
+    </div>
+
+    <div class="core-plugins-frame">
+      <h4>
+        <span class="en">Core + floating plug-ins</span>
+        <span class="ru">Ядро + плавающие плагины</span>
+      </h4>
+      <p>
+        <span class="en">The core is voice technology. Plug-ins are what we add together with partners for their world: voice verification, ceremonies, festivals, educational programs. Granat is not absorbed — Granat connects.</span>
+        <span class="ru">Granat — ядро + плавающие плагины. Ядро — голосовая технология. Плагины — то, что мы вместе с партнёрами добавляем под их мир: верификация по голосу, церемонии, фестивали, образовательные программы. Granat не поглощается — Granat соединяется.</span>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 7 — HOW IT WORKS + LIVE DEMO
+     ═══════════════════════════════════════════ -->
+<section id="how-it-works">
+  <div class="container reveal">
+    <div class="section-label">
+      <span class="section-label-num">07</span>
+      <span class="en">How It Works</span><span class="ru">Как это работает</span>
+    </div>
+    <h2 class="section-title">
+      <span class="en">Three steps to eternity</span>
+      <span class="ru">Три шага к вечности</span>
+    </h2>
+
+    <div class="steps-flow">
+      <div class="step-row">
+        <div class="step-num">01</div>
+        <div class="step-body">
+          <h3>
+            <span class="en">Record</span><span class="ru">Запись</span>
+          </h3>
+          <p>
+            <span class="en">5 minutes through the GRANAT app.</span>
+            <span class="ru">5 минут через приложение GRANAT.</span>
+          </p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">02</div>
+        <div class="step-body">
+          <h3>
+            <span class="en">Transformation</span><span class="ru">Преображение</span>
+          </h3>
+          <p>
+            <span class="en">AI finds the perfect place for your voice in the symphony.</span>
+            <span class="ru">AI находит идеальное место для вашего голоса в симфонии.</span>
+          </p>
+        </div>
+      </div>
+      <div class="step-row">
+        <div class="step-num">03</div>
+        <div class="step-body">
+          <h3>
+            <span class="en">Eternity</span><span class="ru">Вечность</span>
+          </h3>
+          <p>
+            <span class="en">A digital certificate — proof of your place in history.</span>
+            <span class="ru">Цифровой сертификат — доказательство вашего места в истории.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="demo-cta-wrap reveal">
+      <p class="demo-headline">
+        <span class="en">Hear yourself become part of a 25-voice choir — in 27 seconds.</span>
+        <span class="ru">Услышь, как твой голос становится частью хора из 25 — за 27 секунд.</span>
+      </p>
+      <button type="button" class="vj-cta" id="vj-open-modal" aria-haspopup="dialog">
+        <span class="vj-cta-icon" aria-hidden="true"></span>
+        <span class="en">Try it now</span><span class="ru">Попробовать сейчас</span>
+      </button>
+      <div class="demo-headphones">
+        <span class="en">Headphones recommended</span><span class="ru">Лучше в наушниках</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 8 — ROADMAP
+     ═══════════════════════════════════════════ -->
+<section id="roadmap" class="section-alt">
+  <div class="container reveal">
+    <div class="section-label">
+      <span class="section-label-num">08</span>
+      <span class="en">Civilization Roadmap</span><span class="ru">Дорожная карта цивилизации</span>
+    </div>
+    <h2 class="section-title">
+      <span class="en">Four milestones toward the artifact in space</span>
+      <span class="ru">Четыре вехи на пути артефакта в космос</span>
+    </h2>
+
+    <div class="roadmap-grid">
+      <div class="roadmap-cell">
+        <div class="roadmap-year">2026</div>
+        <div class="roadmap-label">
+          <span class="en">Launch</span><span class="ru">Старт</span>
+        </div>
+        <div class="roadmap-text">
+          <span class="en">The first million voices.</span>
+          <span class="ru">Первый миллион голосов.</span>
+        </div>
+      </div>
+      <div class="roadmap-cell">
+        <div class="roadmap-year">2027</div>
+        <div class="roadmap-label">
+          <span class="en">Growth</span><span class="ru">Рост</span>
+        </div>
+        <div class="roadmap-text">
+          <span class="en">50 million participants.</span>
+          <span class="ru">50 миллионов участников.</span>
+        </div>
+      </div>
+      <div class="roadmap-cell">
+        <div class="roadmap-year">2028</div>
+        <div class="roadmap-label">
+          <span class="en">Recognition</span><span class="ru">Признание</span>
+        </div>
+        <div class="roadmap-text">
+          <span class="en">Inclusion in UNESCO heritage.</span>
+          <span class="ru">Включение в наследие ЮНЕСКО.</span>
+        </div>
+      </div>
+      <div class="roadmap-cell">
+        <div class="roadmap-year">2029</div>
+        <div class="roadmap-label">
+          <span class="en">Eternity</span><span class="ru">Вечность</span>
+        </div>
+        <div class="roadmap-text">
+          <span class="en">The artifact sent into space.</span>
+          <span class="ru">Отправка артефакта в космос.</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="roadmap-closer">
+      <span class="en">We create not a product but a legacy. Not a company but an institution. Not a brand but a legend.</span>
+      <span class="ru">Мы создаём не продукт, а наследие. Не компанию, а институцию. Не бренд, а легенду.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 9 — SOCIAL TRANSFORMATION
+     ═══════════════════════════════════════════ -->
+<section id="social">
+  <div class="container-narrow reveal">
+    <div class="section-label" style="justify-content: center;">
+      <span class="section-label-num">09</span>
+      <span class="en">Social Transformation</span><span class="ru">Социальная трансформация</span>
+    </div>
+    <p class="pull-quote" style="text-align: center; margin: 0 auto;">
+      <span class="en">Granat heals the main illness of our time — collective loneliness.</span>
+      <span class="ru">Granat лечит главную болезнь современности — коллективное одиночество.</span>
+    </p>
+
+    <div class="transform-arrows">
+      <div class="transform-row">
+        <div class="transform-from"><span class="en">Disconnection</span><span class="ru">Разобщённость</span></div>
+        <div class="transform-arrow" aria-hidden="true"></div>
+        <div class="transform-to"><span class="en">Unity</span><span class="ru">Единство</span></div>
+      </div>
+      <div class="transform-row">
+        <div class="transform-from"><span class="en">Statistics</span><span class="ru">Статистика</span></div>
+        <div class="transform-arrow" aria-hidden="true"></div>
+        <div class="transform-to"><span class="en">Story</span><span class="ru">История</span></div>
+      </div>
+      <div class="transform-row">
+        <div class="transform-from"><span class="en">Observer</span><span class="ru">Наблюдатель</span></div>
+        <div class="transform-arrow" aria-hidden="true"></div>
+        <div class="transform-to"><span class="en">Creator</span><span class="ru">Творец</span></div>
+      </div>
+      <div class="transform-row">
+        <div class="transform-from"><span class="en">Contemporaries</span><span class="ru">Современники</span></div>
+        <div class="transform-arrow" aria-hidden="true"></div>
+        <div class="transform-to"><span class="en">Legacy</span><span class="ru">Наследие</span></div>
+      </div>
+    </div>
+
+    <div class="seven-worlds-fold">
+      <button type="button" class="seven-worlds-toggle" id="seven-worlds-toggle" aria-expanded="false" aria-controls="seven-worlds-content">
+        <span class="chev" aria-hidden="true">▸</span>
+        <span class="en">Seven worlds where Granat already sounds</span>
+        <span class="ru">Семь миров, в которых уже звучит GRANAT</span>
+      </button>
+      <div class="seven-worlds-content" id="seven-worlds-content" data-open="false">
+        <div class="world-card">
+          <div class="world-num">01</div>
+          <h4><span class="en">Family & Generation</span><span class="ru">Семья и поколение</span></h4>
+          <p><span class="en">Multi-generational singing — voice as family inheritance.</span><span class="ru">Многопоколенное пение — голос как семейное наследие.</span></p>
+        </div>
+        <div class="world-card">
+          <div class="world-num">02</div>
+          <h4><span class="en">Schools & Earth</span><span class="ru">Школа и Земля</span></h4>
+          <p><span class="en">Educational and planetary scale — classrooms singing together across continents.</span><span class="ru">Образовательный и планетарный масштаб — классы, поющие вместе через континенты.</span></p>
+        </div>
+        <div class="world-card">
+          <div class="world-num">03</div>
+          <h4><span class="en">Stadium & Stage</span><span class="ru">Стадион и сцена</span></h4>
+          <p><span class="en">World-cup-scale voice integration into broadcast anthems in real time.</span><span class="ru">Интеграция голосов уровня мирового первенства в трансляционный гимн в реальном времени.</span></p>
+        </div>
+        <div class="world-card">
+          <div class="world-num">04</div>
+          <h4><span class="en">Sacred & Belonging</span><span class="ru">Священное и принадлежность</span></h4>
+          <p><span class="en">Religious and spiritual chorus — ritual participation made global.</span><span class="ru">Религиозный и духовный хор — ритуальное участие в глобальном масштабе.</span></p>
+        </div>
+        <div class="world-card">
+          <div class="world-num">05</div>
+          <h4><span class="en">Civic & Collective Will</span><span class="ru">Гражданское</span></h4>
+          <p><span class="en">National anthems and collective civic expression in one shared signal.</span><span class="ru">Национальные гимны и коллективное гражданское выражение в одном общем сигнале.</span></p>
+        </div>
+        <div class="world-card">
+          <div class="world-num">06</div>
+          <h4><span class="en">Industry & Identity</span><span class="ru">Индустрия и идентичность</span></h4>
+          <p><span class="en">Corporate and professional identity expressed through voice.</span><span class="ru">Корпоративная и профессиональная идентичность через голос.</span></p>
+        </div>
+        <div class="world-card">
+          <div class="world-num">07</div>
+          <h4><span class="en">Memory & Legacy</span><span class="ru">Память и наследие</span></h4>
+          <p><span class="en">Voice preservation across generations — the thread that survives.</span><span class="ru">Сохранение голоса через поколения — нить, которая остаётся.</span></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 10 — ECONOMY OF THE GIFT
+     ═══════════════════════════════════════════ -->
+<section id="economy" class="section-alt">
+  <div class="container reveal">
+    <div class="section-label">
+      <span class="section-label-num">10</span>
+      <span class="en">Economy of the Gift</span><span class="ru">Экономика дара</span>
+    </div>
+    <h2 class="section-title">
+      <span class="en">Not a business model — an economy of the gift</span>
+      <span class="ru">Не бизнес-модель — экономика дара</span>
+    </h2>
+    <p class="lead-body">
+      <span class="en">We are creating not a business model, but an economy of the gift.</span>
+      <span class="ru">Мы создаём не бизнес-модель, а экономику дара.</span>
+    </p>
+
+    <div class="hex-grid">
+      <div class="hex-cell">
+        <h4><span class="en">Basic Participation</span><span class="ru">Базовое участие</span></h4>
+        <div class="hex-tag">
+          <span class="en">A person's gift to humanity</span><span class="ru">Дар человека человечеству</span>
+        </div>
+      </div>
+      <div class="hex-cell">
+        <h4><span class="en">Digital Certificates of Participation</span><span class="ru">Цифровые сертификаты участия</span></h4>
+        <div class="hex-tag">
+          <span class="en">Digital relics</span><span class="ru">Цифровые реликвии</span>
+        </div>
+      </div>
+      <div class="hex-cell">
+        <h4><span class="en">Investments</span><span class="ru">Инвестиции</span></h4>
+        <div class="hex-tag">
+          <span class="en">The blessing of eternity</span><span class="ru">Благословение вечности</span>
+        </div>
+      </div>
+      <div class="hex-cell">
+        <h4><span class="en">Profit</span><span class="ru">Прибыль</span></h4>
+        <div class="hex-tag">
+          <span class="en">Energy for the development of legacy</span><span class="ru">Энергия для развития наследия</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="economy-tagline">
+      <span class="en">This is not a startup. It is a foundation of eternal values.</span>
+      <span class="ru">Это не стартап. Это фонд вечных ценностей.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 11 — INVITATION TO HISTORY
+     ═══════════════════════════════════════════ -->
+<section id="invitation">
+  <div class="invitation-frame reveal">
+    <div class="section-label" style="justify-content: center;">
+      <span class="section-label-num">11</span>
+      <span class="en">Invitation to History</span><span class="ru">Приглашение в историю</span>
+    </div>
+    <div class="hairline-gold"></div>
+    <p class="invitation-lead">
+      <span class="en">Before you is not a partnership offer. Before you is a choice: to remain a statistic in textbooks, or to become an eternally sounding note in the symphony of humanity.</span>
+      <span class="ru">Перед вами не предложение о партнёрстве. Перед вами выбор: остаться статистикой в учебниках или стать вечно звучащей нотой в симфонии человечества.</span>
+    </p>
+    <div class="hairline-gold"></div>
+    <p class="invitation-frame-block">
+      <span class="en">We do not come to sell. We come with a world to which we invite. Granat is not absorbed — Granat connects. We remain co-authors of what we create.</span>
+      <span class="ru">Мы не приходим продавать. Мы приходим с миром, в который зовём. Granat не поглощается — Granat соединяется. Мы остаёмся со-авторами того, что мы создаём.</span>
+    </p>
+    <p class="invitation-closer">
+      <span class="en">Your name may be inscribed not in reports, but in the DNA of civilization.</span>
+      <span class="ru">Ваше имя может быть вписано не в отчёты, а в ДНК цивилизации.</span>
+    </p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     SECTION 12 — CALL TO ACTION
+     ═══════════════════════════════════════════ -->
+<section id="cta" class="section-alt">
+  <div class="container reveal">
+    <div class="section-label">
+      <span class="section-label-num">12</span>
+      <span class="en">Call to Action</span><span class="ru">Призыв к действию</span>
+    </div>
+    <h2 class="section-title">
+      <span class="en">Choose your role in the artifact</span>
+      <span class="ru">Выберите свою роль в артефакте</span>
+    </h2>
+
+    <div class="cta-grid">
+      <a href="#how-it-works" class="role-card">
+        <div class="role-label">
+          <span class="en">Participant</span><span class="ru">Участник</span>
+        </div>
+        <h4>
+          <span class="en">Record your voice</span>
+          <span class="ru">Запишите свой голос</span>
+        </h4>
+        <span class="role-action">
+          <span class="en">Begin →</span><span class="ru">Начать →</span>
+        </span>
+      </a>
+      <a href="mailto:hello@granat.world?subject=Granat%20%E2%80%94%20Guardian" class="role-card">
+        <div class="role-label">
+          <span class="en">Guardian</span><span class="ru">Хранитель</span>
+        </div>
+        <h4>
+          <span class="en">Support the project</span>
+          <span class="ru">Поддержите проект</span>
+        </h4>
+        <span class="role-action">
+          <span class="en">Write →</span><span class="ru">Написать →</span>
+        </span>
+      </a>
+      <a href="mailto:hello@granat.world?subject=Granat%20%E2%80%94%20Architect" class="role-card">
+        <div class="role-label">
+          <span class="en">Architect</span><span class="ru">Архитектор</span>
+        </div>
+        <h4>
+          <span class="en">Join the team of creators</span>
+          <span class="ru">Войдите в команду создателей</span>
+        </h4>
+        <span class="role-action">
+          <span class="en">Write →</span><span class="ru">Написать →</span>
+        </span>
+      </a>
+    </div>
+
+    <p class="cta-tagline">
+      <span class="en">GRANAT is a reality that is chosen to be created.</span>
+      <span class="ru">GRANAT — это реальность, которую выбирают творить.</span>
+    </p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="footer-mark">
+    <span class="footer-gem" aria-hidden="true"></span>
+    <span>granat</span>
+    <span style="font-style: italic; font-weight: 400; color: var(--gold-light); margin-left: 0.2rem;"><span class="en">the voice of humanity</span><span class="ru">голос человечества</span></span>
+  </div>
+  <div class="footer-meta">Granat Music Artistic Talent · 2026 · granat.world</div>
+  <div class="footer-links">
+    <a href="/policy.html"><span class="en">Participant policy</span><span class="ru">Политика участника</span></a>
+    <a href="mailto:hello@granat.world"><span class="en">Contact</span><span class="ru">Связаться</span></a>
+    <a href="/future.html"><span class="en">Manifesto</span><span class="ru">Манифест</span></a>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════
+     ADD-VOICE-TO-CHOIR MODAL (inherited from manifesto)
+     ═══════════════════════════════════════════ -->
+<!-- ═══════════════════════════════════════════
+     ADD-VOICE-TO-CHOIR MODAL
+     ═══════════════════════════════════════════ -->
+<div class="vj-modal-backdrop" id="vj-backdrop" data-open="false" aria-hidden="true"></div>
+<div class="vj-modal" id="vj-modal" data-open="false" data-state="idle"
+     role="dialog" aria-modal="true" aria-hidden="true"
+     aria-labelledby="vj-modal-title" aria-describedby="vj-fp-text">
+  <button type="button" class="vj-modal-close" id="vj-close-modal" aria-label="Close">
+    &#x2715;
+  </button>
+  <div class="vj-modal-label">
+    <span class="en">Stage 5 — Try It</span><span class="ru">Этап 5 — Попробуй</span>
+  </div>
+  <h3 class="vj-modal-title" id="vj-modal-title">
+    <span class="en">Add Your Voice to the Choir</span><span class="ru">Добавь свой голос в хор</span>
+  </h3>
+
+  <div class="vj-stage-area" aria-hidden="true">
+    <div class="vj-sa-halo"></div>
+    <div class="vj-sa-rings">
+      <span class="vj-ring"></span>
+      <span class="vj-ring"></span>
+      <span class="vj-ring"></span>
+      <span class="vj-ring"></span>
+    </div>
+    <div class="vj-sa-bars" id="vj-sa-bars"><!-- BAR_COUNT .vj-rec-bar injected by JS --></div>
+    <div class="vj-sa-dots" id="vj-sa-dots"><!-- DOT_COUNT .vj-rec-dot injected by JS --></div>
+    <div class="vj-sa-core"></div>
+  </div>
+  <div class="vj-sa-counter" id="vj-sa-counter" aria-live="off">0:00 / 0:27</div>
+
+  <div class="vj-status-line" id="vj-status-line" role="status" aria-live="polite">
+    <span class="en">Press start when you&#39;re ready</span><span class="ru">Нажми «Начать», когда готов</span>
+  </div>
+
+  <button type="button" class="vj-primary" id="vj-primary-btn">
+    <span class="vj-primary-icon" aria-hidden="true"></span>
+    <span class="vj-primary-label">
+      <span class="en">Start recording (27s)</span><span class="ru">Начать запись (27с)</span>
+    </span>
+  </button>
+
+  <div class="vj-headphones-hint">
+    <span class="en">Headphones recommended — sing along with the guide track.</span>
+    <span class="ru">Лучше в наушниках — пой вместе с гид-треком.</span>
+  </div>
+
+  <audio id="vj-guide-audio" src="guide.mp3" preload="auto" aria-hidden="true"></audio>
+
+  <div class="vj-result-block" id="vj-result-block">
+    <div class="vj-result-caption">
+      <span class="en">You + 24 Voices Became One Choir</span><span class="ru">Ты + 24 голоса стали одним хором</span>
+    </div>
+    <div class="vj-player" id="vj-player" data-playing="false">
+      <button type="button" class="vj-player-play" id="vj-player-play" aria-label="Play">
+        <svg class="vj-pi vj-pi-play" viewBox="0 0 20 20" aria-hidden="true">
+          <polygon points="6,4 6,16 16,10" fill="currentColor"/>
+        </svg>
+        <svg class="vj-pi vj-pi-pause" viewBox="0 0 20 20" aria-hidden="true">
+          <rect x="5"  y="4" width="3.5" height="12" rx="1" fill="currentColor"/>
+          <rect x="11.5" y="4" width="3.5" height="12" rx="1" fill="currentColor"/>
+        </svg>
+      </button>
+      <div class="vj-player-track" id="vj-player-track" role="slider"
+           aria-label="Seek" tabindex="0" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="vj-player-fill" id="vj-player-fill"></div>
+        <div class="vj-player-thumb" id="vj-player-thumb"></div>
+      </div>
+      <div class="vj-player-time" id="vj-player-time">0:00 / 0:00</div>
+    </div>
+    <audio id="vj-result-audio" preload="metadata"></audio>
+  </div>
+
+  <div class="vj-journey" aria-label="Voice transformation journey">
+    <div class="vj-jc">
+      <div class="vj-ji vj-ji-bars" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span><span></span>
+      </div>
+      <div class="vj-jl"><span class="en">Your voice</span><span class="ru">Твой голос</span></div>
+    </div>
+    <div class="vj-jarrow" aria-hidden="true">→</div>
+    <div class="vj-jc">
+      <div class="vj-ji vj-ji-dims" aria-hidden="true">
+        <svg class="vj-ji-dial" viewBox="0 0 40 40">
+          <circle cx="20" cy="20" r="14" fill="none" stroke="var(--crimson)" stroke-width="1" stroke-opacity="0.4"/>
+          <g class="vj-ji-dial-ticks">
+            <circle cx="20" cy="6"  r="1.7"/>
+            <circle cx="27" cy="7.9"  r="1.7"/>
+            <circle cx="32.1" cy="13"  r="1.7"/>
+            <circle cx="34" cy="20"  r="1.7"/>
+            <circle cx="32.1" cy="27"  r="1.7"/>
+            <circle cx="27" cy="32.1"  r="1.7"/>
+            <circle cx="20" cy="34"  r="1.7"/>
+            <circle cx="13" cy="32.1"  r="1.7"/>
+            <circle cx="7.9" cy="27"  r="1.7"/>
+            <circle cx="6" cy="20"  r="1.7"/>
+            <circle cx="7.9" cy="13"  r="1.7"/>
+            <circle cx="13" cy="7.9"  r="1.7"/>
+          </g>
+          <circle cx="20" cy="20" r="1.4" fill="var(--gold-light)" opacity="0.7"/>
+        </svg>
+      </div>
+      <div class="vj-jl"><span class="en">12 dimensions</span><span class="ru">12 измерений</span></div>
+    </div>
+    <div class="vj-jarrow" aria-hidden="true">→</div>
+    <div class="vj-jc">
+      <div class="vj-ji vj-ji-fp" aria-hidden="true">
+        <span class="vj-ji-ring"></span>
+        <span class="vj-ji-core"></span>
+      </div>
+      <div class="vj-jl"><span class="en">Fingerprint</span><span class="ru">Отпечаток</span></div>
+    </div>
+    <div class="vj-jarrow" aria-hidden="true">→</div>
+    <div class="vj-jc">
+      <div class="vj-ji vj-ji-choir" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <div class="vj-jl"><span class="en">Choir</span><span class="ru">Хор</span></div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ═══ Language Toggle ═══ */
+function setLang(lang) {
+  document.body.style.opacity = '0.7';
+  setTimeout(() => {
+    if (lang === 'ru') {
+      document.body.classList.add('lang-ru');
+      document.documentElement.lang = 'ru';
+    } else {
+      document.body.classList.remove('lang-ru');
+      document.documentElement.lang = 'en';
+    }
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      const isActive = btn.dataset.lang === lang;
+      btn.classList.toggle('active', isActive);
+      btn.setAttribute('aria-pressed', String(isActive));
+    });
+    document.body.style.opacity = '1';
+  }, 150);
+}
+
+/* ═══ Scroll Progress ═══ */
+window.addEventListener('scroll', () => {
+  const scrollTop = document.documentElement.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const progress = (scrollTop / scrollHeight) * 100;
+  const el = document.getElementById('scrollProgress');
+  if (el) el.style.width = progress + '%';
+});
+
+/* ═══ Scroll Reveal ═══
+   `body.js-ready` is the gate. CSS keeps content visible until JS confirms it's
+   running. Once we add the class, .reveal goes opacity:0 and the observer
+   promotes elements to .visible as they intersect. */
+document.body.classList.add('js-ready');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ═══ Smooth Scroll ═══ */
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+
+/* ═══ Stat Count-up (Section 2) ═══ */
+const easeOutQuart = (t) => 1 - Math.pow(1 - t, 4);
+const fmtCount = (n, target) => {
+  if (target >= 1000) return new Intl.NumberFormat('en-US').format(Math.floor(n));
+  return Math.floor(n).toString();
+};
+const statObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting || entry.target.dataset.counted === '1') return;
+    entry.target.dataset.counted = '1';
+    const target = parseInt(entry.target.dataset.count, 10);
+    if (Number.isNaN(target) || target === 0) {
+      entry.target.textContent = '0';
+      return;
+    }
+    const start = performance.now();
+    const duration = 1400;
+    const tick = (t) => {
+      const p = Math.min(1, (t - start) / duration);
+      const eased = easeOutQuart(p);
+      entry.target.textContent = fmtCount(eased * target, target);
+      if (p < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  });
+}, { threshold: 0.4 });
+document.querySelectorAll('.stat-num[data-count]').forEach(el => statObserver.observe(el));
+
+/* ═══ Seven-Worlds Toggle (Section 9) ═══ */
+(function() {
+  const btn = document.getElementById('seven-worlds-toggle');
+  const content = document.getElementById('seven-worlds-content');
+  if (!btn || !content) return;
+  btn.addEventListener('click', () => {
+    const isOpen = content.dataset.open === 'true';
+    content.dataset.open = isOpen ? 'false' : 'true';
+    btn.setAttribute('aria-expanded', String(!isOpen));
+  });
+})();
+
+/* ═══════════════════════════════════════════
+   ADD-VOICE-TO-CHOIR MODAL — STATE MACHINE (inherited)
+   ═══════════════════════════════════════════ */
+/* ═══════════════════════════════════════════
+   ADD-VOICE-TO-CHOIR MODAL — STATE MACHINE
+   ═══════════════════════════════════════════ */
+(() => {
+  const BAR_COUNT = 28;
+  const DOT_COUNT = 36;
+  let   RECORD_SECS = 27;          // fallback; auto-set to floor(guide duration)
+  const POLL_INTERVAL_MS = 3000;   // upstream rate-limit: 10/min/IP — keep poll budget low
+  const POLL_MAX_ATTEMPTS = 30;    // 30 × 3 s = 90 s ceiling on a runaway pipeline
+
+  const $ = (id) => document.getElementById(id);
+  const modal = $('vj-modal');
+  const backdrop = $('vj-backdrop');
+  const openBtn = $('vj-open-modal');
+  const closeBtn = $('vj-close-modal');
+  const primaryBtn = $('vj-primary-btn');
+  const primaryLabel = primaryBtn.querySelector('.vj-primary-label');
+  const statusLine = $('vj-status-line');
+  const counter = $('vj-sa-counter');
+  const barsEl = $('vj-sa-bars');
+  const dotsEl = $('vj-sa-dots');
+  const audioEl = $('vj-result-audio');
+  const guideEl = $('vj-guide-audio');
+  const playerEl = $('vj-player');
+  const playerPlayBtn = $('vj-player-play');
+  const playerTrack = $('vj-player-track');
+  const playerFill = $('vj-player-fill');
+  const playerThumb = $('vj-player-thumb');
+  const playerTime = $('vj-player-time');
+  const journeyCells = Array.from(modal.querySelectorAll('.vj-journey .vj-jc'));
+
+  const STEP_LABELS = {
+    loading:         { en: 'Loading your voice…',     ru: 'Загружаем твой голос…' },
+    per_voice_chain: { en: 'Preparing your voice…',   ru: 'Готовим твой голос…' },
+    assembling:      { en: 'Assembling choir…',       ru: 'Собираем хор…' },
+    mastering:       { en: 'Mastering mix…',          ru: 'Сводим микс…' },
+    saving:          { en: 'Saving result…',          ru: 'Сохраняем результат…' },
+  };
+
+  const STATUS_COPY = {
+    idle:        { en: "Press start when you're ready",        ru: 'Нажми «Начать», когда готов' },
+    arming:      { en: 'Allow microphone access…',              ru: 'Разреши доступ к микрофону…' },
+    recording:   { en: 'Listening to you…',                     ru: 'Слушаю тебя…' },
+    encoding:    { en: 'Compressing into a fingerprint…',       ru: 'Сжимаем в отпечаток…' },
+    uploading:   { en: 'Sending to the choir…',                 ru: 'Отправляем в хор…' },
+    complete:    { en: 'Your voice is now part of the choir.',  ru: 'Твой голос теперь часть хора.' },
+    rate_limited:{ en: 'Catching our breath. Try again soon.',  ru: 'Перевести дух. Попробуй чуть позже.' },
+    mic_denied:  { en: "Couldn't access the microphone. Check your browser settings.",
+                   ru: 'Не удалось получить доступ к микрофону. Проверь настройки браузера.' },
+    network:     { en: "Couldn't reach the server. Try again.",
+                   ru: 'Не удалось связаться с сервером. Попробуй ещё раз.' },
+  };
+
+  const PRIMARY_LABELS = {
+    idle:      { en: 'Start recording (27s)',     ru: 'Начать запись (27с)' },
+    arming:    { en: 'Allow microphone…',          ru: 'Разреши микрофон…' },
+    recording: { en: 'Cancel',                     ru: 'Отменить' },
+    encoding:  { en: 'Working…',                   ru: 'Работаем…' },
+    uploading: { en: 'Uploading…',                 ru: 'Отправляем…' },
+    processing:{ en: 'Processing…',                ru: 'Обрабатываем…' },
+    complete:  { en: 'Record again',               ru: 'Записать ещё раз' },
+    failed:    { en: 'Try again',                  ru: 'Попробовать снова' },
+    rate_limited: { en: 'Try again in a minute',   ru: 'Попробуй через минуту' },
+  };
+
+  /* ─── Build morphing centerpiece sublayers ─── */
+  const bars = [];
+  for (let i = 0; i < BAR_COUNT; i++) {
+    const b = document.createElement('span');
+    b.className = 'vj-rec-bar';
+    barsEl.appendChild(b);
+    bars.push(b);
+  }
+  // Pseudo-random scattered dot positions (deterministic for SSR-stable feel)
+  const seedRand = (seed) => () => {
+    seed = (seed * 9301 + 49297) % 233280;
+    return seed / 233280;
+  };
+  const rand = seedRand(7);
+  for (let i = 0; i < DOT_COUNT; i++) {
+    const d = document.createElement('span');
+    d.className = 'vj-rec-dot';
+    d.style.top  = (10 + rand() * 80).toFixed(1) + '%';
+    d.style.left = (10 + rand() * 80).toFixed(1) + '%';
+    d.style.animationDelay = (rand() * 2.4).toFixed(2) + 's';
+    dotsEl.appendChild(d);
+  }
+
+  /* ─── State helpers ─── */
+  let state = {
+    name: 'idle',
+    step: null,
+    jobId: null,
+    audioCtx: null,
+    micStream: null,
+    workletNode: null,
+    scriptNode: null,
+    sourceNode: null,
+    recordedFloats: [],
+    sampleRate: 16000,
+    recordTimer: null,
+    countdownTimer: null,
+    pollTimer: null,
+    pollAttempts: 0,
+    cooldownTimer: null,
+    cooldownSecondsRemaining: 0,
+    lastFocus: null,
+  };
+
+  function setState(name, step = null) {
+    state.name = name;
+    state.step = step;
+    modal.dataset.state = name;
+    if (step) modal.dataset.step = step; else delete modal.dataset.step;
+
+    primaryLabel.innerHTML = renderBilingual(PRIMARY_LABELS[name] || PRIMARY_LABELS.idle);
+
+    if (name === 'processing' && step && STEP_LABELS[step]) {
+      statusLine.innerHTML = renderBilingual(STEP_LABELS[step]);
+    } else if (STATUS_COPY[name]) {
+      statusLine.innerHTML = renderBilingual(STATUS_COPY[name]);
+    }
+
+    primaryBtn.disabled = ['arming','encoding','uploading','processing','rate_limited'].includes(name);
+    setJourneyStage(journeyStageFor(name, step));
+  }
+
+  // Map a state (and pipeline step) to which journey-strip cell is active.
+  // Cell 0 = Your voice  | Cell 1 = 12 dimensions  | Cell 2 = Fingerprint  | Cell 3 = Choir
+  // The backend's 'assembling' step often blasts through in <500 ms, which made
+  // the UI skip Cell 2 entirely. Remap so uploading + the early server prep
+  // (loading / per_voice_chain) light up the Fingerprint cell — that's
+  // semantically when the fingerprint is being shipped + computed anyway.
+  // -1 means no cell active (idle / failed / rate-limited).
+  function journeyStageFor(name, step) {
+    if (name === 'recording') return 0;
+    if (name === 'encoding') return 1;                     // 12 dimensions extracted in-browser
+    if (name === 'uploading') return 2;                    // shipping the fingerprint
+    if (name === 'processing') {
+      if (step === 'loading' || step === 'per_voice_chain') return 2;  // server-side fingerprint prep
+      if (step === 'assembling' || step === 'mastering' || step === 'saving') return 3;
+      return 2;                                            // queued / unknown step → still on fingerprint
+    }
+    if (name === 'complete') return 3;
+    return -1;
+  }
+
+  // Journey advancement honours a minimum dwell time per stage. The real
+  // pipeline can blast through a step in 50–500 ms (e.g. encoding, the
+  // server's loading/per_voice_chain steps), which would visually skip a
+  // cell. We never skip — instead we step one cell at a time and wait
+  // MIN_STAGE_DWELL_MS between advances so every cell gets its moment.
+  const MIN_STAGE_DWELL_MS = 1100;
+  let journeyTargetIdx = -1;
+  let currentJourneyIdx = -1;
+  let stageEnteredAt = 0;
+  let stageAdvanceTimer = null;
+
+  function setJourneyStage(target) {
+    if (target < 0) {
+      if (stageAdvanceTimer) { clearTimeout(stageAdvanceTimer); stageAdvanceTimer = null; }
+      journeyTargetIdx = -1;
+      currentJourneyIdx = -1;
+      applyJourneyStage(-1);
+      return;
+    }
+    if (target <= currentJourneyIdx) return;             // never go backwards
+    journeyTargetIdx = Math.max(journeyTargetIdx, target);
+    scheduleStageAdvance();
+  }
+
+  function scheduleStageAdvance() {
+    if (stageAdvanceTimer) return;                       // already scheduled
+    if (currentJourneyIdx >= journeyTargetIdx) return;   // nothing to do
+    const elapsed = currentJourneyIdx < 0 ? Infinity : Date.now() - stageEnteredAt;
+    const wait = Math.max(0, MIN_STAGE_DWELL_MS - elapsed);
+    stageAdvanceTimer = setTimeout(() => {
+      stageAdvanceTimer = null;
+      currentJourneyIdx += 1;
+      stageEnteredAt = Date.now();
+      applyJourneyStage(currentJourneyIdx);
+      if (currentJourneyIdx < journeyTargetIdx) scheduleStageAdvance();
+    }, wait);
+  }
+
+  function applyJourneyStage(idx) {
+    journeyCells.forEach((cell, i) => {
+      cell.classList.remove('vj-jc--future', 'vj-jc--done', 'vj-jc--active');
+      if (idx < 0) return;            // idle: leave all cells in default look
+      if (i < idx) cell.classList.add('vj-jc--done');
+      else if (i === idx) cell.classList.add('vj-jc--active');
+      else cell.classList.add('vj-jc--future');
+    });
+  }
+
+  function renderBilingual(pair) {
+    return `<span class="en">${escapeHtml(pair.en)}</span><span class="ru">${escapeHtml(pair.ru)}</span>`;
+  }
+  function escapeHtml(s) {
+    return s.replace(/[&<>"']/g, (c) => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;' }[c]));
+  }
+
+  /* ─── Modal open/close ─── */
+  function openModal() {
+    state.lastFocus = document.activeElement;
+    backdrop.dataset.open = 'true';
+    backdrop.setAttribute('aria-hidden', 'false');
+    modal.dataset.open = 'true';
+    modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('vj-modal-open');
+    setState('idle');
+    resetResult();
+    setTimeout(() => closeBtn.focus(), 60);
+  }
+
+  function closeModal() {
+    cleanupRecording();
+    cleanupPolling();
+    cleanupCooldown();
+    if (!audioEl.paused) audioEl.pause();
+    backdrop.dataset.open = 'false';
+    backdrop.setAttribute('aria-hidden', 'true');
+    modal.dataset.open = 'false';
+    modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('vj-modal-open');
+    setState('idle');
+    if (state.lastFocus && state.lastFocus.focus) state.lastFocus.focus();
+  }
+
+  function resetResult() {
+    audioEl.removeAttribute('src');
+    audioEl.load();
+  }
+
+  openBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  // Click-on-backdrop intentionally does NOT close the modal so the user
+  // doesn't accidentally lose a recording in progress. Only the explicit
+  // close button or ESC dismisses it.
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.dataset.open === 'true') closeModal();
+  });
+
+  /* ─── Focus trap (close ↔ primary ↔ player controls) ─── */
+  modal.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab') return;
+    const focusables = [closeBtn, primaryBtn, playerPlayBtn, playerTrack]
+      .filter((el) => el && !el.disabled && el.offsetParent !== null);
+    if (focusables.length === 0) return;
+    const i = focusables.indexOf(document.activeElement);
+    if (e.shiftKey && i <= 0) { e.preventDefault(); focusables[focusables.length - 1].focus(); }
+    else if (!e.shiftKey && i === focusables.length - 1) { e.preventDefault(); focusables[0].focus(); }
+  });
+
+  /* ─── Primary button — state-aware dispatch ─── */
+  primaryBtn.addEventListener('click', () => {
+    switch (state.name) {
+      case 'idle':       startRecording(); break;
+      case 'recording':  cancelRecording(); break;
+      case 'complete':
+      case 'failed':     resetForRetry(); break;
+    }
+  });
+
+  function cancelRecording() {
+    // User aborts mid-recording — discard captured audio, return to idle.
+    cleanupRecording();
+    state.recordedFloats = [];
+    setState('idle');
+  }
+
+  function resetForRetry() {
+    resetResult();
+    setState('idle');
+  }
+
+  /* ─── Recording ─── */
+  async function startRecording() {
+    setState('arming');
+    try {
+      state.micStream = await navigator.mediaDevices.getUserMedia({
+        audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true, autoGainControl: true },
+      });
+    } catch (err) {
+      console.warn('[vj] mic denied:', err);
+      statusLine.innerHTML = renderBilingual(STATUS_COPY.mic_denied);
+      setState('idle');
+      return;
+    }
+
+    try {
+      state.audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      state.sampleRate = state.audioCtx.sampleRate;
+      state.recordedFloats = [];
+      state.sourceNode = state.audioCtx.createMediaStreamSource(state.micStream);
+      await attachCapture(state.audioCtx, state.sourceNode);
+
+      // Play the guide track so the user can sing along
+      if (guideEl) {
+        try {
+          guideEl.currentTime = 0;
+          guideEl.volume = 0.85;
+          await guideEl.play();
+        } catch (err) {
+          console.warn('[vj] guide audio play blocked:', err);
+        }
+      }
+
+      setState('recording');
+      let elapsed = 0;
+      counter.textContent = `0:00 / 0:${String(RECORD_SECS).padStart(2,'0')}`;
+      state.countdownTimer = setInterval(() => {
+        elapsed += 1;
+        counter.textContent = `0:${String(elapsed).padStart(2,'0')} / 0:${String(RECORD_SECS).padStart(2,'0')}`;
+      }, 1000);
+      state.recordTimer = setTimeout(stopRecording, RECORD_SECS * 1000);
+    } catch (err) {
+      console.error('[vj] audio context init failed:', err);
+      statusLine.innerHTML = renderBilingual(STATUS_COPY.mic_denied);
+      cleanupRecording();
+      setState('idle');
+    }
+  }
+
+  async function attachCapture(ctx, source) {
+    // Preferred: AudioWorklet
+    if (ctx.audioWorklet) {
+      try {
+        const workletSrc = `
+          class VJCapture extends AudioWorkletProcessor {
+            process(inputs) {
+              const input = inputs[0];
+              if (input && input[0]) {
+                this.port.postMessage(input[0].slice(0));
+              }
+              return true;
+            }
+          }
+          registerProcessor('vj-capture', VJCapture);
+        `;
+        const url = URL.createObjectURL(new Blob([workletSrc], { type: 'application/javascript' }));
+        await ctx.audioWorklet.addModule(url);
+        URL.revokeObjectURL(url);
+        state.workletNode = new AudioWorkletNode(ctx, 'vj-capture');
+        state.workletNode.port.onmessage = (e) => onAudioFrame(e.data);
+        source.connect(state.workletNode);
+        // Worklet output is unused; don't connect to destination (avoid feedback)
+        return;
+      } catch (err) {
+        console.warn('[vj] worklet failed, falling back to ScriptProcessor:', err);
+      }
+    }
+    // Fallback: ScriptProcessorNode (deprecated but ubiquitous)
+    state.scriptNode = ctx.createScriptProcessor(2048, 1, 1);
+    state.scriptNode.onaudioprocess = (e) => onAudioFrame(e.inputBuffer.getChannelData(0));
+    source.connect(state.scriptNode);
+    // Must connect to destination for ScriptProcessor to fire; route through silent gain
+    const silent = ctx.createGain();
+    silent.gain.value = 0;
+    state.scriptNode.connect(silent);
+    silent.connect(ctx.destination);
+  }
+
+  let smoothRms = 0;
+  function onAudioFrame(frame) {
+    // Store a copy for WAV encoding
+    state.recordedFloats.push(new Float32Array(frame));
+    // Visualize
+    let sum = 0;
+    for (let i = 0; i < frame.length; i++) sum += frame[i] * frame[i];
+    const rms = Math.sqrt(sum / frame.length);
+    smoothRms = smoothRms * 0.7 + rms * 0.3;
+    const target = Math.min(95, Math.max(8, smoothRms * 220));
+    for (let i = 0; i < bars.length; i++) {
+      const jitter = 0.85 + Math.random() * 0.3;
+      bars[i].style.height = (target * jitter).toFixed(1) + '%';
+    }
+  }
+
+  function stopRecording() {
+    if (state.recordTimer) { clearTimeout(state.recordTimer); state.recordTimer = null; }
+    if (state.countdownTimer) { clearInterval(state.countdownTimer); state.countdownTimer = null; }
+    setState('encoding');
+    // Defer encoding to next tick so UI repaints
+    setTimeout(async () => {
+      try {
+        const wavBlob = encodeWAV(state.recordedFloats, state.sampleRate);
+        cleanupRecording();
+        await uploadAndPoll(wavBlob);
+      } catch (err) {
+        console.error('[vj] encode failed:', err);
+        statusLine.innerHTML = renderBilingual(STATUS_COPY.network);
+        setState('failed');
+      }
+    }, 50);
+  }
+
+  function cleanupRecording() {
+    try { state.sourceNode && state.sourceNode.disconnect(); } catch (_) {}
+    try { state.workletNode && state.workletNode.disconnect(); } catch (_) {}
+    try { state.scriptNode && state.scriptNode.disconnect(); } catch (_) {}
+    state.sourceNode = state.workletNode = state.scriptNode = null;
+    if (state.micStream) {
+      state.micStream.getTracks().forEach((t) => t.stop());
+      state.micStream = null;
+    }
+    if (state.audioCtx && state.audioCtx.state !== 'closed') {
+      state.audioCtx.close().catch(() => {});
+    }
+    state.audioCtx = null;
+    if (guideEl && !guideEl.paused) {
+      guideEl.pause();
+      try { guideEl.currentTime = 0; } catch (_) {}
+    }
+    if (state.recordTimer) { clearTimeout(state.recordTimer); state.recordTimer = null; }
+    if (state.countdownTimer) { clearInterval(state.countdownTimer); state.countdownTimer = null; }
+  }
+
+  /* ─── WAV encoder (mono PCM16) ─── */
+  function encodeWAV(chunks, sampleRate) {
+    const totalLen = chunks.reduce((acc, c) => acc + c.length, 0);
+    const flat = new Float32Array(totalLen);
+    let off = 0;
+    for (const c of chunks) { flat.set(c, off); off += c.length; }
+
+    const pcm = new Int16Array(flat.length);
+    for (let i = 0; i < flat.length; i++) {
+      const s = Math.max(-1, Math.min(1, flat[i]));
+      pcm[i] = s < 0 ? s * 0x8000 : s * 0x7FFF;
+    }
+
+    const dataSize = pcm.length * 2;
+    const buf = new ArrayBuffer(44 + dataSize);
+    const view = new DataView(buf);
+    const writeStr = (o, s) => { for (let i = 0; i < s.length; i++) view.setUint8(o + i, s.charCodeAt(i)); };
+
+    writeStr(0, 'RIFF');
+    view.setUint32(4, 36 + dataSize, true);
+    writeStr(8, 'WAVE');
+    writeStr(12, 'fmt ');
+    view.setUint32(16, 16, true);          // PCM chunk size
+    view.setUint16(20, 1, true);           // PCM format
+    view.setUint16(22, 1, true);           // mono
+    view.setUint32(24, sampleRate, true);
+    view.setUint32(28, sampleRate * 2, true); // byte rate
+    view.setUint16(32, 2, true);           // block align
+    view.setUint16(34, 16, true);          // bits per sample
+    writeStr(36, 'data');
+    view.setUint32(40, dataSize, true);
+
+    const out = new Uint8Array(buf);
+    const pcmBytes = new Uint8Array(pcm.buffer);
+    out.set(pcmBytes, 44);
+    return new Blob([out], { type: 'audio/wav' });
+  }
+
+  /* ─── Upload + poll ─── */
+  async function uploadAndPoll(blob) {
+    setState('uploading');
+    const fd = new FormData();
+    fd.append('audio', blob, 'voice.wav');
+
+    let resp;
+    try {
+      resp = await fetch('/api/voice/process', { method: 'POST', body: fd });
+    } catch (err) {
+      console.warn('[vj] upload network error:', err);
+      statusLine.innerHTML = renderBilingual(STATUS_COPY.network);
+      setState('failed');
+      return;
+    }
+
+    if (resp.status === 429) {
+      enterRateLimited();
+      return;
+    }
+    if (!resp.ok) {
+      const txt = await resp.text().catch(() => '');
+      console.warn('[vj] upload rejected:', resp.status, txt);
+      statusLine.innerHTML = renderBilingual(STATUS_COPY.network);
+      setState('failed');
+      return;
+    }
+
+    let data;
+    try { data = await resp.json(); } catch (_) { data = {}; }
+    if (!data.job_id) {
+      statusLine.innerHTML = renderBilingual(STATUS_COPY.network);
+      setState('failed');
+      return;
+    }
+
+    state.jobId = data.job_id;
+    state.pollAttempts = 0;
+    setState('processing', 'loading');
+    pollOnce();
+  }
+
+  async function pollOnce() {
+    if (!state.jobId) return;
+    state.pollAttempts += 1;
+    if (state.pollAttempts > POLL_MAX_ATTEMPTS) {
+      statusLine.innerHTML = renderBilingual(STATUS_COPY.network);
+      setState('failed');
+      return;
+    }
+
+    let resp;
+    try {
+      resp = await fetch(`/api/voice/status/${encodeURIComponent(state.jobId)}`);
+    } catch (err) {
+      schedulePoll();
+      return;
+    }
+
+    if (resp.status === 429) { enterRateLimited(); return; }
+
+    if (!resp.ok) {
+      // 5xx → keep trying; 4xx other than 429 → fail
+      if (resp.status >= 500) { schedulePoll(); return; }
+      statusLine.innerHTML = renderBilingual(STATUS_COPY.network);
+      setState('failed');
+      return;
+    }
+
+    let data;
+    try { data = await resp.json(); } catch (_) { schedulePoll(); return; }
+
+    if (data.status === 'complete') {
+      showResult(state.jobId);
+      return;
+    }
+    if (data.status === 'failed') {
+      const lastStep = STEP_LABELS[data.step];
+      const prefix = { en: 'Could not finish', ru: 'Не удалось завершить' };
+      const sep = lastStep ? ' — ' : '';
+      statusLine.innerHTML = renderBilingual({
+        en: `${prefix.en}${sep}${lastStep ? lastStep.en : ''}`,
+        ru: `${prefix.ru}${sep}${lastStep ? lastStep.ru : ''}`,
+      });
+      setState('failed');
+      return;
+    }
+    if (data.status === 'not_found') {
+      statusLine.innerHTML = renderBilingual(STATUS_COPY.network);
+      setState('failed');
+      return;
+    }
+    // queued or in_progress
+    const step = data.step && STEP_LABELS[data.step] ? data.step : 'loading';
+    setState('processing', step);
+    schedulePoll();
+  }
+
+  function schedulePoll() {
+    cleanupPolling();
+    state.pollTimer = setTimeout(pollOnce, POLL_INTERVAL_MS);
+  }
+
+  function cleanupPolling() {
+    if (state.pollTimer) { clearTimeout(state.pollTimer); state.pollTimer = null; }
+  }
+
+  function showResult(jobId) {
+    const url = `/api/voice/result/${encodeURIComponent(jobId)}/audio`;
+    audioEl.src = url;
+    audioEl.load();
+    setState('complete');
+  }
+
+  /* ─── Rate-limit cooldown ─── */
+  function enterRateLimited() {
+    cleanupPolling();
+    setState('rate_limited');
+    state.cooldownSecondsRemaining = 60;
+    updateCooldownLabel();
+    state.cooldownTimer = setInterval(() => {
+      state.cooldownSecondsRemaining -= 1;
+      if (state.cooldownSecondsRemaining <= 0) {
+        cleanupCooldown();
+        setState('idle');
+      } else {
+        updateCooldownLabel();
+      }
+    }, 1000);
+  }
+
+  function updateCooldownLabel() {
+    const s = state.cooldownSecondsRemaining;
+    primaryLabel.innerHTML = renderBilingual({
+      en: `Try again in ${s}s`,
+      ru: `Попробовать через ${s}с`,
+    });
+  }
+
+  function cleanupCooldown() {
+    if (state.cooldownTimer) { clearInterval(state.cooldownTimer); state.cooldownTimer = null; }
+    state.cooldownSecondsRemaining = 0;
+  }
+
+  /* ─── Custom audio player for the choir result ─── */
+  function fmtTime(sec) {
+    if (!isFinite(sec) || sec < 0) sec = 0;
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60);
+    return `${m}:${String(s).padStart(2, '0')}`;
+  }
+  function updatePlayerProgress() {
+    const cur = audioEl.currentTime || 0;
+    const dur = isFinite(audioEl.duration) ? audioEl.duration : 0;
+    const pct = dur > 0 ? (cur / dur) * 100 : 0;
+    playerFill.style.width = pct + '%';
+    playerThumb.style.left = pct + '%';
+    playerTime.textContent = `${fmtTime(cur)} / ${fmtTime(dur)}`;
+    playerTrack.setAttribute('aria-valuenow', String(Math.round(pct)));
+  }
+  playerPlayBtn.addEventListener('click', () => {
+    if (audioEl.paused) audioEl.play().catch((e) => console.warn('[vj] result play blocked:', e));
+    else audioEl.pause();
+  });
+  audioEl.addEventListener('play',  () => {
+    playerEl.dataset.playing = 'true';
+    playerPlayBtn.setAttribute('aria-label', 'Pause');
+  });
+  audioEl.addEventListener('pause', () => {
+    playerEl.dataset.playing = 'false';
+    playerPlayBtn.setAttribute('aria-label', 'Play');
+  });
+  audioEl.addEventListener('ended', () => {
+    playerEl.dataset.playing = 'false';
+  });
+  audioEl.addEventListener('loadedmetadata', updatePlayerProgress);
+  audioEl.addEventListener('timeupdate', updatePlayerProgress);
+
+  function seekFromEvent(clientX) {
+    const r = playerTrack.getBoundingClientRect();
+    const fr = Math.max(0, Math.min(1, (clientX - r.left) / r.width));
+    if (isFinite(audioEl.duration) && audioEl.duration > 0) {
+      audioEl.currentTime = audioEl.duration * fr;
+    }
+  }
+  playerTrack.addEventListener('click', (e) => seekFromEvent(e.clientX));
+  playerTrack.addEventListener('keydown', (e) => {
+    if (!isFinite(audioEl.duration) || audioEl.duration <= 0) return;
+    const step = audioEl.duration * 0.05;
+    if (e.key === 'ArrowRight') { audioEl.currentTime = Math.min(audioEl.duration, audioEl.currentTime + step); e.preventDefault(); }
+    if (e.key === 'ArrowLeft')  { audioEl.currentTime = Math.max(0, audioEl.currentTime - step); e.preventDefault(); }
+  });
+
+  /* ─── Cap recording duration to the guide track ─── */
+  function applyGuideDuration() {
+    if (!guideEl) return;
+    const d = guideEl.duration;
+    if (!isFinite(d) || d <= 0 || d > 600) return;
+    const secs = Math.max(5, Math.floor(d));
+    RECORD_SECS = secs;
+    const padded = String(secs).padStart(2, '0');
+    PRIMARY_LABELS.idle = { en: `Start recording (${secs}s)`, ru: `Начать запись (${secs}с)` };
+    if (counter) counter.textContent = `0:00 / 0:${padded}`;
+    if (state.name === 'idle') primaryLabel.innerHTML = renderBilingual(PRIMARY_LABELS.idle);
+  }
+  if (guideEl) {
+    if (guideEl.readyState >= 1 && isFinite(guideEl.duration)) applyGuideDuration();
+    else guideEl.addEventListener('loadedmetadata', applyGuideDuration, { once: true });
+  }
+})();
+</script>
+</body>
+</html>

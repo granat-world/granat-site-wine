@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Participant Policy — GRANAT</title>
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600&subset=cyrillic,latin&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-deep: #1A0F0C;
+  --bg-elevated: #241612;
+  --pom-juice: #A4123F;
+  --gold: #E8B66A;
+  --text-bright: #FAF3E8;
+  --text-primary: #E8DFD0;
+  --text-secondary: rgba(250,243,232,0.62);
+  --border-subtle: rgba(250,243,232,0.07);
+}
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Inter', sans-serif; background: var(--bg-deep); color: var(--text-primary);
+  line-height: 1.75; padding: 4rem 1.5rem; min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+.frame { max-width: 720px; margin: 0 auto; }
+a.back-link {
+  display: inline-block; color: var(--gold); text-decoration: none; font-size: 0.78rem;
+  letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 2.4rem;
+}
+a.back-link:hover { color: var(--text-bright); }
+h1 {
+  font-family: 'Playfair Display', serif; font-weight: 700;
+  font-size: clamp(1.8rem, 3vw, 2.6rem); color: var(--text-bright);
+  margin-bottom: 1.6rem; line-height: 1.2;
+}
+h2 {
+  font-family: 'Playfair Display', serif; font-weight: 700;
+  font-size: 1.15rem; color: var(--text-bright);
+  margin-top: 2.4rem; margin-bottom: 0.8rem;
+}
+p { margin-bottom: 1rem; color: var(--text-primary); }
+.label {
+  font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase;
+  color: var(--gold); font-weight: 600; margin-bottom: 0.6rem;
+}
+.note {
+  background: var(--bg-elevated); border-left: 3px solid var(--gold);
+  padding: 1.2rem 1.4rem; margin: 2rem 0; font-size: 0.95rem;
+  color: var(--text-secondary);
+}
+.lang-toggle {
+  display: inline-flex; gap: 0.3rem; margin-bottom: 2rem;
+  background: var(--bg-elevated); border-radius: 4px; padding: 0.2rem;
+  border: 1px solid var(--border-subtle);
+}
+.lang-btn {
+  border: none; background: transparent; color: var(--text-secondary);
+  font-family: inherit; font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.08em; padding: 0.3rem 0.7rem; border-radius: 3px;
+  cursor: pointer;
+}
+.lang-btn.active { background: var(--pom-juice); color: var(--text-bright); }
+.ru { display: none; }
+body.lang-ru .en { display: none; }
+body.lang-ru .ru { display: block; }
+body.lang-ru .ru.inline { display: inline; }
+</style>
+</head>
+<body>
+<div class="frame">
+  <a href="/" class="back-link">← <span class="en">Back to GRANAT</span><span class="ru inline">Назад на GRANAT</span></a>
+  <div class="lang-toggle">
+    <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+    <button class="lang-btn" data-lang="ru" onclick="setLang('ru')">RU</button>
+  </div>
+
+  <div class="label"><span class="en">Participant Policy</span><span class="ru inline">Политика участника</span></div>
+
+  <h1>
+    <span class="en">Recording, voice rights, and the artifact</span>
+    <span class="ru">Запись, права на голос и артефакт</span>
+  </h1>
+
+  <div class="note">
+    <span class="en">This is a v1 placeholder for the participant policy. The full legal text — covering voice-recording rights, blockchain registry inscription, and the relationship between participant and the Granat Music Artistic Talent Contracting L.L.C S.O.C entity — is being prepared by counsel and will replace this page before the public launch. If you have urgent questions, please write to <a href="mailto:hello@granat.world" style="color: var(--gold); text-decoration: none;">hello@granat.world</a>.</span>
+    <span class="ru">Это v1-заглушка политики участника. Полный юридический текст — охватывающий права на голосовую запись, занесение в блокчейн-реестр и отношения между участником и юридическим лицом Granat Music Artistic Talent Contracting L.L.C S.O.C — готовится юристами и заменит эту страницу до публичного запуска. Если у вас срочные вопросы, напишите на <a href="mailto:hello@granat.world" style="color: var(--gold); text-decoration: none;">hello@granat.world</a>.</span>
+  </div>
+
+  <h2><span class="en">What you consent to when you record</span><span class="ru">Что вы подтверждаете при записи</span></h2>
+  <p>
+    <span class="en">When you record your voice through the GRANAT app or the demo on this site, you consent to transferring that audio recording to the GRANAT project for integration into the collective work — the digital artifact created by humanity. The recording becomes part of the artifact's source material; the artifact itself is owned and operated by Granat Music Artistic Talent Contracting L.L.C S.O.C. You retain the right to identify your participation and to request inscription removal at any time.</span>
+    <span class="ru">При записи голоса через приложение GRANAT или демо на этом сайте вы соглашаетесь на передачу аудиозаписи проекту GRANAT для интеграции в общее произведение — цифровой артефакт, созданный человечеством. Запись становится частью исходного материала артефакта; сам артефакт принадлежит и управляется юридическим лицом Granat Music Artistic Talent Contracting L.L.C S.O.C. Вы сохраняете право подтвердить участие и в любое время запросить удаление записи из реестра.</span>
+  </p>
+
+  <h2><span class="en">What is preserved</span><span class="ru">Что сохраняется</span></h2>
+  <p>
+    <span class="en">No raw audio leaves the system in identifiable form. What is preserved in the eternal registry is a mathematical fingerprint of your voice and your name (or pseudonym) — proof that you took part in the artifact, anchored to a tamper-resistant ledger.</span>
+    <span class="ru">Сырое аудио не покидает систему в идентифицируемой форме. В вечном реестре сохраняется математический отпечаток голоса и ваше имя (или псевдоним) — доказательство участия в артефакте, закреплённое в защищённом от подделки реестре.</span>
+  </p>
+
+  <h2><span class="en">Contact</span><span class="ru">Контакты</span></h2>
+  <p>
+    <span class="en">For policy clarifications, removal requests, or partnership inquiries, write to <a href="mailto:hello@granat.world" style="color: var(--gold); text-decoration: none;">hello@granat.world</a>.</span>
+    <span class="ru">По вопросам политики, удаления записей или партнёрства пишите на <a href="mailto:hello@granat.world" style="color: var(--gold); text-decoration: none;">hello@granat.world</a>.</span>
+  </p>
+
+  <p style="margin-top: 3rem; font-size: 0.78rem; color: var(--text-secondary); letter-spacing: 0.06em;">
+    Granat Music Artistic Talent Contracting L.L.C S.O.C · 2026 · granat.world
+  </p>
+</div>
+
+<script>
+function setLang(lang) {
+  if (lang === 'ru') document.body.classList.add('lang-ru');
+  else document.body.classList.remove('lang-ru');
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  document.documentElement.lang = lang;
+}
+</script>
+</body>
+</html>

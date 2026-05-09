@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GRANAT FUTURE — A Future We Invite You Into / Будущее, в которое мы вас приглашаем</title>
+<meta name="description" content="A vision invitation to Granat partners — from Yaroslav Малый. One billion voices. One song. An artifact that grows.">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600;700;800&subset=cyrillic,latin&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg-void: #050505; --bg-deep: #080808; --bg-primary: #0C0C0C;
+  --bg-elevated: #121212; --bg-glass: rgba(255,255,255,0.025); --bg-glass-hover: rgba(255,255,255,0.045);
+  --crimson: #C62828; --crimson-bright: #EF5350; --crimson-soft: #E57373;
+  --crimson-dark: #7F1D1D; --crimson-glow: rgba(198,40,40,0.12);
+  --gold: #D4A843; --gold-light: #E8C97A; --gold-muted: rgba(212,168,67,0.35);
+  --text-bright: #F2F2F2; --text-primary: #DADADA;
+  --text-secondary: rgba(255,255,255,0.58); --text-muted: rgba(255,255,255,0.32);
+  --border-subtle: rgba(255,255,255,0.05); --border-medium: rgba(255,255,255,0.09);
+  --border-crimson: rgba(198,40,40,0.28);
+}
+*,*::before,*::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Inter', -apple-system, sans-serif;
+  background: var(--bg-deep); color: var(--text-primary);
+  line-height: 1.7; -webkit-font-smoothing: antialiased;
+  overflow-x: hidden; transition: opacity 0.25s ease;
+}
+
+/* Lang toggle */
+.ru { display: none; }
+body.lang-ru .en { display: none !important; }
+body.lang-ru span.ru { display: inline !important; }
+body.lang-ru div.ru, body.lang-ru p.ru, body.lang-ru blockquote.ru { display: block !important; }
+body.lang-ru .ru.flex { display: flex !important; }
+
+.lang-toggle {
+  display: flex; align-items: center; gap: 0.3rem;
+  background: rgba(255,255,255,0.04); border: 1px solid var(--border-subtle);
+  border-radius: 6px; padding: 0.2rem;
+}
+.lang-btn {
+  border: none; background: transparent; color: var(--text-muted);
+  font-family: 'Inter',sans-serif; font-size: 0.65rem; font-weight: 600;
+  letter-spacing: 0.5px; padding: 0.25rem 0.6rem; border-radius: 4px;
+  cursor: pointer; transition: all 0.2s;
+}
+.lang-btn.active { background: var(--crimson-dark); color: var(--text-bright); }
+.lang-btn:hover:not(.active) { color: var(--text-secondary); }
+
+/* Nav */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 0 2rem; height: 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: rgba(8,8,8,0.92); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.nav-brand { display: flex; align-items: center; gap: 0.6rem; }
+.nav-wordmark {
+  font-family: 'Inter',sans-serif; font-weight: 800; font-size: 0.85rem;
+  color: var(--text-bright); letter-spacing: 2px; text-decoration: none;
+}
+.nav-wordmark span { color: var(--crimson-bright); }
+.nav-wordmark::after {
+  content: 'FUTURE'; margin-left: 0.4rem;
+  color: var(--gold-light); font-weight: 600; letter-spacing: 1.5px;
+  font-size: 0.7rem;
+}
+.nav-links { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+.nav-links a {
+  color: var(--text-muted); text-decoration: none;
+  font-size: 0.68rem; font-weight: 500; letter-spacing: 0.5px;
+  transition: color 0.25s;
+}
+.nav-links a:hover { color: var(--text-bright); }
+.nav-links .manifesto-link { color: var(--gold-light); }
+@media (max-width: 720px) { .nav-links a:not(.manifesto-link) { display: none; } }
+
+/* Scroll progress */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; height: 2px; z-index: 200;
+  background: linear-gradient(90deg, var(--crimson), var(--gold));
+  width: 0%; transition: width 0.1s;
+}
+
+/* Layout */
+section { padding: 5rem 2rem; position: relative; }
+.container { max-width: 920px; margin: 0 auto; }
+.section-alt { background: var(--bg-primary); border-top: 1px solid var(--border-subtle); }
+.section-void { background: var(--bg-void); }
+
+/* Reveal */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* Section labels */
+.section-label {
+  font-size: 0.65rem; font-weight: 700; letter-spacing: 4px;
+  text-transform: uppercase; color: var(--crimson-bright);
+  margin-bottom: 1rem; display: flex; align-items: center; gap: 0.8rem;
+}
+.section-label::before { content: ''; width: 28px; height: 1px; background: var(--crimson); }
+
+.section-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700;
+  line-height: 1.18; color: var(--text-bright); margin-bottom: 1.5rem;
+}
+.section-subtitle {
+  font-size: 1rem; font-weight: 300; color: var(--text-secondary);
+  max-width: 680px; line-height: 1.85; margin-bottom: 2rem;
+}
+
+/* Hero */
+#hero {
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  background: var(--bg-void); text-align: center; position: relative; overflow: hidden;
+  padding-top: 5rem;
+}
+#hero::before {
+  content: ''; position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+}
+.hero-content { position: relative; z-index: 2; max-width: 760px; padding: 0 1.5rem; }
+.hero-eyebrow {
+  font-family: 'Inter',sans-serif; font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 5px; text-transform: uppercase;
+  color: var(--gold-light); margin-bottom: 1.5rem;
+}
+.hero-title {
+  font-family: 'Playfair Display', Georgia, serif; font-weight: 700;
+  font-size: clamp(2.2rem, 5.5vw, 4rem); line-height: 1.12;
+  color: var(--text-bright); margin-bottom: 1.4rem;
+  letter-spacing: -0.5px;
+}
+.hero-title em {
+  font-style: italic; color: var(--crimson-bright); font-weight: 400;
+}
+.hero-sub {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: clamp(1rem, 2vw, 1.3rem); font-weight: 400;
+  color: var(--gold-light); margin-bottom: 2.5rem;
+  max-width: 600px; margin-left: auto; margin-right: auto;
+  line-height: 1.6;
+}
+.hero-meta {
+  font-size: 0.7rem; font-weight: 500; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--text-muted);
+}
+
+/* Letter — bilingual two-column on desktop */
+.letter-block {
+  background: var(--bg-glass); border: 1px solid var(--border-subtle);
+  border-radius: 14px; padding: 2.5rem; margin: 2rem 0;
+}
+.letter-block p {
+  font-size: 1rem; line-height: 1.85; color: var(--text-primary);
+  margin-bottom: 1.2rem;
+}
+.letter-block p strong { color: var(--text-bright); }
+.letter-block p em { color: var(--gold-light); font-style: italic; }
+.letter-sig {
+  margin-top: 1.8rem; padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+  font-family: 'Playfair Display', serif; font-style: italic;
+  color: var(--gold-light); font-size: 1.05rem;
+}
+
+/* Pull-quote — the central thesis */
+.pull-quote {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: clamp(1.3rem, 2.8vw, 1.8rem); line-height: 1.5;
+  color: var(--text-bright); text-align: center;
+  padding: 2.5rem 1.5rem; margin: 2rem 0;
+  border-top: 2px solid var(--crimson);
+  border-bottom: 2px solid var(--gold-muted);
+  max-width: 760px; margin-left: auto; margin-right: auto;
+}
+.pull-quote em { color: var(--crimson-bright); font-style: italic; }
+
+/* ═══ WORLDS BENTO (redesigned) ═══ */
+/* Wider container just for this section so 12-col bento can breathe */
+#worlds .container { max-width: 1180px; }
+
+.worlds-frame-line {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  color: var(--gold-light);
+  margin: 0.5rem 0 2.5rem 0;
+  padding-left: 1rem; border-left: 2px solid var(--gold-muted);
+  line-height: 1.5;
+}
+
+.worlds-bento {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-auto-rows: minmax(0, auto);
+  gap: 1rem;
+  margin: 1rem 0 0 0;
+}
+
+.world-tile {
+  --accent: var(--crimson-bright);
+  --accent-soft: rgba(239,83,80,0.10);
+  position: relative; overflow: hidden;
+  padding: 1.6rem 1.4rem;
+  border-radius: 14px;
+  background: var(--bg-glass);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: border-color 0.35s ease, background 0.35s ease, transform 0.35s ease;
+  display: flex; flex-direction: column;
+}
+.world-tile::before {
+  /* faint accent wash that grows on hover */
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(120% 80% at 0% 0%, var(--accent-soft) 0%, transparent 55%);
+  opacity: 0.55; transition: opacity 0.4s ease; pointer-events: none;
+}
+.world-tile:hover { border-color: var(--accent); transform: translateY(-3px); }
+.world-tile:hover::before { opacity: 1; }
+.world-tile.expanded { border-color: var(--accent); background: var(--bg-glass-hover); }
+.world-tile.expanded::before { opacity: 1; }
+
+/* Top row: register pill + numeral */
+.world-meta {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 0.9rem; position: relative; z-index: 1;
+}
+.world-register {
+  font-family: 'Inter', sans-serif; font-size: 0.58rem; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  color: var(--accent);
+  padding: 0.25rem 0.55rem;
+  border: 1px solid var(--accent);
+  border-radius: 999px; opacity: 0.85;
+}
+.world-num-bento {
+  font-family: 'Playfair Display', serif; font-weight: 900;
+  font-size: 1.4rem; line-height: 1;
+  color: var(--text-muted); opacity: 0.55;
+}
+
+/* Glyph */
+.world-glyph {
+  width: 32px; height: 32px;
+  margin-bottom: 0.7rem; color: var(--accent);
+  position: relative; z-index: 1; opacity: 0.9;
+}
+.world-glyph svg { width: 100%; height: 100%; display: block; }
+
+/* Title + tagline */
+.world-tile h3 {
+  font-family: 'Playfair Display', serif; font-weight: 700;
+  color: var(--text-bright);
+  margin-bottom: 0.5rem;
+  font-size: 1.15rem; line-height: 1.2;
+  position: relative; z-index: 1;
+}
+.world-tagline {
+  font-size: 0.85rem; color: var(--text-secondary);
+  line-height: 1.6; margin-bottom: 0.8rem;
+  position: relative; z-index: 1;
+}
+
+/* Scenes (preserved expand) */
+.world-scenes {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.5s ease, margin-top 0.5s ease;
+  position: relative; z-index: 1;
+}
+.world-tile.expanded .world-scenes { max-height: 2000px; margin-top: 0.6rem; }
+.world-scene {
+  padding: 0.9rem 0; border-top: 1px solid var(--border-subtle);
+  font-size: 0.85rem; color: var(--text-secondary); line-height: 1.7;
+}
+.world-scene strong { color: var(--gold-light); display: block; margin-bottom: 0.3rem; font-weight: 600; }
+
+.world-cta {
+  display: inline-block; margin-top: auto; padding-top: 0.6rem;
+  font-size: 0.66rem; font-weight: 700; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--accent);
+  position: relative; z-index: 1;
+}
+.world-tile.expanded .world-cta { color: var(--gold-light); }
+.world-tile.expanded .world-cta::after { content: ' ↑'; }
+.world-tile:not(.expanded) .world-cta::after { content: ' →'; }
+
+/* === Bento placement (desktop, 12 cols) === */
+.tile-family   { grid-column: span 7; }   /* HERO row 1 */
+.tile-stadium  { grid-column: span 5; }   /* HERO row 1 */
+.tile-schools  { grid-column: span 4; }   /* row 2 — wide */
+.tile-sacred   { grid-column: span 4; }   /* row 2 — wide */
+.tile-civic    { grid-column: span 4; }   /* row 2 — wide */
+.tile-industry { grid-column: span 6; }   /* row 3 */
+.tile-legacy   { grid-column: span 6; }   /* row 3 */
+
+/* Hero scaling for tier-A tiles */
+.tile-family, .tile-stadium {
+  padding: 2rem 1.8rem; min-height: 280px;
+}
+.tile-family h3, .tile-stadium h3 {
+  font-size: clamp(1.5rem, 2.1vw, 1.95rem);
+  margin-bottom: 0.7rem;
+}
+.tile-family .world-tagline, .tile-stadium .world-tagline {
+  font-size: 0.95rem;
+}
+.tile-family .world-glyph, .tile-stadium .world-glyph {
+  width: 40px; height: 40px;
+}
+
+/* Per-world accent palette */
+.tile-family   { --accent: var(--gold-light);    --accent-soft: rgba(232,201,122,0.10); }
+.tile-schools  { --accent: #6FB7C9;              --accent-soft: rgba(111,183,201,0.10); } /* teal — Earth */
+.tile-stadium  { --accent: var(--crimson-bright);--accent-soft: rgba(239,83,80,0.12); }
+.tile-sacred   { --accent: var(--gold);          --accent-soft: rgba(212,168,67,0.10); }
+.tile-civic    { --accent: #B084CC;              --accent-soft: rgba(176,132,204,0.10); } /* lighter purple */
+.tile-industry { --accent: var(--crimson-soft);  --accent-soft: rgba(229,115,115,0.10); }
+.tile-legacy   { --accent: var(--gold-light);    --accent-soft: rgba(232,201,122,0.08); }
+
+/* === Tablet: 2-col bento === */
+@media (max-width: 960px) {
+  #worlds .container { max-width: 720px; }
+  .worlds-bento { grid-template-columns: repeat(2, 1fr); }
+  .tile-family   { grid-column: 1 / -1; }
+  .tile-stadium  { grid-column: 1 / -1; }
+  .tile-schools  { grid-column: span 1; }
+  .tile-sacred   { grid-column: span 1; }
+  .tile-civic    { grid-column: 1 / -1; }
+  .tile-industry { grid-column: 1 / -1; }
+  .tile-legacy   { grid-column: 1 / -1; }
+}
+
+/* === Mobile: single column, heroes still feel taller === */
+@media (max-width: 600px) {
+  .worlds-bento { grid-template-columns: 1fr; gap: 0.85rem; }
+  .world-tile { grid-column: 1 / -1 !important; }
+  .tile-family, .tile-stadium { min-height: 220px; padding: 1.6rem 1.3rem; }
+  .tile-family h3, .tile-stadium h3 { font-size: 1.4rem; }
+  .world-register { font-size: 0.55rem; letter-spacing: 1.5px; }
+}
+
+/* Why Now / Us */
+.facts-list {
+  list-style: none; padding: 0; margin: 1.5rem 0;
+}
+.facts-list li {
+  padding: 0.9rem 0; padding-left: 1.5rem; position: relative;
+  border-bottom: 1px solid var(--border-subtle);
+  color: var(--text-secondary); font-size: 0.95rem; line-height: 1.65;
+}
+.facts-list li:last-child { border-bottom: none; }
+.facts-list li::before {
+  content: '○'; position: absolute; left: 0;
+  color: var(--crimson-bright); font-weight: 700;
+}
+.facts-list li strong { color: var(--text-bright); }
+
+/* Offer */
+.offer-list { padding: 0; list-style: none; margin: 1.5rem 0; }
+.offer-list li {
+  padding: 1.2rem 0; padding-left: 1.8rem; position: relative;
+  font-size: 0.95rem; line-height: 1.7; color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.offer-list li:last-child { border-bottom: none; }
+.offer-list li::before {
+  content: '+'; position: absolute; left: 0; top: 1.1rem;
+  color: var(--gold); font-weight: 700; font-size: 1.2rem;
+}
+.offer-list li strong { color: var(--gold-light); }
+
+.not-on-table {
+  background: rgba(198,40,40,0.04);
+  border-left: 2px solid var(--crimson-dark);
+  padding: 1.2rem 1.5rem; margin: 2rem 0;
+  border-radius: 0 8px 8px 0;
+}
+.not-on-table h4 {
+  font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1.5px; color: var(--crimson-soft); margin-bottom: 0.8rem;
+}
+.not-on-table ul { padding-left: 1.2rem; }
+.not-on-table li {
+  font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 0.3rem;
+}
+
+/* Path */
+.path-step {
+  padding: 1.5rem 0; border-bottom: 1px solid var(--border-subtle);
+}
+.path-step:last-child { border-bottom: none; }
+.path-when {
+  font-size: 0.7rem; font-weight: 700; letter-spacing: 2px;
+  text-transform: uppercase; color: var(--crimson-bright); margin-bottom: 0.4rem;
+}
+.path-what { font-size: 0.95rem; color: var(--text-primary); line-height: 1.7; }
+.path-what strong { color: var(--text-bright); }
+
+/* Closing */
+#closing {
+  min-height: 60vh; display: flex; align-items: center; justify-content: center;
+  text-align: center; background: var(--bg-void); padding: 5rem 2rem;
+}
+.closing-content { max-width: 720px; }
+.closing-statement {
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: clamp(1.3rem, 2.8vw, 1.8rem); line-height: 1.5;
+  color: var(--text-bright); margin-bottom: 2rem;
+}
+.closing-statement em { color: var(--crimson-bright); }
+.closing-sig {
+  margin-top: 2.5rem; font-family: 'Playfair Display', serif;
+  color: var(--gold-light); font-size: 1.1rem; font-weight: 700;
+}
+
+/* Footer */
+footer {
+  background: var(--bg-void); border-top: 1px solid var(--border-subtle);
+  color: var(--text-muted); text-align: center;
+  padding: 2.5rem 2rem; font-size: 0.7rem; letter-spacing: 0.5px;
+}
+footer a { color: var(--gold-light); text-decoration: none; }
+footer a:hover { color: var(--gold); }
+
+@media (max-width: 768px) {
+  section { padding: 3.5rem 1.25rem; }
+  .letter-block { padding: 1.8rem; }
+  .pull-quote { padding: 1.8rem 1rem; }
+}
+</style>
+</head>
+<body>
+<div class="scroll-progress" id="scrollProgress"></div>
+
+<nav>
+  <div class="nav-brand">
+    <a href="/" class="nav-wordmark">GRAN<span>A</span>T</a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#letter"><span class="en">Letter</span><span class="ru">Письмо</span></a></li>
+    <li><a href="#worlds"><span class="en">Seven Worlds</span><span class="ru">Семь миров</span></a></li>
+    <li><a href="#offer"><span class="en">Offer</span><span class="ru">Приглашение</span></a></li>
+    <li><a href="/" class="manifesto-link"><span class="en">Manifesto</span><span class="ru">Манифест</span></a></li>
+    <li>
+      <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="en" onclick="setLang('en')">EN</button>
+        <button class="lang-btn" data-lang="ru" onclick="setLang('ru')">RU</button>
+      </div>
+    </li>
+  </ul>
+</nav>
+
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span class="en">For our friends · before the meeting</span>
+      <span class="ru">Для друзей · перед встречей</span>
+    </div>
+    <h1 class="hero-title">
+      <span class="en">A Future We <em>Invite</em><br>You Into</span>
+      <span class="ru">Будущее, в которое<br><em>мы вас приглашаем</em></span>
+    </h1>
+    <p class="hero-sub">
+      <span class="en">One billion voices. One song. Not a moment — an artifact that grows.</span>
+      <span class="ru">Один миллиард голосов. Одна песня. Не момент — артефакт, который растёт.</span>
+    </p>
+    <div class="hero-meta">
+      <span class="en">From Yaroslav Малый · May 2026</span>
+      <span class="ru">От Ярослава Малого · Май 2026</span>
+    </div>
+  </div>
+</section>
+
+<section id="letter" class="section-alt">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">
+        <span class="en">The Invitation</span><span class="ru">Письмо</span>
+      </div>
+    </div>
+
+    <div class="letter-block reveal">
+      <div class="en">
+        <p>Dear friend,</p>
+        <p>I rarely write letters like this. But what we are building with Olga and the team feels like something we want to invite specifically those we trust into.</p>
+        <p><strong>Granat</strong> is a song the entire planet can sing. One billion voices. One song. Not a remix, not a mashup — an artifact that has never existed in the history of humanity.</p>
+        <p>The site is already live — <strong>granat.world</strong>. The voice-to-choir technology is already working — the AI system has been in production since April 19. The team is nine data scientists plus one of the best sound engineers in the world. Cone Red, our technology partner, has built more than fifty AI systems of this kind for the largest companies on earth — they know how to take things to production. <em>This is not a pitch of an idea. It is an invitation to a moment when the foundation is already poured.</em></p>
+        <p>We are not selling percentages. We are inviting you to become a <strong>co-author</strong> of the first global musical artifact — with your name, your scene, your world inside it.</p>
+        <p>In this document are seven worlds where Granat already lives. Read them and ask yourself: <em>in which world do I want to be the person who made it real?</em></p>
+        <div class="letter-sig">Warmly, Yaroslav</div>
+      </div>
+      <div class="ru">
+        <p>Дорогой друг,</p>
+        <p>Я редко пишу такие письма. Но то, что мы строим с Ольгой и командой, ощущается как нечто, во что хочется пригласить именно тех, кому мы доверяем.</p>
+        <p><strong>Granat</strong> — это песня, в которой может петь вся планета. Один миллиард голосов. Одна песня. Не ремикс, не мэшап — артефакт, которого в истории человечества ещё не было.</p>
+        <p>Сайт уже есть — <strong>granat.world</strong>. Технология голос-в-хор уже работает — ИИ-система в продакшене с 19 апреля. Команда — девять data scientists + один из лучших саунд-инженеров в мире. Cone Red, наш технологический партнёр, построил больше 50 таких ИИ-систем для крупнейших компаний мира — они умеют доводить до продакшена. <em>Это не питч идеи. Это приглашение в момент, когда фундамент уже залит.</em></p>
+        <p>Мы не продаём проценты. Мы приглашаем стать <strong>со-автором</strong> первого глобального музыкального артефакта — со своим именем, со своей сценой, со своим миром внутри.</p>
+        <p>В этом документе — семь миров, в которых уже живёт Granat. Прочитай и спроси себя: <em>в каком мире я хочу быть тем человеком, который сделал это реальным?</em></p>
+        <div class="letter-sig">С теплом, Ярослав</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="vision">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">
+        <span class="en">The Vision</span><span class="ru">Видение</span>
+      </div>
+      <h2 class="section-title">
+        <span class="en">One billion voices. One song.</span>
+        <span class="ru">Один миллиард голосов. Одна песня.</span>
+      </h2>
+      <p class="section-subtitle">
+        <span class="en">Five continents. Five artists trusted by millions. Their listeners record their voices. AI assembles a billion voices into a single track. Every participant can find themselves inside the song. This is not streaming. This is not a social network. This is a <strong>historic artifact</strong> — one song where every person on Earth can be heard, and become part of something that has not been before.</span>
+        <span class="ru">Пять континентов. Пять артистов, которым доверяют миллионы. Их слушатели записывают свои голоса. ИИ собирает миллиард голосов в единый трек. Каждый участник может найти себя внутри песни. Это не стриминг. Это не социальная сеть. Это <strong>исторический артефакт</strong> — одна песня, в которой каждый человек на Земле может быть услышанным, и стать частью того, чего ещё не было.</span>
+      </p>
+    </div>
+
+    <blockquote class="pull-quote reveal">
+      <span class="en"><em>Granat does not record a moment.</em><br>Granat grows an artifact, to which every generation adds its voice.</span>
+      <span class="ru"><em>Granat не записывает момент.</em><br>Granat растит артефакт, к которому каждое поколение добавляет свой голос.</span>
+    </blockquote>
+  </div>
+</section>
+
+<section id="worlds" class="section-alt">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">
+        <span class="en">Seven Worlds</span><span class="ru">Семь миров</span>
+      </div>
+      <h2 class="section-title">
+        <span class="en">Seven Worlds Where Granat Lives</span>
+        <span class="ru">Семь миров, в которых живёт Granat</span>
+      </h2>
+      <p class="section-subtitle">
+        <span class="en">Not seven products. Seven forms of co-authorship people already want to step into. Each world is an entry point for one of our friends. Choose the one in which you want to leave a mark.</span>
+        <span class="ru">Не семь продуктов. Семь форм соавторства, в которые человек уже хочет войти. Каждый мир — точка входа для одного из наших друзей. Выбери тот, в котором ты хочешь оставить след.</span>
+      </p>
+      <p class="worlds-frame-line">
+        <span class="en">Pick the one with your name on it.</span>
+        <span class="ru">Выбери тот, на котором уже стоит твоё имя.</span>
+      </p>
+    </div>
+
+    <div class="worlds-bento reveal">
+
+      <!-- World 1 — FAMILY (hero) -->
+      <div class="world-tile tile-family" onclick="this.classList.toggle('expanded')">
+        <div class="world-meta">
+          <span class="world-register"><span class="en">Lifecycle</span><span class="ru">Жизненный цикл</span></span>
+          <span class="world-num-bento">01</span>
+        </div>
+        <div class="world-glyph" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+            <path d="M6 22c0-5 4-9 10-9s10 4 10 9"/>
+            <circle cx="16" cy="9" r="3.2"/>
+            <path d="M11 26c1.5-1.5 8.5-1.5 10 0"/>
+          </svg>
+        </div>
+        <h3><span class="en">Family &amp; Generation</span><span class="ru">Семья и поколение</span></h3>
+        <p class="world-tagline">
+          <span class="en">A wedding where everyone sounds. A grandmother's voice carried 25 years forward. A song born in 2027 heard at age 18.</span>
+          <span class="ru">Свадьба, на которой звучат все. Голос бабушки, перенесённый на 25 лет вперёд. Песня поколения, услышанная в 18.</span>
+        </p>
+        <span class="world-cta"><span class="en">Read scenes</span><span class="ru">Сцены</span></span>
+        <div class="world-scenes">
+          <div class="world-scene">
+            <strong><span class="en">The wedding where everyone sounds</span><span class="ru">Свадьба, на которой звучат все</span></strong>
+            <span class="en">On her wedding day, the bride hears the first dance — her own voice, her grandmother's voice (recorded ten years earlier, on purpose), her mother's, her sisters', and two hundred guests, all woven together. Not a recording of the ceremony. <strong>The ceremony itself, sounding as one voice.</strong></span>
+            <span class="ru">Невеста в день свадьбы слышит первый танец, в который вплетены её голос, голос её бабушки (записанный за десять лет до этого, специально), голос матери, сестёр и двухсот гостей. Не запись церемонии. <strong>Сама церемония, прозвучавшая как один голос.</strong></span>
+          </div>
+          <div class="world-scene">
+            <strong><span class="en">The voice as the new photograph</span><span class="ru">Голос как новая фотография</span></strong>
+            <span class="en">A grandmother records her lullaby at 70; her granddaughter hears it at her own wedding 25 years later. The whole family sang that lullaby — and now the next generations already hear the voice of their ancestors. <strong>A heritage that grows without end.</strong></span>
+            <span class="ru">Бабушка записала свою колыбельную в 70 лет — внучка слышит её на собственной свадьбе через 25 лет. Вся семья спела эту колыбельную — и уже следующие поколения слышат голос своих предков. <strong>Это наследие, которое бесконечно растёт.</strong></span>
+          </div>
+          <div class="world-scene">
+            <strong><span class="en">The song of a generation</span><span class="ru">Песня поколения</span></strong>
+            <span class="en">Every child born in 2027 sings one note into the song of their generation. At 18, they hear for the first time what the world they were born into sounded like — and their own voice inside it.</span>
+            <span class="ru">Каждый ребёнок, родившийся в 2027 году, поёт одну ноту в песню своего поколения. В 18 лет он впервые слышит, как звучал мир, в который он пришёл — и свой голос внутри.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- World 3 — STADIUM (hero, placed second on row 1) -->
+      <div class="world-tile tile-stadium" onclick="this.classList.toggle('expanded')">
+        <div class="world-meta">
+          <span class="world-register"><span class="en">Civic Mass</span><span class="ru">Гражданская масса</span></span>
+          <span class="world-num-bento">03</span>
+        </div>
+        <div class="world-glyph" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+            <ellipse cx="16" cy="20" rx="12" ry="5"/>
+            <path d="M4 20c0-4 5.4-7.5 12-7.5S28 16 28 20"/>
+            <path d="M10 14.5l1-3M16 12l0-3M22 14.5l-1-3"/>
+          </svg>
+        </div>
+        <h3><span class="en">Stadium &amp; Stage</span><span class="ru">Стадион и сцена</span></h3>
+        <p class="world-tagline">
+          <span class="en">The World Cup anthem sung by every fan across every stadium. The Olympic anthem in the IOC archive forever. The concert encore credited to five million names.</span>
+          <span class="ru">Гимн ЧМ, спетый каждым фанатом со всех стадионов. Олимпийский гимн в архиве МОК навсегда. Финальный припев — на пять миллионов имён.</span>
+        </p>
+        <span class="world-cta"><span class="en">Read scenes</span><span class="ru">Сцены</span></span>
+        <div class="world-scenes">
+          <div class="world-scene">
+            <strong><span class="en">The World Cup final</span><span class="ru">Финал чемпионата мира</span></strong>
+            <span class="en">60,000 fans across the world's stadiums sing the same song — voice by voice, gathered. And now in the stands the planet hears an anthem sung by the whole world, in which every fan can find themselves. <strong>This song becomes football's first shared anthem — and every year it grows larger.</strong> Generations of fans now sing it together. Participation has become a ritual and a family tradition.</span>
+            <span class="ru">60 000 фанатов на разных стадионах спели единую песню. Каждый голос был собран — и теперь на трибунах звучит гимн, спетый всем миром, в котором каждый фанат может узнать себя. <strong>Эта песня становится первым общим гимном футбола — и с каждым годом она становится больше.</strong> Поколения фанатов уже поют её вместе. Участие стало обязательным ритуалом и семейной традицией.</span>
+          </div>
+          <div class="world-scene">
+            <strong><span class="en">Olympic opening ceremony</span><span class="ru">Олимпийская церемония открытия</span></strong>
+            <span class="en">Athletes from 200 countries. The host stadium. Fans in every nation. The Games anthem is sung by all of them together. The IOC archives it as part of the Olympic record — permanently.</span>
+            <span class="ru">Спортсмены из 200 стран. Стадион хозяев. Фанаты в каждой стране. Гимн Игр поёт всё это вместе. МОК хранит запись как часть олимпийского архива — навсегда.</span>
+          </div>
+          <div class="world-scene">
+            <strong><span class="en">The concert encore</span><span class="ru">Концертный финал</span></strong>
+            <span class="en">The artist on stage. 100,000 in the room. 5 million online. The final chorus is sung by all of them. The next morning's release: "[Artist] feat. 5,100,000 voices." Royalty splits with five million names. <strong>A new form of authorship.</strong></span>
+            <span class="ru">Артист на сцене. 100 000 человек в зале. 5 миллионов онлайн. Финальный припев поют все. Утром следующего дня релиз: «[Артист] feat. 5 100 000 голосов». В авторских отчислениях — пять миллионов имён. <strong>Новая форма авторства.</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- World 2 — SCHOOLS -->
+      <div class="world-tile tile-schools" onclick="this.classList.toggle('expanded')">
+        <div class="world-meta">
+          <span class="world-register"><span class="en">Generational</span><span class="ru">Поколенческое</span></span>
+          <span class="world-num-bento">02</span>
+        </div>
+        <div class="world-glyph" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+            <circle cx="16" cy="16" r="11"/>
+            <path d="M5 16h22M16 5c3.5 3.5 3.5 18 0 22M16 5c-3.5 3.5-3.5 18 0 22"/>
+          </svg>
+        </div>
+        <h3><span class="en">Schools &amp; Earth</span><span class="ru">Школа и Земля</span></h3>
+        <p class="world-tagline">
+          <span class="en">Hundreds of millions of children sing one song on Earth Day. The graduating class adds its choir every year.</span>
+          <span class="ru">Сотни миллионов детей поют одну песню в День Земли. Выпускной хор пополняется каждый год.</span>
+        </p>
+        <span class="world-cta"><span class="en">Read scenes</span><span class="ru">Сцены</span></span>
+        <div class="world-scenes">
+          <div class="world-scene">
+            <strong><span class="en">Earth Day</span><span class="ru">День Земли</span></strong>
+            <span class="en">April 22, 2027. Together, hundreds of millions of children on five continents sing one song. Each child already feels themselves part of the whole planet — part of a whole world. <strong>This is the voice of the generation that will choose to live in a new world.</strong> It is the official UN climate anthem. And every voice in it is heard.</span>
+            <span class="ru">22 апреля 2027 года. Вместе сотни миллионов детей на пяти континентах поют одну песню. Каждый ребёнок уже чувствует себя частью всей планеты — целым миром. <strong>Это голос поколения, которое выберет жить в новом мире.</strong> Это официальный климатический гимн ООН. И каждый голос в нём — услышан.</span>
+          </div>
+          <div class="world-scene">
+            <strong><span class="en">The graduating class</span><span class="ru">Класс выпускников</span></strong>
+            <span class="en">Five hundred universities sing the graduation anthem. Every graduate is in the archive. <strong>Each year the song is added to, and this choir is no longer just an anthem — it is woven from the voices of thousands, each having put a part of their soul into the whole.</strong></span>
+            <span class="ru">Пятьсот университетов поют выпускной гимн. Каждый выпускник — в архиве. <strong>Каждый год песня дополняется, и этот хор уже не просто гимн — он соткан голосами тысяч людей, каждый из которых вложил в его целое часть своей души.</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- World 4 — SACRED -->
+      <div class="world-tile tile-sacred" onclick="this.classList.toggle('expanded')">
+        <div class="world-meta">
+          <span class="world-register"><span class="en">Sacred</span><span class="ru">Священное</span></span>
+          <span class="world-num-bento">04</span>
+        </div>
+        <div class="world-glyph" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+            <circle cx="16" cy="16" r="11"/>
+            <circle cx="16" cy="16" r="6"/>
+            <path d="M16 5v22M5 16h22M8 8l16 16M24 8L8 24"/>
+          </svg>
+        </div>
+        <h3><span class="en">Sacred &amp; Belonging</span><span class="ru">Священное и принадлежность</span></h3>
+        <p class="world-tagline">
+          <span class="en">A multi-faith chorus at dawn. A diaspora hearing itself as one. A sacred place that sings with everyone who has ever stood in it.</span>
+          <span class="ru">Многоконфессиональный хор на рассвете. Диаспора, слышащая себя как одно целое. Священное место, поющее всеми, кто в нём был.</span>
+        </p>
+        <span class="world-cta"><span class="en">Read scenes</span><span class="ru">Сцены</span></span>
+        <div class="world-scenes">
+          <div class="world-scene">
+            <strong><span class="en">The multi-faith chorus</span><span class="ru">Многоконфессиональный хор</span></strong>
+            <span class="en">At dawn on a single day — voices from a pilgrimage in Mecca, a Mass in the Vatican, a prayer at the Western Wall in Jerusalem, a ritual in Varanasi, a morning chant in a Korean Buddhist monastery — sound together. Each in its own language, its own tradition. UNESCO preserves the recording.</span>
+            <span class="ru">На рассвете одного дня — голоса с паломничества в Мекке, мессы в Ватикане, молитвы у Стены Плача в Иерусалиме, ритуала в Варанаси, утреннего пения в корейском буддистском монастыре — звучат вместе. Каждый — на своём языке, в своей традиции. ЮНЕСКО сохраняет запись.</span>
+          </div>
+          <div class="world-scene">
+            <strong><span class="en">Sacred places sing again</span><span class="ru">Священные места снова поют</span></strong>
+            <span class="en">A mosque, a cathedral, a temple, a synagogue. Granat allows everyone who has ever stood there to leave a voice. <strong>The place is no longer empty — it sounds with everyone who has been inside it.</strong> People leave a part of themselves to sound in sacred places forever.</span>
+            <span class="ru">Мечеть, собор, храм, синагога. Granat позволяет каждому, кто там стоял, оставить голос. <strong>Место больше не пустое — оно звучит всеми, кто в нём был.</strong> Люди оставляют часть себя звучать в святых местах навечно.</span>
+          </div>
+          <div class="world-scene">
+            <strong><span class="en">Coming home</span><span class="ru">Возвращение домой</span></strong>
+            <span class="en">A people scattered across forty countries sings the anthem. The recording sounds like home — for the first time since home was split. Any diaspora — Armenian, Irish, Jewish, Lebanese — can hear itself as one again.</span>
+            <span class="ru">Народ, рассеянный по сорока странам, поёт гимн. Запись звучит как дом — впервые с момента, когда дом был расколот. Любая диаспора — армянская, ирландская, еврейская, ливанская — может снова услышать себя как одно целое.</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- World 5 — CIVIC -->
+      <div class="world-tile tile-civic" onclick="this.classList.toggle('expanded')">
+        <div class="world-meta">
+          <span class="world-register"><span class="en">Civic Will</span><span class="ru">Гражданская воля</span></span>
+          <span class="world-num-bento">05</span>
+        </div>
+        <div class="world-glyph" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+            <path d="M8 4v24M8 6h16l-3 5 3 5H8"/>
+          </svg>
+        </div>
+        <h3><span class="en">Civic &amp; Collective Will</span><span class="ru">Гражданское</span></h3>
+        <p class="world-tagline">
+          <span class="en">A protest anthem as the new petition. A nation's anniversary sung by every living citizen. The next signal beyond Earth — all of us.</span>
+          <span class="ru">Гимн протеста — новая петиция. Юбилей страны, спетый каждым живым гражданином. Следующий сигнал за пределы Земли — это все мы.</span>
+        </p>
+        <span class="world-cta"><span class="en">Read scenes</span><span class="ru">Сцены</span></span>
+        <div class="world-scenes">
+          <div class="world-scene">
+            <strong><span class="en">Global climate march</span><span class="ru">Глобальный климатический марш</span></strong>
+            <span class="en">A global climate initiative activates Granat for the next march. Demonstrators in 80 cities record the protest anthem — each from their city, each with their own voice. Granat assembles them into a single artifact, delivered to the UN as auditory evidence of mass will. <strong>Not a petition. Not signatures. Voices.</strong></span>
+            <span class="ru">Глобальная экологическая инициатива активирует Granat для следующего марша. Демонстранты в 80 городах записывают гимн протеста — каждый из своего города, каждый своим голосом. Granat собирает их в единый артефакт, который передаётся в ООН — как звуковое доказательство массовой воли. <strong>Не петиция. Не подписи. Голоса.</strong></span>
+          </div>
+          <div class="world-scene">
+            <strong><span class="en">A nation's anniversary</span><span class="ru">Юбилей страны</span></strong>
+            <span class="en">75 years. 100 years. 80 years. Every living citizen records a line. <strong>The nation sings itself — literally, for the first time.</strong></span>
+            <span class="ru">75 лет. 100 лет. 80 лет. Каждый живой гражданин записывает строчку. <strong>Нация поёт сама себя — впервые буквально.</strong></span>
+          </div>
+          <div class="world-scene">
+            <strong><span class="en">Message to space</span><span class="ru">Сообщение в космос</span></strong>
+            <span class="en">Voyager carried a symphony. The next signal is all of us. The first song sent beyond Earth contains every voice that wanted to be in it. <strong>The voices of the planet fly to the stars.</strong></span>
+            <span class="ru">Voyager нёс симфонию. Следующий сигнал — это все мы. Первая песня, отправленная за пределы Земли, содержит голос каждого, кто захотел в ней быть. <strong>Голоса планеты летят к звёздам.</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- World 6 — INDUSTRY -->
+      <div class="world-tile tile-industry" onclick="this.classList.toggle('expanded')">
+        <div class="world-meta">
+          <span class="world-register"><span class="en">Industry</span><span class="ru">Индустрия</span></span>
+          <span class="world-num-bento">06</span>
+        </div>
+        <div class="world-glyph" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+            <rect x="4" y="10" width="24" height="14" rx="1.5"/>
+            <path d="M4 14h24M9 10V6h14v4"/>
+            <path d="M11 18h2M16 18h2M21 18h2"/>
+          </svg>
+        </div>
+        <h3><span class="en">Industry &amp; Culture</span><span class="ru">Индустрия и культура</span></h3>
+        <p class="world-tagline">
+          <span class="en">Disney. A corporate anthem of 220,000 voices. The new Eurovision. A museum's audience sounding inside the work.</span>
+          <span class="ru">Disney. Корпоративный гимн на 220 000 голосов. Новый Eurovision. Аудитория музея, звучащая внутри произведения.</span>
+        </p>
+        <span class="world-cta"><span class="en">Read scenes</span><span class="ru">Сцены</span></span>
+        <div class="world-scenes">
+          <div class="world-scene">
+            <strong><span class="en">Disney + beloved characters</span><span class="ru">Disney + любимые герои</span></strong>
+            <span class="en">A seven-year-old opens the app, sings along with her favorite princess, and on her birthday hears the official release — a version where her voice is one among millions. Twenty years later she plays it at her own wedding. <strong>Disney sells not a song — participation in a song.</strong></span>
+            <span class="ru">Семилетняя девочка открывает приложение, поёт вместе с любимой принцессой, и в день своего рождения слышит официальный релиз — версию, в которой её голос среди миллионов. Через двадцать лет она ставит этот трек на собственной свадьбе. <strong>Disney продаёт не песню — участие в песне.</strong></span>
+          </div>
+          <div class="world-scene">
+            <strong><span class="en">Corporate anthem for hundreds of thousands of voices</span><span class="ru">Корпоративный гимн на сотни тысяч голосов</span></strong>
+            <span class="en">The full staff of a global company. The founder. The CEO. The intern in São Paulo. They all sing the company's anniversary anthem. Not corporate culture. <strong>Corporate memory.</strong></span>
+            <span class="ru">Полный штат глобальной компании. Основатель. CEO. Стажёр в Сан-Паулу. Все поют гимн юбилея компании. Это не корпоративная культура. <strong>Это корпоративная память.</strong></span>
+          </div>
+          <div class="world-scene">
+            <strong><span class="en">The new Eurovision</span><span class="ru">Новый Eurovision</span></strong>
+            <span class="en">Every viewer is also a singer. The winner is decided not by SMS votes, but by how many people sang into each artist's song. <strong>Victory = co-authorship.</strong></span>
+            <span class="ru">Каждый зритель — также певец. Победителя определяют не SMS-голоса, а количество людей, которые спели в песне артиста. <strong>Победа = соавторство.</strong></span>
+          </div>
+          <div class="world-scene">
+            <strong><span class="en">Cultural institution</span><span class="ru">Культурный институт</span></strong>
+            <span class="en">A museum, an opera house, a biennale. Visitors record a vocal phrase that sounds at the exhibition's closing. Every exhibition receives its own song, written by those who came. <strong>The work stops being separate from the one who came to see it.</strong></span>
+            <span class="ru">Музей, опера, биеннале. Посетители записывают вокальный фрагмент, который потом звучит на закрытии выставки. Каждая выставка получает свою песню, написанную её посетителями. <strong>Произведение перестаёт быть отдельным от того, кто пришёл на него посмотреть.</strong></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- World 7 — LEGACY -->
+      <div class="world-tile tile-legacy" onclick="this.classList.toggle('expanded')">
+        <div class="world-meta">
+          <span class="world-register"><span class="en">Legacy</span><span class="ru">Наследие</span></span>
+          <span class="world-num-bento">07</span>
+        </div>
+        <div class="world-glyph" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+            <path d="M9 4h14M9 28h14"/>
+            <path d="M11 4c0 6 10 6 10 12s-10 6-10 12"/>
+            <path d="M21 4c0 6-10 6-10 12s10 6 10 12"/>
+          </svg>
+        </div>
+        <h3><span class="en">Memory &amp; Legacy</span><span class="ru">Память и наследие</span></h3>
+        <p class="world-tagline">
+          <span class="en">Voice against forgetting. A coronation that becomes participation. An archive that remains for the next century.</span>
+          <span class="ru">Голос против забвения. Коронация как участие. Архив, который остаётся следующему столетию.</span>
+        </p>
+        <span class="world-cta"><span class="en">Read scenes</span><span class="ru">Сцены</span></span>
+        <div class="world-scenes">
+          <div class="world-scene">
+            <strong><span class="en">Voice against forgetting</span><span class="ru">Голос против забвения</span></strong>
+            <span class="en">Music therapy for dementia patients. The patient hears their own voice, recorded 30 years ago — in a song with their grandchildren. <strong>Identity returns through sound.</strong> Partnerships with Alzheimer's research.</span>
+            <span class="ru">Музыкальная терапия для пациентов с деменцией. Пациент слышит свой голос, записанный 30 лет назад — в общей песне со внуками. <strong>Идентичность возвращается через звук.</strong> Партнёрства с исследовательскими центрами Альцгеймера.</span>
+          </div>
+          <div class="world-scene">
+            <strong><span class="en">Coronations and centennials</span><span class="ru">Коронации и столетия</span></strong>
+            <span class="en">Civic ceremonies become events of participation, not observation. One voice of a monarch or leader, billions of citizens' — in one record. An archive that remains for the next century.</span>
+            <span class="ru">Гражданские церемонии становятся событиями участия — не наблюдения. Один голос монарха или лидера, миллиарды голосов народа — в одной записи. Архив, который остаётся следующему столетию.</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section id="why-now">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">
+        <span class="en">Why Now & Why Us</span><span class="ru">Почему сейчас и почему мы</span>
+      </div>
+      <h2 class="section-title">
+        <span class="en">The foundation is already poured</span>
+        <span class="ru">Фундамент уже залит</span>
+      </h2>
+      <p class="section-subtitle">
+        <span class="en">Voice fingerprinting. AI mixing. Cryptographic verification. Each individually mature and proven. Granat is an "iPhone moment": connecting ready components into a form that becomes obvious the instant you see it. <strong>Not research. Engineering.</strong></span>
+        <span class="ru">Голосовые отпечатки. AI-микширование. Криптографическая верификация. Все по отдельности зрелые и проверенные. Granat — это «момент iPhone»: соединение готовых компонентов в форму, которая становится очевидной в тот миг, когда её увидел. <strong>Это не исследование. Это инженерия.</strong></span>
+      </p>
+    </div>
+
+    <ul class="facts-list reveal">
+      <li><strong><span class="en">Yaroslav</span><span class="ru">Ярослав</span></strong> — <span class="en">artist of Machete and Tokio. An audience earned through honest songs. Trust that capital cannot purchase.</span><span class="ru">артист «Мачете» и «Токио». Аудитория, которой доверяют, потому что её писали честно. Доверие, которое не покупается за капитал.</span></li>
+      <li><strong><span class="en">Olga</span><span class="ru">Ольга</span></strong> — <span class="en">has spent her life at the intersection of people, businesses, and ideas. She knows how to connect what must connect, and to protect what must not be mixed.</span><span class="ru">всю жизнь работает на стыке людей, бизнесов и идей. Знает, как соединять то, что должно соединиться, и охранять то, что нельзя смешивать.</span></li>
+      <li><strong><span class="en">Cone Red</span><span class="ru">Cone Red</span></strong> — <span class="en">our technology partner. They have built more than fifty AI systems of this kind for the largest companies on earth. The voice-to-choir pipeline has been in production since April 19, 2026 — they know how to take things to the finish.</span><span class="ru">наш технологический партнёр. Они построили больше пятидесяти таких ИИ-систем для крупнейших компаний мира. Voice-to-choir пайплайн в продакшене с 19 апреля 2026 — они умеют доводить до результата.</span></li>
+      <li><strong><span class="en">Granat Music Artistic Talent</span><span class="ru">Granat Music Artistic Talent</span></strong> — <span class="en">our company. IP consolidated in early May.</span><span class="ru">наша компания. IP консолидирован в начале мая.</span></li>
+    </ul>
+
+    <p class="section-subtitle reveal" style="margin-top: 2rem;">
+      <span class="en">What already exists: <strong>granat.world</strong> — the live site. The Manifesto — published. The voice-to-choir pipeline — working. The team — assembled. The legal foundation — in place.</span>
+      <span class="ru">Что уже существует: <strong>granat.world</strong> — живой сайт. Манифест — опубликован. Голос-в-хор пайплайн — работает. Команда — собрана. Юридический фундамент — заложен.</span>
+    </p>
+  </div>
+</section>
+
+<section id="offer" class="section-alt">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">
+        <span class="en">What We Invite Friends Into</span><span class="ru">Что мы предлагаем друзьям</span>
+      </div>
+      <h2 class="section-title">
+        <span class="en">Founder of an artifact that grows</span>
+        <span class="ru">Основатель артефакта, который растёт</span>
+      </h2>
+      <p class="section-subtitle">
+        <span class="en">Not a percentage. Not M&A. Not "buying a piece." We invite you to become <strong>the founder of an artifact that grows.</strong> Each of our friends — in their own world, in their own way. Your name on the first edition. The artifact continues for the next fifty years.</span>
+        <span class="ru">Не процент. Не M&A. Не «купить кусок». Мы приглашаем стать <strong>основателем артефакта, который растёт.</strong> Каждый из наших друзей — в своём мире, своим способом. Имя стоит на первой редакции. Артефакт продолжается следующие пятьдесят лет.</span>
+      </p>
+    </div>
+
+    <ul class="offer-list reveal">
+      <li><strong><span class="en">Disney</span><span class="ru">Disney</span></strong> — <span class="en">becomes the founder of a song to which every new generation of children adds its voice. First edition — millions of participants. Ten years in — hundreds of millions. Disney's name on the première.</span><span class="ru">становится основателем песни, к которой каждое новое поколение детей добавляет свой голос. Первая редакция — миллионы участников. Через десять лет — сотни миллионов. Имя Disney — на премьере.</span></li>
+      <li><strong><span class="en">A global football organization</span><span class="ru">Глобальная футбольная организация</span></strong> — <span class="en">makes the World Cup anthem the first edition of football's shared anthem, written anew every four years, sung by generations of fans as family tradition.</span><span class="ru">делает гимн чемпионата мира первой редакцией футбольного гимна, который пишется заново каждые четыре года, и который поют поколения фанатов как семейную традицию.</span></li>
+      <li><strong><span class="en">The UN</span><span class="ru">ООН</span></strong> — <span class="en">launches a climate anthem that hundreds of millions of children sing today and continue to sing every April 22nd for the next century.</span><span class="ru">запускает климатический гимн, который запевают сто миллионов детей сейчас и который продолжают петь каждое 22 апреля следующее столетие.</span></li>
+      <li><strong><span class="en">A global corporation</span><span class="ru">Глобальная корпорация</span></strong> — <span class="en">builds its corporate memory — an archive of voices to which new generations of employees are added every decade.</span><span class="ru">строит свою корпоративную память — архив голосов, к которому добавляются новые поколения сотрудников каждое десятилетие.</span></li>
+      <li><strong><span class="en">Any country</span><span class="ru">Любая страна</span></strong> — <span class="en">launches its civic artifact — a record to which the nation adds a voice at every anniversary, centennial, and turning point.</span><span class="ru">запускает свой гражданский артефакт — запись, к которой нация добавляет голос на каждом юбилее, столетии, переломе.</span></li>
+      <li><strong><span class="en">A media holding</span><span class="ru">Медиа-холдинг</span></strong> — <span class="en">becomes the co-author of a new kind of competition, in which co-authorship itself is the victory. Their name on the première of a new era.</span><span class="ru">становится со-автором новой формы конкурса, в котором соавторство и есть победа. Их имя — на премьере новой эры.</span></li>
+      <li><strong><span class="en">A cultural institution</span><span class="ru">Культурный институт</span></strong> — <span class="en">a museum, an opera house, a biennale — becomes the co-author of an artifact in which the audience's voice sounds together with the work.</span><span class="ru">музей, опера, биеннале — становится со-автором артефакта, в котором голос аудитории звучит вместе с произведением.</span></li>
+    </ul>
+
+    <p class="section-subtitle reveal">
+      <span class="en">The form of participation is a conversation we want to have personally. Each friend — their own world. Each world — its own form of entry: partnership, licensing, co-production, sponsorship, investment, co-creation. <strong>No universal template. No "tiers." Every invitation is individual.</strong></span>
+      <span class="ru">Форма участия — это разговор, который мы хотим иметь лично. У каждого друга — свой мир. У каждого мира — своя форма входа: партнёрство, лицензирование, со-производство, спонсорство, инвестиция, со-творчество. <strong>Никакого универсального шаблона. Никаких «уровней». Каждое приглашение — индивидуальное.</strong></span>
+    </p>
+
+    <blockquote class="pull-quote reveal">
+      <span class="en"><em>We do not come with a number.</em><br>We come with a world, into which we are inviting you.</span>
+      <span class="ru"><em>Мы не приходим с цифрой.</em><br>Мы приходим с миром, в который зовём.</span>
+    </blockquote>
+
+    <div class="not-on-table reveal">
+      <h4>
+        <span class="en">What is not on the table</span><span class="ru">Что не на столе</span>
+      </h4>
+      <ul>
+        <li><span class="en">Absorption of Granat. Granat is not absorbed — Granat connects.</span><span class="ru">Поглощение Granat. Granat не поглощается — Granat соединяется.</span></li>
+        <li><span class="en">Dilution of authorship. We remain co-authors of what we create.</span><span class="ru">Размывание авторства. Мы остаёмся со-авторами того, что мы создаём.</span></li>
+        <li><span class="en">A standard VC deal. This is not a venture transaction. It is a partnership in creating the first artifact.</span><span class="ru">Стандартный VC-deal. Это не венчурная сделка. Это партнёрство в создании первого артефакта.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="path">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-label">
+        <span class="en">The Path</span><span class="ru">Путь</span>
+      </div>
+      <h2 class="section-title">
+        <span class="en">From now to the first artifact</span>
+        <span class="ru">От сейчас — к первому артефакту</span>
+      </h2>
+    </div>
+
+    <div class="path-step reveal">
+      <div class="path-when"><span class="en">Now · May 2026</span><span class="ru">Сейчас · Май 2026</span></div>
+      <div class="path-what">
+        <span class="en"><strong>granat.world is live. The pipeline works. The team is building.</strong> We are carrying the idea to the world.</span>
+        <span class="ru"><strong>granat.world живёт. Пайплайн работает. Команда строит.</strong> Мы несём идею миру.</span>
+      </div>
+    </div>
+    <div class="path-step reveal">
+      <div class="path-when"><span class="en">By July 2026</span><span class="ru">К июлю 2026</span></div>
+      <div class="path-what">
+        <span class="en">The first full song is heard in production quality — and we are ready to launch with whichever partner stands with us.</span>
+        <span class="ru">Звучит первая полная песня в production-качестве — и мы готовы запускать с тем партнёром, кто рядом.</span>
+      </div>
+    </div>
+    <div class="path-step reveal">
+      <div class="path-when"><span class="en">By the end of 2026</span><span class="ru">К концу 2026</span></div>
+      <div class="path-what">
+        <span class="en">The first GranatFest, the documentary film, and the first artifact with a name and a date.</span>
+        <span class="ru">Первый GranatFest, документальный фильм, и первый артефакт, имеющий название и дату.</span>
+      </div>
+    </div>
+    <div class="path-step reveal">
+      <div class="path-when"><span class="en">This year</span><span class="ru">В этом году</span></div>
+      <div class="path-what">
+        <span class="en">We are choosing the flagship moment — the first global event at which Granat shows itself to the world. <strong>That decision is made together with our people, the people who are with us now. This document is an invitation to stand at the origin of this story.</strong></span>
+        <span class="ru">Мы выбираем флагманский момент — первое глобальное событие, на котором Granat покажет себя миру. <strong>Это решение принимается с нашими людьми, людьми, которые сейчас рядом. Этот документ — приглашение стать у истоков этой истории.</strong></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="closing">
+  <div class="closing-content">
+    <p class="closing-statement reveal">
+      <span class="en">We often say this work is not about music.<br>Music is the door. <em>Granat is about a person again becoming the author, not the audience.</em> About the voice — the most personal of all instruments — meaning again what it meant when people first sang around the fire.</span>
+      <span class="ru">Мы часто говорим, что эта работа — не про музыку.<br>Музыка — это вход. <em>Granat — про то, чтобы человек снова стал автором, а не зрителем.</em> Чтобы голос — самый личный из всех инструментов — снова значил то, что он значил, когда люди впервые начали петь у костра.</span>
+    </p>
+    <p class="closing-statement reveal" style="font-size: 1.2rem; color: var(--gold-light);">
+      <span class="en">We want you to be among them.</span>
+      <span class="ru">Мы хотим, чтобы ты был среди них.</span>
+    </p>
+    <div class="closing-sig reveal">
+      <span class="en">Yaroslav Малый</span>
+      <span class="ru">Ярослав Малый</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>GRANAT FUTURE</strong> ·
+  <span class="en">A Future We Invite You Into</span><span class="ru">Будущее, в которое мы вас приглашаем</span> ·
+  <a href="/"><span class="en">Read the manifesto</span><span class="ru">Прочитать манифест</span></a> ·
+  <span class="en">May 2026 · Confidential</span><span class="ru">Май 2026 · Конфиденциально</span>
+</footer>
+
+<script>
+function setLang(lang) {
+  document.body.style.opacity = '0.7';
+  setTimeout(() => {
+    if (lang === 'ru') {
+      document.body.classList.add('lang-ru');
+      document.documentElement.lang = 'ru';
+    } else {
+      document.body.classList.remove('lang-ru');
+      document.documentElement.lang = 'en';
+    }
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.classList.toggle('active', btn.dataset.lang === lang);
+    });
+    document.body.style.opacity = '1';
+  }, 150);
+}
+
+window.addEventListener('scroll', () => {
+  const scrollTop = document.documentElement.scrollTop;
+  const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const progress = (scrollTop / scrollHeight) * 100;
+  document.getElementById('scrollProgress').style.width = progress + '%';
+});
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+});
+</script>
+</body>
+</html>
