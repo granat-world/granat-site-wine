@@ -1,36 +1,49 @@
 # granat-site-wine
 
-Granat partner-facing site — **wine-brown variant** (working name "CC", from the May 2026 Claude design pipeline).
+> Granat partner-facing site — wine-brown variant. Part of the Granat platform; maintained by Cone Red Engineering.
 
-Palette: wine `#1A0F0C` ground · pomegranate-juice `#A4123F` · sun-warmed honey `#E8B66A`. Single-page narrative with embedded voice-to-choir demo (Section 7).
+A single-page narrative site with an embedded voice-to-choir demo, in the wine-brown visual direction (working name "CC", from the May 2026 design pipeline). Its companion `granat-site-indigo` carries the same content in a periwinkle-indigo, TMA-aligned palette; the two deploy independently so stakeholders can A/B the visual direction.
 
-## Run locally
+Palette: wine `#1A0F0C` ground · pomegranate-juice `#A4123F` · sun-warmed honey `#E8B66A`.
 
-```
+## Stack
+
+- Node.js + Express (static server with voice-API proxy)
+- `express-rate-limit`, `multer`
+- Static single-page site in `public/`
+
+## Getting started
+
+```bash
 npm install
-cp .env.example .env       # set GRANAT_API_KEY
-npm run dev                # or: npm start
+cp .env.example .env        # set GRANAT_API_KEY
+npm run dev                 # http://localhost:3000
 ```
 
-Default port: 3000.
+## Configuration
 
-## Deploy
+| Variable | Purpose |
+|---|---|
+| `GRANAT_API_KEY` | Upstream voice-API key (injected server-side for the Section 7 demo) |
+| `GRANAT_API_BASE` | Upstream voice-API base URL |
 
-Same pattern as `granat-future-site` — Timeweb App Platform, Express static server with voice-API proxy. See `DEPLOY.md`.
+## Deployment
 
-## Companion repo
+Timeweb App Platform — Express static server with the voice-API proxy pattern. See `DEPLOY.md`.
 
-`granat-site-indigo` — periwinkle indigo (TMA-aligned) variant of the same content. Both repos are deployable independently to separate domains so stakeholders can A/B compare visual direction before publishing decision.
-
-## Structure
+## Repository layout
 
 ```
 public/
-  index.html       # the brown CC single-page site (mobile-optimized: 27 @media rules)
-  future.html      # voice fingerprint explainer landing
-  policy.html      # privacy
-  guide.mp3        # voice-demo guide audio
-  assets/          # imagery
-  favicon.*        # favicons + apple-touch-icon + PWA icons
-server.js          # Express static + voice proxy + rate limiting
+  index.html      wine single-page site (mobile-optimised)
+  future.html     voice-fingerprint explainer landing
+  policy.html     privacy
+  guide.mp3       voice-demo guide audio
+  assets/         imagery
+  favicon.*       favicons + PWA icons
+server.js         Express static + voice proxy + rate limiting
 ```
+
+## License
+
+Proprietary. © 2026 Granat Music Artistic Talent Contracting L.L.C S.O.C. All rights reserved. See [LICENSE](./LICENSE).
