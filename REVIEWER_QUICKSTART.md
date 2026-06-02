@@ -1,7 +1,7 @@
 # granat-site-wine — Reviewer Quickstart
 
-> **⚠️ OUT OF SCOPE for Phase 1 independent code review.**
-> This repository is a **Cone Red goodwill artefact**, delivered to the Customer as-is at the close of Phase 1. It is **not** one of the two in-scope repositories. Master review guide: [`granat-world/GRANAT/REVIEW_GUIDE.md`](https://github.com/granat-world/GRANAT/blob/develop/REVIEW_GUIDE.md).
+> **Out of scope for Phase 1 independent code review.**
+> This repository is a **Cone Red Phase 1 supporting deliverable**, delivered to the Customer as-is at the close of Phase 1. It is **not** one of the two in-scope repositories. Master review guide: [`granat-world/GRANAT/REVIEW_GUIDE.md`](https://github.com/granat-world/GRANAT/blob/main/REVIEW_GUIDE.md).
 >
 > This quickstart is provided so that a curious reviewer can run the project locally if they want — not because review is expected.
 
@@ -58,4 +58,4 @@ Proprietary. © 2026 Granat Music Artistic Talent Contracting L.L.C S.O.C. See `
 
 ---
 
-**For the actual Phase 1 review pack**, see [`granat-world/GRANAT/REVIEW_GUIDE.md`](https://github.com/granat-world/GRANAT/blob/develop/REVIEW_GUIDE.md) — the master guide covering the in-scope repositories (`GRANAT` + `reactjs-miniapp-granat`), their SBOMs, security audits, and the 14 048-line platform documentation pack.
+**For the actual Phase 1 review pack**, see [`granat-world/GRANAT/REVIEW_GUIDE.md`](https://github.com/granat-world/GRANAT/blob/main/REVIEW_GUIDE.md) — the master guide covering the in-scope repositories (`GRANAT` + `reactjs-miniapp-granat`), their SBOMs, security audits, and the 14 048-line platform documentation pack.
